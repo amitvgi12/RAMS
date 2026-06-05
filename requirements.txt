@@ -1,0 +1,6 @@
+# Core engine, CLI, reporting and tests require NO third-party packages.
+# Python 3.8+ standard library only. This file documents OPTIONAL extras.
+#
+# Optional (not required):
+#   numpy>=1.21    # only if you add a vectorised cross-segment batch path
+#   pandas>=1.3    # only if you want DataFrame interop for analysis notebooks

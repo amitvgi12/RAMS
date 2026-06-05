@@ -1,0 +1,9 @@
+segment_id,base_iri,base_rut,base_crack,annual_msa,traffic_growth_rate,monsoon_zone,length_km
+NH66-KL-012,1.5,2.0,0.0,4.5,0.06,HIGH,12.0
+NH48-KA-204,2.2,4.0,3.0,6.0,0.05,MEDIUM,8.5
+SH-RJ-077,3.0,6.0,8.0,2.0,0.03,LOW,20.0
+NH16-MH-330,1.8,3.0,1.0,8.0,0.07,HIGH,6.0
+MDR-UP-451,2.6,5.0,5.0,3.5,0.04,MEDIUM,15.0
+NH44-TN-118,2.0,3.5,2.0,5.5,0.05,MEDIUM,10.0
+SH-AS-090,2.8,5.5,6.0,3.0,0.04,HIGH,18.0
+NH52-RJ-260,1.6,2.5,0.5,4.0,0.05,LOW,14.0

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rams-pavement-engine"
+version = "1.0.0"
+description = "Deterministic Indian pavement deterioration & IRC:82 PCI forecasting engine"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+keywords = ["pavement", "RAMS", "IRC82", "MoRTH", "asset-management", "infrastructure"]
+dependencies = []  # core is standard-library only
+
+[project.optional-dependencies]
+accel = ["numpy>=1.21", "pandas>=1.3"]
+
+[project.scripts]
+rams = "rams.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["rams*"]

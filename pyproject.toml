@@ -14,6 +14,10 @@ dependencies = []  # core is standard-library only
 
 [project.optional-dependencies]
 accel = ["numpy>=1.21", "pandas>=1.3"]
+# Optional, more robust PDF text extraction. The stdlib loader already handles
+# simple, digitally-generated table PDFs with no third-party dependency; install
+# this extra for arbitrary producers/layouts.
+pdf = ["pypdf>=4.0"]
 
 [project.scripts]
 rams = "rams.cli:main"

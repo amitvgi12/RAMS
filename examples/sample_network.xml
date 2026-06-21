@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Sample RAMS network as an MLIT-style pavement-databank export.
+  Mirrors examples/sample_network.csv. Fields may be attributes or child
+  elements (both forms shown below). `roughness_mm` is the optional MLIT-PMS
+  longitudinal-roughness sigma, carried for a faithful MCI; it is not required
+  by the IRC:82 deterioration engine.
+-->
+<network>
+  <segment id="NH66-KL-012" length_km="12.0">
+    <base_iri>1.5</base_iri>
+    <base_rut>2.0</base_rut>
+    <base_crack>0.0</base_crack>
+    <annual_msa>4.5</annual_msa>
+    <traffic_growth_rate>0.06</traffic_growth_rate>
+    <monsoon_zone>HIGH</monsoon_zone>
+    <roughness_mm>3.0</roughness_mm>
+    <!-- HDM-4 structural / FWD inputs (optional; used only by the HDM-4 model) -->
+    <deflection_mm>0.85</deflection_mm>
+    <structural_number>4.2</structural_number>
+    <compaction_pct>98.0</compaction_pct>
+    <surfacing_thickness_mm>120</surfacing_thickness_mm>
+  </segment>
+  <segment id="NH48-KA-204" base_iri="2.2" base_rut="4.0" base_crack="3.0"
+           annual_msa="6.0" traffic_growth_rate="0.05" monsoon_zone="MEDIUM"
+           length_km="8.5" roughness_mm="4.5" deflection_mm="0.70" snp="4.6"/>
+  <segment id="SH-RJ-077" base_iri="3.0" base_rut="6.0" base_crack="8.0"
+           annual_msa="2.0" traffic_growth_rate="0.03" monsoon_zone="LOW"
+           length_km="20.0"/>
+  <segment id="NH16-MH-330" base_iri="1.8" base_rut="3.0" base_crack="1.0"
+           annual_msa="8.0" traffic_growth_rate="0.07" monsoon_zone="HIGH"
+           length_km="6.0"/>
+  <segment id="MDR-UP-451" base_iri="2.6" base_rut="5.0" base_crack="5.0"
+           annual_msa="3.5" traffic_growth_rate="0.04" monsoon_zone="MEDIUM"
+           length_km="15.0"/>
+  <segment id="NH44-TN-118" base_iri="2.0" base_rut="3.5" base_crack="2.0"
+           annual_msa="5.5" traffic_growth_rate="0.05" monsoon_zone="MEDIUM"
+           length_km="10.0"/>
+  <segment id="SH-AS-090" base_iri="2.8" base_rut="5.5" base_crack="6.0"
+           annual_msa="3.0" traffic_growth_rate="0.04" monsoon_zone="HIGH"
+           length_km="18.0"/>
+  <segment id="NH52-RJ-260" base_iri="1.6" base_rut="2.5" base_crack="0.5"
+           annual_msa="4.0" traffic_growth_rate="0.05" monsoon_zone="LOW"
+           length_km="14.0"/>
+</network>

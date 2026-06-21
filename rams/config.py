@@ -16,6 +16,108 @@ from enum import Enum
 from typing import Dict
 
 
+class RutModelType(str, Enum):
+    """Which rutting law the engine uses to advance rut depth each year.
+
+    DEFAULT : the IRC:82-style power law (rut_factor * MSA**exp * monsoon).
+    HDM4    : the mechanistic HDM-4 delta-RDM model (densification + structural
+              + plastic deformation), driven by FWD deflection / structural
+              number. See rams/hdm4.py.
+    """
+
+    DEFAULT = "DEFAULT"
+    HDM4 = "HDM4"
+
+    @classmethod
+    def from_str(cls, value: str) -> "RutModelType":
+        try:
+            return cls(str(value).strip().upper())
+        except ValueError:
+            allowed = ", ".join(m.value for m in cls)
+            raise ValueError(
+                f"Unknown rut model {value!r}. Expected one of: {allowed}."
+            ) from None
+
+
+class CrackModelType(str, Enum):
+    """Which cracking law the engine uses.
+
+    DEFAULT : the IRC:82-style S-curve on cumulative MSA (unchanged).
+    MLIT    : the paper's empirical year-on-year recursion C_{i+1}=a+b*C_i.
+    """
+
+    DEFAULT = "DEFAULT"
+    MLIT = "MLIT"
+
+    @classmethod
+    def from_str(cls, value: str) -> "CrackModelType":
+        try:
+            return cls(str(value).strip().upper())
+        except ValueError:
+            allowed = ", ".join(m.value for m in cls)
+            raise ValueError(f"Unknown crack model {value!r}. Expected one of: {allowed}.") from None
+
+
+class RoughnessModelType(str, Enum):
+    """Which roughness (IRI) law the engine uses.
+
+    DEFAULT : the IRI structural+traffic law (unchanged).
+    HDM4    : the HDM-4 incremental roughness model, coupled to the year's
+              cracking and rutting increments + a structural + environmental term.
+    """
+
+    DEFAULT = "DEFAULT"
+    HDM4 = "HDM4"
+
+    @classmethod
+    def from_str(cls, value: str) -> "RoughnessModelType":
+        try:
+            return cls(str(value).strip().upper())
+        except ValueError:
+            allowed = ", ".join(m.value for m in cls)
+            raise ValueError(f"Unknown roughness model {value!r}. Expected one of: {allowed}.") from None
+
+
+class SkidModelType(str, Enum):
+    """Whether/how the engine models skid resistance (side-force coefficient).
+
+    NONE : skid is not tracked (the engine's historical behaviour).
+    HDM4 : the HDM-4-style aggregate-polishing decay of SFC toward a terminal
+           value (skid *decreases* with traffic, unlike the other distresses).
+    """
+
+    NONE = "NONE"
+    HDM4 = "HDM4"
+
+    @classmethod
+    def from_str(cls, value: str) -> "SkidModelType":
+        try:
+            return cls(str(value).strip().upper())
+        except ValueError:
+            allowed = ", ".join(m.value for m in cls)
+            raise ValueError(f"Unknown skid model {value!r}. Expected one of: {allowed}.") from None
+
+
+class PotholeModelType(str, Enum):
+    """Whether/how the engine models potholing (area %).
+
+    NONE : potholes are not tracked (the engine's historical behaviour).
+    HDM4 : the HDM-4-style potholing model -- potholes initiate once cracking
+           passes a threshold, then progress with traffic (wet-climate weighted).
+    """
+
+    NONE = "NONE"
+    HDM4 = "HDM4"
+
+    @classmethod
+    def from_str(cls, value: str) -> "PotholeModelType":
+        try:
+            return cls(str(value).strip().upper())
+        except ValueError:
+            allowed = ", ".join(m.value for m in cls)
+            raise ValueError(f"Unknown pothole model {value!r}. Expected one of: {allowed}.") from None
+
+
 class MonsoonZone(str, Enum):
     """Environmental exposure class driving subgrade-softening penalty."""
 
@@ -130,6 +232,27 @@ class InputBounds:
     length_max: float = 100.0  # homogeneous segments are short by definition
     horizon_min: int = 1
     horizon_max: int = 100     # DoS guard on the simulation loop
+
+    # --- HDM-4 structural inputs (FWD / pavement composition) --------------
+    # Optional fields, only consumed by the HDM-4 rut model. Defaults are sane
+    # for a typical Indian flexible NH so HDM-4 runs without FWD data, but real
+    # Benkelman/FWD deflection and structural number should be supplied.
+    deflection_min: float = 0.0    # mm (Benkelman/FWD rebound)
+    deflection_max: float = 5.0
+    snp_min: float = 0.5           # adjusted structural number
+    snp_max: float = 12.0
+    compaction_min: float = 80.0   # % relative compaction
+    compaction_max: float = 105.0
+    surfacing_min: float = 0.0     # mm total bituminous thickness
+    surfacing_max: float = 600.0
+    cds_min: float = 0.5           # construction-defects indicator
+    cds_max: float = 1.5
+    speed_min: float = 5.0         # km/h heavy-vehicle speed
+    speed_max: float = 120.0
+    skid_min: float = 0.0          # side-force coefficient (SFC, fraction)
+    skid_max: float = 1.0
+    potholes_min: float = 0.0      # potholing area (%)
+    potholes_max: float = 100.0
 
 
 DEFAULT_CALIBRATION = Calibration()

@@ -19,10 +19,26 @@ from .config import (
     DEFAULT_CALIBRATION,
     DEFAULT_SCORING,
     Calibration,
+    CrackModelType,
     InputBounds,
     IRC82Scoring,
+    PotholeModelType,
+    RoughnessModelType,
+    RutModelType,
+    SkidModelType,
+)
+from .distress import (
+    DEFAULT_HDM4_POTHOLE,
+    DEFAULT_HDM4_ROUGHNESS,
+    DEFAULT_HDM4_SKID,
+    DEFAULT_MLIT_CRACK,
+    HDM4PotholeModel,
+    HDM4RoughnessModel,
+    HDM4SkidModel,
+    MLITCrackModel,
 )
 from .engine import IndianPavementDeteriorationEngine
+from .hdm4 import DEFAULT_HDM4, HDM4RutCalibration
 from .maintenance import MaintenanceFlag, MaintenancePolicy, Treatment
 from .models import SegmentInput, YearResult
 
@@ -65,6 +81,16 @@ def simulate_managed_lifecycle(
     calibration: Calibration = DEFAULT_CALIBRATION,
     scoring: IRC82Scoring = DEFAULT_SCORING,
     bounds: InputBounds = DEFAULT_BOUNDS,
+    rut_model: RutModelType = RutModelType.DEFAULT,
+    hdm4_calibration: HDM4RutCalibration = DEFAULT_HDM4,
+    crack_model: CrackModelType = CrackModelType.DEFAULT,
+    mlit_crack: MLITCrackModel = DEFAULT_MLIT_CRACK,
+    roughness_model: RoughnessModelType = RoughnessModelType.DEFAULT,
+    hdm4_roughness: HDM4RoughnessModel = DEFAULT_HDM4_ROUGHNESS,
+    skid_model: SkidModelType = SkidModelType.NONE,
+    hdm4_skid: HDM4SkidModel = DEFAULT_HDM4_SKID,
+    pothole_model: PotholeModelType = PotholeModelType.NONE,
+    hdm4_pothole: HDM4PotholeModel = DEFAULT_HDM4_POTHOLE,
 ) -> ManagedLifecycle:
     """Simulate one segment with interventions applied as bands are entered.
 
@@ -81,6 +107,14 @@ def simulate_managed_lifecycle(
         annual_msa=v.annual_msa, traffic_growth_rate=v.traffic_growth_rate,
         monsoon_zone=v.monsoon_zone.value,
         calibration=calibration, scoring=scoring, bounds=bounds,
+        rut_model=rut_model, hdm4_calibration=hdm4_calibration,
+        crack_model=crack_model, mlit_crack=mlit_crack,
+        roughness_model=roughness_model, hdm4_roughness=hdm4_roughness,
+        skid_model=skid_model, hdm4_skid=hdm4_skid, base_skid=v.base_skid,
+        pothole_model=pothole_model, hdm4_pothole=hdm4_pothole, base_potholes=v.base_potholes,
+        deflection_mm=v.deflection_mm, structural_number=v.structural_number,
+        compaction_pct=v.compaction_pct, surfacing_thickness_mm=v.surfacing_thickness_mm,
+        cds=v.cds, heavy_speed_kmh=v.heavy_speed_kmh,
     )
 
     timeline: List[YearResult] = []
@@ -101,10 +135,17 @@ def simulate_managed_lifecycle(
                 iri=treatment.reset_iri,
                 rut=treatment.reset_rut,
                 crack=treatment.reset_crack,
+                # A new wearing course restores skid resistance and removes potholes.
+                skid=v.base_skid if skid_model is SkidModelType.HDM4 else None,
+                potholes=0.0 if pothole_model is PotholeModelType.HDM4 else None,
             )
             # Recompute this year's KPIs/PCI on the restored condition.
             yr.iri, yr.rutting_mm, yr.cracking_pct = engine.iri, engine.rut, engine.crack
             yr.irc82_pci = engine.calculate_irc82_pci(engine.iri, engine.rut, engine.crack)
+            if skid_model is SkidModelType.HDM4:
+                yr.skid = round(engine.skid, 3)
+            if pothole_model is PotholeModelType.HDM4:
+                yr.potholes = round(engine.potholes, 2)
             yr.treatment = treatment.name
 
             cost = treatment_cost(treatment, v.length_km, base_unit_cost)

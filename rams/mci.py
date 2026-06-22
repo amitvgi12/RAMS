@@ -31,7 +31,7 @@ Fidelity caveat:
     sigma term is a longitudinal roughness in mm. When an explicit roughness is
     not supplied we pass IRI through as a proxy, so `compute_mci` results that
     use IRI are an approximation -- flagged as such by callers. Supply a true
-    `roughness_mm` (the XML/PDF schema accepts one) for a faithful MCI.
+    `roughness_mm` (the XLSX/PDF schema accepts one) for a faithful MCI.
 """
 from __future__ import annotations
 

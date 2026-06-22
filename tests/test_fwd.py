@@ -7,7 +7,7 @@ from rams import api
 from rams.batch import forecast_network
 from rams.config import RutModelType
 from rams.fwd import DEFAULT_DEFLECTION_TO_SNP, DeflectionToSNP, snp_from_deflection
-from rams.ingest import ingest_segments_xml_text
+from rams.ingest import ingest_segments_csv_text
 from rams.models import SegmentInput
 from rams.config import MonsoonZone
 
@@ -33,27 +33,23 @@ class TestFwdToSnp(unittest.TestCase):
 
 
 class TestIngestionAutoDerivesSnp(unittest.TestCase):
-    XML = (
-        '<network><segment id="A" base_iri="2" base_rut="3" base_crack="1" '
-        'annual_msa="5" traffic_growth_rate="0.05" monsoon_zone="HIGH" '
-        'deflection_mm="1.2"/></network>'
-    )
+    HEADER = ("segment_id,base_iri,base_rut,base_crack,annual_msa,"
+              "traffic_growth_rate,monsoon_zone,deflection_mm")
 
     def test_snp_derived_when_absent(self):
-        s = ingest_segments_xml_text(self.XML).segments[0]
+        csv = self.HEADER + "\nA,2,3,1,5,0.05,HIGH,1.2\n"
+        s = ingest_segments_csv_text(csv).segments[0]
         self.assertAlmostEqual(s.structural_number, snp_from_deflection(1.2), places=3)
 
     def test_explicit_snp_not_overridden(self):
-        xml = self.XML.replace('deflection_mm="1.2"/>', 'deflection_mm="1.2" snp="5.5"/>')
-        s = ingest_segments_xml_text(xml).segments[0]
+        csv = self.HEADER + ",structural_number\nA,2,3,1,5,0.05,HIGH,1.2,5.5\n"
+        s = ingest_segments_csv_text(csv).segments[0]
         self.assertEqual(s.structural_number, 5.5)
 
     def test_no_deflection_keeps_default_snp(self):
-        xml = (
-            '<network><segment id="A" base_iri="2" base_rut="3" base_crack="1" '
-            'annual_msa="5" traffic_growth_rate="0.05" monsoon_zone="HIGH"/></network>'
-        )
-        s = ingest_segments_xml_text(xml).segments[0]
+        csv = ("segment_id,base_iri,base_rut,base_crack,annual_msa,"
+               "traffic_growth_rate,monsoon_zone\nA,2,3,1,5,0.05,HIGH\n")
+        s = ingest_segments_csv_text(csv).segments[0]
         self.assertEqual(s.structural_number, 4.0)  # SegmentInput default
 
 

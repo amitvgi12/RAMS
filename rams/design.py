@@ -130,6 +130,29 @@ def fatigue_life_msa(
     return nf / 1.0e6  # standard axles -> MSA
 
 
+def fatigue_life_msa_irc115(
+    tensile_strain: float,
+    bituminous_modulus_mpa: float,
+    *,
+    reliability: int = 90,
+) -> float:
+    """Allowable repetitions (MSA) for bottom-up fatigue, **IRC:115-2014**.
+
+        Nf = 0.711e-4 * (1/eps_t)^3.89 * (1/MR)^0.854   (90% reliability)
+
+    This is the model FWD remaining-life reports use (e.g. the NH-152D
+    evaluation). Unlike the IRC:37-2018 form it carries no mix `C` factor, and
+    `MR` is the (temperature-corrected) back-calculated bituminous modulus. The
+    90% constant is validated against published reports; the 80% constant
+    (1.6940e-4) is indicative -- confirm against the agency's adopted IRC:115.
+    """
+    eps = max(1e-9, float(tensile_strain))
+    mr = max(1.0, float(bituminous_modulus_mpa))
+    c = 0.711e-4 if reliability >= 90 else 1.6940e-4
+    nf = c * math.pow(1.0 / eps, 3.89) * math.pow(1.0 / mr, 0.854)
+    return nf / 1.0e6
+
+
 def rutting_life_msa(
     vertical_strain: float,
     *,

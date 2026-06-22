@@ -265,10 +265,9 @@ class TestSegmentImport(unittest.TestCase):
     def test_ingest_first_segment_has_form_fields(self):
         # The segment-forecast upload reuses /api/ingest; the first row must carry
         # everything the form needs (incl. FWD deflection / derived SNP).
-        xml = ('<network><segment id="S1" base_iri="2.2" base_rut="4" base_crack="3" '
-               'annual_msa="6" traffic_growth_rate="0.05" monsoon_zone="MEDIUM" '
-               'deflection_mm="0.9"/></network>')
-        out = api.ingest_data({"format": "xml", "content": xml})
+        csv = ("segment_id,base_iri,base_rut,base_crack,annual_msa,traffic_growth_rate,"
+               "monsoon_zone,deflection_mm\nS1,2.2,4,3,6,0.05,MEDIUM,0.9\n")
+        out = api.ingest_data({"format": "csv", "content": csv})
         s = out["segments"][0]
         for k in ("base_iri", "base_rut", "base_crack", "annual_msa",
                   "traffic_growth_rate", "monsoon_zone", "deflection_mm", "structural_number"):

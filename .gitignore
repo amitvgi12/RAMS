@@ -13,3 +13,6 @@ htmlcov/
 !docs/**/*.html
 forecast.*
 .DS_Store
+
+# Uploaded sample condition-survey workbooks (input data, not part of the repo)
+/[Tt]est*.xlsx

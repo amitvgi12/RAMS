@@ -32,8 +32,8 @@ python -m rams.cli --id NH66-KL-012 --html forecast.html --json forecast.json
 # Forecast and triage an entire network from a CSV of NSV records
 python -m rams.cli --csv examples/sample_network.csv --summary
 
-# Same network from an XML pavement-databank export, or a PDF condition report
-python -m rams.cli --xml examples/sample_network.xml --summary
+# Same network from an XLSX survey/condition workbook, or a PDF condition report
+python -m rams.cli --xlsx survey.xlsx --summary
 python -m rams.cli --pdf condition_survey.pdf --summary
 
 # Run the test suite
@@ -102,7 +102,7 @@ condition. Treatment reset targets and relative costs live in
 
 ---
 
-## Input data formats (CSV / XML / PDF)
+## Input data formats (CSV / XLSX / PDF)
 
 The portal ingests a road network from three formats, all funnelled through the
 same `SegmentInput.validate()` trust boundary with per-record error isolation
@@ -110,53 +110,37 @@ same `SegmentInput.validate()` trust boundary with per-record error isolation
 
 | Format | Loader | Web portal | Notes |
 |--------|--------|-----------|-------|
-| CSV    | `ingest_segments_csv(path)`  | upload `.csv` | header = `REQUIRED_COLUMNS` |
-| XML    | `ingest_segments_xml(path)`  | upload `.xml` | MLIT-style pavement-databank export |
-| PDF    | `ingest_segments_pdf(path)`  | upload `.pdf` | text layer of a digitally-generated condition report |
+| CSV    | `ingest_segments_csv(path)`   | upload `.csv`  | header = `REQUIRED_COLUMNS`, or an NSV chainage survey |
+| XLSX   | `ingest_segments_xlsx(path)`  | upload `.xlsx` | all worksheets scanned; NSV surveys merged by chainage |
+| PDF    | `ingest_segments_pdf(path)`   | upload `.pdf`  | text layer of a digitally-generated condition report |
 
 ```python
-from rams import ingest_segments            # dispatches on .csv / .xml / .pdf
-result = ingest_segments("examples/sample_network.xml")
+from rams import ingest_segments            # dispatches on .csv / .xlsx / .pdf
+result = ingest_segments("examples/sample_network.csv")
 print(len(result.segments), result.errors)
 ```
 
 In the **web dashboard** (`python -m rams.server`), the *Network & Budget* tab
-now has an **Import pavement-databank network** card: pick a `.csv`, `.xml` or
+has an **Import pavement-databank network** card: pick a `.csv`, `.xlsx` or
 `.pdf` file and the parsed segments replace the demo network for the optimiser.
-
-The XML schema accepts fields as attributes or child elements (see
-`examples/sample_network.xml`) and an optional `roughness_mm` (the MLIT-PMS σ):
-
-```xml
-<network>
-  <segment id="NH66-KL-012" length_km="12.0">
-    <base_iri>1.5</base_iri> <base_rut>2.0</base_rut> <base_crack>0.0</base_crack>
-    <annual_msa>4.5</annual_msa> <traffic_growth_rate>0.06</traffic_growth_rate>
-    <monsoon_zone>HIGH</monsoon_zone> <roughness_mm>3.0</roughness_mm>
-  </segment>
-</network>
-```
+The *Segment Forecast* tab accepts **multiple files at once** and merges them (see
+[NSV chainage-survey ingestion](#nsv-chainage-survey-ingestion-vendor-schemas)).
 
 **Large files.** Browser uploads stream as a raw body to `/api/upload?format=…`
 (no base64, no in-memory JSON), so a multi-tens-of-MB NSV/FWD export goes
-straight through — up to a 128 MB transport cap. The **dashboard** still renders
-up to 5000 segments; a raw per-chainage survey with hundreds of thousands of rows
+straight through — up to a 128 MB transport cap. The **dashboard** renders up to
+5000 segments; a raw per-chainage survey with hundreds of thousands of rows
 should go through the **CLI batch** path (`python -m rams.cli --csv <file>`),
-which row-streams the whole network to disk/DB at constant memory. (CSV is always
-row-streamed; XML/PDF are buffered up to a 64 MB blob cap.)
+which row-streams the whole network at constant memory. (CSV is always
+row-streamed; XLSX/PDF are buffered up to a 64 MB blob cap.)
 
-**Security.** XML is parsed with the stdlib `ElementTree`, and any document
-carrying a `DOCTYPE`/DTD is rejected up front — this blocks external-entity
-(XXE) file disclosure and "billion-laughs" entity-expansion DoS, both of which
-require a DTD, with no third-party hardened parser. PDF reads the *text layer
-only* (stdlib `FlateDecode` + text operators, or `pypdf` if installed) with a
-size cap; scanned/image PDFs have no text layer and raise a clear "OCR required"
-error. Blob sizes are bounded (`MAX_BLOB_BYTES`).
-
-> Why these formats? The HDM-4 calibration paper (Taniguchi & Yoshida, PWRI)
-> describes the MLIT-PMS **pavement databank** — road-surface-attribute records
-> (cracking %, rut depth, roughness, traffic) exchanged as PMS exports and
-> survey reports. The XML/PDF importers let RAMS read exactly those records.
+**Security.** XLSX is a ZIP of XML parts, read with the stdlib `zipfile` +
+`ElementTree`; any internal part carrying a `DOCTYPE`/DTD is rejected up front —
+blocking external-entity (XXE) disclosure and "billion-laughs" expansion with no
+third-party hardened parser. PDF reads the *text layer only* (stdlib
+`FlateDecode` + text operators, or `pypdf` if installed) with a size cap;
+scanned/image PDFs have no text layer and raise a clear "OCR required" error.
+Blob sizes and ZIP member counts are bounded (`MAX_BLOB_BYTES`, `_XLSX_MAX_PARTS`).
 
 ## MLIT-PMS Maintenance Control Index (paper cross-reference)
 
@@ -235,7 +219,7 @@ from rams import snp_from_deflection
 snp_from_deflection(1.0)   # -> 3.2   (≈5.0 at 0.5 mm, ≈2.5 at 1.5 mm)
 ```
 
-This happens automatically on import: a CSV/XML/PDF row with `deflection_mm` but
+This happens automatically on import: a CSV/XLSX/PDF row with `deflection_mm` but
 no `structural_number` gets SNP derived for it, so a bare deflection survey drives
 the HDM-4 model directly. In the CLI use `--derive-snp` (with `--deflection`); in
 the Segment Forecast tab tick **derive SNP from FWD**. An explicitly-supplied SNP
@@ -246,7 +230,7 @@ is never overridden.
 FWD/Benkelman rebound deflection (`deflection_mm`, the HDM-4 `DEF`) and the
 structural number (`structural_number`, `SNP`) feed the HDM-4 densification and
 structural terms directly — a weaker/wetter pavement (higher deflection, lower
-SNP) ruts faster. These columns are importable from CSV/XML/PDF (aliases:
+SNP) ruts faster. These columns are importable from CSV/XLSX/PDF (aliases:
 `deflection`, `fwd_deflection`, `benkelman`, `snp`, `sn`), so a deflection survey
 merges straight into the network. Deflection also drives an explicit IRC:81
 structural-strengthening trigger (below).
@@ -331,7 +315,7 @@ add their own trajectory tables and fire their own IRC:SP:16 / IRC:82 triggers).
 ### Load a segment from a survey / FWD file
 
 The Segment Forecast tab has a **Load a segment from a survey / FWD file** card:
-upload an NSV/FWD `.csv`, `.xml` or `.pdf` with the standard columns and the first
+upload an NSV/FWD `.csv`, `.xlsx` or `.pdf` with the standard columns and the first
 segment fills the form (including FWD deflection → derived SNP) and forecasts
 automatically. It reuses the same hardened `/api/ingest` parser as the network
 import.
@@ -488,6 +472,172 @@ budget/interval cannot keep performance-compliant). Both are exposed at
 and as the dashboard's **Design & PBMC** tab. Every rate is a planning default —
 replace with the agency's schedule of rates for a tender-grade estimate.
 
+## IITPAVE-style mechanistic design & section evaluation
+
+`rams/iitpave.py` adds the mechanistic layer IRC:37-2018 actually designs with: a
+layered-elastic analysis that computes the two critical strains under the
+standard axle and converts them to fatigue/rutting life. RAMS cannot ship the
+IRC IITPAVE binary, so it uses the **Odemark--Boussinesq method of equivalent
+thickness** -- a documented layered-elastic approximation in the IITPAVE
+tradition (standard 80 kN dual-wheel axle, 0.56 MPa, second wheel superposed).
+It is monotonic and lands in the IRC:37 strain range, but is an approximation:
+**confirm a final design against IITPAVE proper.**
+
+Two uses, both on the **Design & PBMC** tab and at `POST /api/design`
+(`method:"iitpave"`) / `POST /api/iitpave`:
+
+```bash
+# Mechanistic design: lowest-cost section meeting fatigue AND rutting for the MSA
+python -m rams.cli --design --design-method iitpave --cbr 8 --design-msa 50
+#   -> 145 mm bituminous over 360 mm granular; eps_t 185 / eps_v 368 microstrain
+
+# Section check from FWD back-calculated 15th-percentile moduli (residual life)
+python -m rams.cli --iitpave --e-bt 977 --e-gran 200 --e-sub 70 \
+    --h-bt 300 --h-gran 350 --msa 10 --growth 0.05 --cumulative-msa 20 --design-msa 150
+#   -> capacity 258 MSA (subgrade rutting), ~16 yr residual, carries 150 MSA
+```
+
+```python
+from rams import design_pavement_mechanistic, evaluate_section, LayerModel
+d = design_pavement_mechanistic(cbr=8, design_msa=50)        # CBR -> thicknesses
+a = evaluate_section(LayerModel(977, 200, 70, 300, 350),     # FWD moduli -> life
+                     annual_msa=10, cumulative_msa=20, design_msa=150)
+```
+
+The design tab's **Catalogue / IITPAVE** selector switches the design method, and
+the **IITPAVE section check** card evaluates an in-service pavement from its FWD
+back-calculated layer moduli + thicknesses (the natural input from a deflection
+survey's homogeneous-section report).
+
+### Calibration & accuracy (validated against real IITPAVE output)
+
+The Odemark–Boussinesq strains are calibrated to **real IITPAVE results** — the
+IRC:37-2018 Annex II worked examples and a 33 km NH-152D FWD evaluation report —
+with multipliers (`TENSILE_CORRECTION_IRC37=1.30`, `TENSILE_CORRECTION_IRC115=1.38`,
+`VERTICAL_CORRECTION=0.97`) that bring εt/εv to within **~5–10%** of IITPAVE over
+the validated range (50–1600 MPa bituminous modulus, 190–310 mm thickness). The
+golden cases are locked in the test suite. Two honest caveats: very thick
+(>250 mm) perpetual-pavement sections under-predict tensile strain, and overlay
+decisions within **±15% of the design life are flagged "confirm with IITPAVE"** —
+the screening defers the close calls to a rigorous run rather than guessing.
+
+### FWD remaining-life & overlay (IRC:115-2014)
+
+`evaluate_fwd_sections` reproduces the real FWD-report workflow (KGPBACK
+back-calculation → 15th-percentile moduli → IITPAVE remaining life → overlay
+decision), using the **IRC:115-2014** fatigue model (`0.711e-4`, no mix C factor,
+Poisson 0.5/0.4/0.4) that those reports use.
+
+```bash
+# Overlay screening from a homogeneous-section moduli table (real NH-152D data)
+python -m rams.cli --fwd examples/fwd_sections_nh152d.csv --design-msa 300
+#   -> per-section remaining life vs the 300 MSA design life, overlay yes/no,
+#      and borderline sections flagged (*) for IITPAVE confirmation
+```
+
+```python
+from rams import FWDSection, evaluate_fwd_sections
+secs = [FWDSection("LHS-1", 870, 348, 77, 300, 350),   # E_bt, E_gran, E_sub, h_bt, h_gran
+        FWDSection("RHS-2", 801, 352, 77, 300, 350)]
+res = evaluate_fwd_sections(secs, design_msa=300)
+print(res.overlay_sections, res.borderline_sections)
+```
+
+Exposed at `POST /api/fwd` and the dashboard's **FWD remaining-life & overlay**
+card (paste the report's 15th-percentile moduli as CSV). `examples/fwd_sections_nh152d.csv`
+is the real corrected 15th-percentile moduli table from the NH-152D report.
+
+## NSV chainage-survey ingestion (vendor schemas)
+
+Real network surveys ship one **distress per file**, keyed to chainage + GPS,
+with vendor column names and text condition bands -- not RAMS' native schema.
+`rams/survey.py` recognises these and maps them automatically: the **Load a
+segment** and network-import paths now accept a ROMDAS/Hawkeye-style survey
+(rutting, roughness `Lane IRI`, cracking `Condition` band, potholes) directly,
+with no reformatting.
+
+```python
+from rams import merge_surveys, SurveyDefaults
+# join rutting + roughness + cracking + potholes surveys by (chainage, lane)
+merged = merge_surveys([rut_rows, rough_rows, crack_rows, pothole_rows],
+                       SurveyDefaults(annual_msa=8.0, monsoon_zone="HIGH"))
+```
+
+Text bands are converted to representative values (`<5%` -> 2.5, `5-10%` -> 7.5,
+`>20%` -> 25); a single distress file loads with the surveyed field populated and
+the rest defaulted, while `merge_surveys` joins several files by `(chainage,
+lane)` into the fully-populated condition a network forecast needs. Uploading a
+`.csv` / `.xlsx` survey to the dashboard auto-detects the schema.
+
+**Multi-file & multi-sheet.** `ingest_multi_files([(name, bytes), ...])` ingests
+several files at once and merges *every* survey across them by chainage — so the
+four separate rutting / roughness / cracking / pothole exports become one
+fully-populated condition. **All worksheets** of a workbook are scanned (a sheet
+that is neither standard nor a recognised survey is skipped, not an error, with a
+per-sheet status); wide per-lane sheets (`L1 Lane Roughness BI`, `L1 % Crack
+Area`, ...) are expanded to one row per lane. On the dashboard, the upload card
+takes **multiple files at once** (`POST /api/ingest_multi`) and reports what each
+file/sheet contributed.
+
+**Messy real templates (no hard-coding).** Vendor condition workbooks are parsed
+generically: two-row / merged **grouped headers** are detected from the sheet's
+`<mergeCells>` and combined (`Roughness BI` + `L1` → `roughness_bi_l1`, merges
+expanded), and when a sheet repeats columns in a working block the **first
+non-empty value wins**, so a real measurement is never overwritten by a later
+flag column. This reads heterogeneous per-lane condition workbooks (roughness BI,
+% crack area, rut depth per L1/L2/R1/R2) without any template-specific code.
+
+## Homogeneous sectioning & downloadable reports
+
+A raw survey is thousands of 100 m sub-segments; maintenance is planned on
+**homogeneous sections**. `rams/sections.py` delineates them with the IRC:115-2014
+**cumulative-difference** method (a new section starts where the local condition
+crosses the network mean; short runs merge forward to a minimum length), then
+aggregates each section (length-weighted mean distress), scores the IRC:82 PCI,
+classifies the MoRTH band and forecasts the preventive window — a per-section table.
+
+```python
+from rams import section_survey, sections_to_xlsx, sections_to_pdf
+from rams.ingest import ingest_segments_xlsx
+res = section_survey(ingest_segments_xlsx("Test5.xlsx").segments, key="rut")
+print(res.as_dict()["n_sections"])          # e.g. 1734 points -> ~120 sections
+open("sections.xlsx", "wb").write(sections_to_xlsx(res))
+open("sections.pdf",  "wb").write(sections_to_pdf(res))
+```
+
+On the **Segment Forecast** tab, uploading a multi-row chainage survey now renders
+the homogeneous-section table directly under the import card, with **Download XLSX**
+and **Download PDF** buttons (`POST /api/sections`, `POST /api/export?format=…`).
+Both writers are pure standard library — the `.xlsx` is a minimal Office Open XML
+package and the `.pdf` a paginated Courier table — so reports download with no
+third-party dependency.
+
+## Life-Cycle Analysis (LCA) decision matrix & MoRTH cost
+
+`rams/lca.py` projects a segment's deterioration over a horizon **you choose** and
+fixes the maintenance **decision** each year as the condition crosses IRC
+thresholds — routine → preventive → structural **overlay** → **reconstruction** —
+resetting the condition after each major treatment and continuing, so the matrix
+shows *when* overlays/rebuilds fall due. Every action is priced from the **MoRTH
+Standard Data Book** (`rams/morth.py`, indicative Rs/m² rates, editable), and the
+life cycle is summarised by total cost, NPV and the equivalent uniform annual cost
+(EUAC).
+
+```python
+# 20-year LCA decision matrix for a 10 km x 7 m carriageway
+from rams import lca_matrix, SegmentInput, MonsoonZone
+seg = SegmentInput(2.6, 5.0, 5.0, 4.5, 0.06, MonsoonZone.HIGH, segment_id="NH66", length_km=10.0)
+r = lca_matrix(seg, horizon_years=20, width_m=7.0, discount_rate=0.08)
+for y in r.years:
+    print(y.year, y.decision, y.treatment, round(y.cost_inr/1e5, 1), "lakh")
+print(r.total_cost_inr, r.npv_inr, r.euac_inr)
+```
+
+Exposed at `POST /api/lca` and the dashboard's **Life-Cycle Analysis** card, with
+**Download XLSX / PDF** of the decision matrix. MoRTH SDB rates are indicative —
+replace `MORTH_RATES` with the project's current SDB / state Schedule of Rates
+before tendering.
+
 ## Project layout
 
 ```
@@ -499,12 +649,19 @@ rams/
   lifecycle.py    Treatment-aware simulation (applies catalog reset values)
   optimize.py     Multi-year budget optimisation across the network
   batch.py        Defensive CSV ingestion + streaming network forecaster
-  ingest.py       Multi-format network import (CSV / XML / PDF), one trust boundary
+  ingest.py       Multi-format network import (CSV / XLSX / PDF), one trust boundary
   hdm4.py         HDM-4 mechanistic delta-RDM rut model + paper-calibrated presets
   distress.py     Selectable cracking (MLIT) / roughness / skid / pothole models
   traffic.py      IRC:37 CVPD + VDF -> design / annual MSA (Indian overloading)
   design.py       IRC:37 new-pavement design: CBR + MSA -> BC/DBM/WMM/GSB section
+  iitpave.py      Mechanistic layered-elastic analysis (Odemark-Boussinesq):
+                  critical strains -> fatigue/rutting life, section check + design
   pbmc.py         Performance-Based Maintenance Contract cost estimator (5-7 yr)
+  morth.py        MoRTH Standard Data Book treatment unit rates (Rs/m^2) + costing
+  lca.py          Life-cycle decision matrix (routine/preventive/overlay/recon) + NPV/EUAC
+  survey.py       NSV chainage-survey ingestion (ROMDAS/Hawkeye vendor schemas)
+  sections.py     Dynamic segmentation: chainage survey -> homogeneous sections
+  export.py       Stdlib XLSX + PDF writers for downloadable section/LCA reports
   fwd.py          FWD/Benkelman deflection -> structural number (SNP) back-calc
   calibrate.py    OLS harnesses: fit rut / cracking / roughness / skid / potholes
   residual.py     IRC:81/IRC:37 remaining fatigue life + HAM handback verdict
@@ -515,7 +672,7 @@ rams/
   server.py       Stdlib web server + embedded interactive dashboard (SPA)
   cli.py          Command-line interface
 tests/            unittest suite (golden values, edge & security cases)
-examples/         sample_network.csv / .xml      (Segment & ingestion demos)
+examples/         sample_network.csv              (Segment & ingestion demos)
                   budget_network.csv             (16-segment Network & Budget demo)
                   sample_observations.csv        (HDM-4 calibration demo)
 docs/             ARCHITECTURE.md (design rationale)
@@ -607,9 +764,20 @@ earlier preventive window — that earlier year is what `--csv` prints per row.
   avoided structural cost, and which segments go unfunded.
 - **Calibrate & Residual Life** — fit any deterioration model to field data, and
   assess IRC:81/IRC:37 remaining structural life + HAM handback verdict.
-- **Design & PBMC** — IRC:37 pavement design (CBR → layer thicknesses) and a
-  priced 5–7-year Performance-Based Maintenance Contract with a per-year cash
-  flow, contract value and NPV.
+- **Design & PBMC** — IRC:37 pavement design (CBR → layer thicknesses) via the
+  catalogue **or** an IITPAVE-style mechanistic analysis, an **IITPAVE section
+  check** (FWD moduli → strains, fatigue/rutting life, residual life), a priced
+  5–7-year Performance-Based Maintenance Contract, and the **Life-Cycle Analysis**
+  decision matrix with MoRTH costs (NPV/EUAC).
+
+**Shared upload & paged tables.** A survey loaded once in *Load a segment* is
+shared across tabs — **Network & Budget**, **PBMC** and **LCA** offer a green
+*"Use uploaded survey"* button (no re-upload), and *Calibrate* a *"Use uploaded
+CSV"* button. Missing fields fall back to defaults and differently-named columns
+are matched on import. Long result tables (homogeneous sections, LCA matrix,
+network risk, FWD) are **paginated** (25/50/100/all rows per page). All
+maintenance/treatment costs shown — managed lifecycle and LCA — are priced from
+the **MoRTH Standard Data Book** (rate × carriageway area).
 
 Security: binds to loopback only, caps request bodies, sets `nosniff` +
 `X-Frame-Options` + a restrictive CSP, and maps bad input to HTTP 400 without

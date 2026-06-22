@@ -42,6 +42,13 @@ from .distress import (
 from .design import design_pavement
 from .engine import IndianPavementDeteriorationEngine
 from .fwd import snp_from_deflection
+from .iitpave import (
+    FWDSection,
+    LayerModel,
+    design_pavement_mechanistic,
+    evaluate_fwd_sections,
+    evaluate_section,
+)
 from .pbmc import PBMCParams, estimate_pbmc, estimate_pbmc_network
 from .hdm4 import preset as hdm4_preset
 from .residual import handback_assessment, remaining_fatigue_life
@@ -51,8 +58,8 @@ from .ingest import (
     ingest_segments_csv_text,
     ingest_segments_pdf,
     ingest_segments_pdf_bytes,
-    ingest_segments_xml,
-    ingest_segments_xml_text,
+    ingest_segments_xlsx,
+    ingest_segments_xlsx_bytes,
 )
 from .lifecycle import simulate_managed_lifecycle
 from .maintenance import MaintenancePolicy, annotate_timeline, build_maintenance_plan
@@ -174,7 +181,9 @@ def forecast_single(payload: dict) -> dict:
         length_km=_f(payload, "length_km", 1.0),
         **structural_kw,
     )
-    managed = simulate_managed_lifecycle(seg, horizon, policy=_POLICY, **model_kw)
+    managed = simulate_managed_lifecycle(
+        seg, horizon, policy=_POLICY, width_m=_f(payload, "width_m", 7.0), **model_kw
+    )
 
     # Indian intervention triggers (rut / crack / IRI / FWD deflection / MSA).
     design_msa = payload.get("design_msa")
@@ -291,6 +300,89 @@ def forecast_single(payload: dict) -> dict:
     }
 
 
+def survey_sections(payload: dict) -> dict:
+    """Group an uploaded chainage survey into homogeneous sections (tabular).
+
+    Accepts a `segments` list (as returned by /api/upload) plus optional
+    `years`, `min_length_km`, and `key` ("pci"|"rut"|"iri"|"crack"). Returns the
+    per-section breakdown with aggregate condition, PCI band and preventive window.
+    """
+    from .sections import section_survey
+    segments = _segments_from_payload(payload)
+    result = section_survey(
+        segments,
+        horizon_years=_i(payload, "years", 10),
+        min_length_km=_f(payload, "min_length_km", 0.5),
+        key=str(payload.get("key", "pci")).strip().lower(),
+    )
+    return result.as_dict()
+
+
+_XLSX_MIME = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+
+
+def export_report(payload: dict, fmt: str):
+    """Build a downloadable report. `report`: "sections" (default) or "lca".
+    Returns (bytes, mime, filename)."""
+    fmt = str(fmt).strip().lower()
+    if fmt not in ("xlsx", "pdf"):
+        raise ValueError("'format' must be xlsx or pdf.")
+    kind = str(payload.get("report", "sections")).strip().lower()
+
+    if kind == "lca":
+        from .export import lca_to_pdf, lca_to_xlsx
+        result = _lca_from_payload(payload)
+        if fmt == "xlsx":
+            return lca_to_xlsx(result), _XLSX_MIME, "rams_lca_matrix.xlsx"
+        return lca_to_pdf(result), "application/pdf", "rams_lca_matrix.pdf"
+
+    from .sections import section_survey
+    from .export import sections_to_pdf, sections_to_xlsx
+    result = section_survey(
+        _segments_from_payload(payload),
+        horizon_years=_i(payload, "years", 10),
+        min_length_km=_f(payload, "min_length_km", 0.5),
+        key=str(payload.get("key", "pci")).strip().lower(),
+    )
+    if fmt == "xlsx":
+        return sections_to_xlsx(result), _XLSX_MIME, "rams_sections.xlsx"
+    return sections_to_pdf(result), "application/pdf", "rams_sections.pdf"
+
+
+def _lca_from_payload(payload: dict):
+    """Build an LCAResult from a single-segment payload (shared by lca + export)."""
+    from .lca import lca_matrix
+    seg = SegmentInput(
+        base_iri=_f(payload, "iri", 2.5), base_rut=_f(payload, "rut", 4.0),
+        base_crack=_f(payload, "crack", 3.0), annual_msa=_f(payload, "msa", 4.5),
+        traffic_growth_rate=_f(payload, "growth", 0.06),
+        monsoon_zone=MonsoonZone.from_str(str(payload.get("zone", "MEDIUM"))),
+        segment_id=str(payload.get("id", "SEGMENT")),
+        length_km=_f(payload, "length_km", 1.0),
+        deflection_mm=_f(payload, "deflection", 0.5),
+        structural_number=_f(payload, "snp", 4.0),
+    )
+    return lca_matrix(
+        seg, _i(payload, "years", 15), width_m=_f(payload, "width_m", 7.0),
+        discount_rate=_f(payload, "discount_rate", 0.08),
+        rut_model=RutModelType.from_str(str(payload.get("model", "default"))),
+        hdm4_calibration=hdm4_preset(str(payload.get("pavement", "dense"))),
+        crack_model=CrackModelType.from_str(str(payload.get("crack_model", "default"))),
+        roughness_model=RoughnessModelType.from_str(str(payload.get("roughness_model", "default"))),
+    )
+
+
+def lca(payload: dict) -> dict:
+    """Life-cycle decision matrix + MoRTH costs over a user-given horizon.
+
+    Single segment (same condition fields as /api/forecast) -> per-year matrix
+    triggering routine/preventive/overlay/reconstruction, priced from the MoRTH
+    Standard Data Book, with total cost, NPV and EUAC. Optional: years, width_m,
+    discount_rate, plus the rut/crack/roughness model selectors.
+    """
+    return _lca_from_payload(payload).as_dict()
+
+
 def _segments_from_payload(payload: dict) -> List[SegmentInput]:
     rows = payload.get("segments")
     if not isinstance(rows, list) or not rows:
@@ -326,38 +418,37 @@ def _segments_from_payload(payload: dict) -> List[SegmentInput]:
 
 
 def ingest_data(payload: dict) -> dict:
-    """Parse an uploaded CSV/XML/PDF network file into segment rows.
+    """Parse an uploaded CSV/XLSX/PDF network file into segment rows.
 
-    Request shape (one of `content` for text formats, `content_b64` for PDF):
-        {"format": "xml"|"csv"|"pdf",
-         "content": "<text>",            # xml / csv
-         "content_b64": "<base64>"}      # pdf (binary)
+    Request shape (one of `content` for CSV text, `content_b64` for binary):
+        {"format": "csv"|"xlsx"|"pdf",
+         "content": "<text>",            # csv
+         "content_b64": "<base64>"}      # xlsx / pdf (binary)
 
     Returns the parsed (validated) segments ready to feed `/api/network`,
-    plus any per-row errors -- so the portal can import a pavement-databank
-    export and immediately optimise a budget over it.
+    plus any per-row errors.
     """
     fmt = str(payload.get("format", "")).strip().lower()
-    if fmt in ("xml", "csv"):
+    if fmt == "csv":
         content = payload.get("content")
         if not isinstance(content, str) or not content.strip():
-            raise ValueError("'content' (text) is required for csv/xml import.")
-        result = (
-            ingest_segments_xml_text(content)
-            if fmt == "xml"
-            else ingest_segments_csv_text(content)
-        )
-    elif fmt == "pdf":
+            raise ValueError("'content' (text) is required for csv import.")
+        result = ingest_segments_csv_text(content)
+    elif fmt in ("pdf", "xlsx"):
         b64 = payload.get("content_b64")
         if not isinstance(b64, str) or not b64.strip():
-            raise ValueError("'content_b64' (base64) is required for pdf import.")
+            raise ValueError(f"'content_b64' (base64) is required for {fmt} import.")
         try:
             data = base64.b64decode(b64, validate=True)
         except (binascii.Error, ValueError):
             raise ValueError("'content_b64' is not valid base64.") from None
-        result = ingest_segments_pdf_bytes(data)
+        result = (
+            ingest_segments_xlsx_bytes(data)
+            if fmt == "xlsx"
+            else ingest_segments_pdf_bytes(data)
+        )
     else:
-        raise ValueError("'format' must be one of: csv, xml, pdf.")
+        raise ValueError("'format' must be one of: csv, xlsx, pdf.")
 
     return _ingest_payload(result, fmt)
 
@@ -392,20 +483,52 @@ def _ingest_payload(result, fmt: str) -> dict:
     }
 
 
+def ingest_multi(payload: dict) -> dict:
+    """Ingest several uploaded files at once and merge their surveys by chainage.
+
+    Request: {"files": [{"name": "...", "content_b64": "..."}], ...}. Separate
+    rutting / roughness / cracking / pothole exports (or a multi-sheet workbook)
+    merge into one fully-populated condition. Returns the merged segments plus a
+    per-file/sheet status list.
+    """
+    from .ingest import ingest_multi_files
+    files = payload.get("files")
+    if not isinstance(files, list) or not files:
+        raise ValueError("'files' must be a non-empty list.")
+    if len(files) > 50:
+        raise ValueError("too many files (max 50).")
+    decoded = []
+    for i, f in enumerate(files, start=1):
+        if not isinstance(f, dict):
+            raise ValueError(f"file #{i} must be an object.")
+        name = str(f.get("name", f"file{i}"))
+        b64 = f.get("content_b64")
+        if not isinstance(b64, str) or not b64.strip():
+            raise ValueError(f"file #{i} ({name}) is missing 'content_b64'.")
+        try:
+            decoded.append((name, base64.b64decode(b64, validate=True)))
+        except (binascii.Error, ValueError):
+            raise ValueError(f"file #{i} ({name}) is not valid base64.") from None
+    result, infos = ingest_multi_files(decoded)
+    out = _ingest_payload(result, "multi")
+    out["files"] = [{"name": n, "status": s} for n, s in infos]
+    return out
+
+
 def ingest_file(path: str, fmt: str) -> dict:
     """Ingest an uploaded file already streamed to `path` (large-file path).
 
     Avoids base64/JSON buffering: the server streams the raw body to a temp file
-    and calls this. CSV is row-streamed; XML/PDF are buffered up to the blob cap.
+    and calls this. CSV is row-streamed; XLSX/PDF are buffered up to the cap.
     """
     fmt = str(fmt).strip().lower()
     loaders = {
         "csv": ingest_segments_csv,
-        "xml": ingest_segments_xml,
+        "xlsx": ingest_segments_xlsx,
         "pdf": ingest_segments_pdf,
     }
     if fmt not in loaders:
-        raise ValueError("'format' must be one of: csv, xml, pdf.")
+        raise ValueError("'format' must be one of: csv, xlsx, pdf.")
     return _ingest_payload(loaders[fmt](path), fmt)
 
 
@@ -453,12 +576,25 @@ def residual_life(payload: dict) -> dict:
     return out
 
 
+def _split_layers(bituminous_mm: float, granular_mm: float) -> dict:
+    """Split bituminous/granular totals into BC/DBM and WMM/GSB for display."""
+    bc = min(40.0, bituminous_mm)
+    wmm = min(250.0, max(0.0, granular_mm - 150.0))
+    return {
+        "bc_mm": round(bc, 0), "dbm_mm": round(bituminous_mm - bc, 0),
+        "bituminous_mm": round(bituminous_mm, 0),
+        "wmm_mm": round(wmm, 0), "gsb_mm": round(granular_mm - wmm, 0),
+        "granular_mm": round(granular_mm, 0),
+    }
+
+
 def pavement_design(payload: dict) -> dict:
     """IRC:37 flexible-pavement structural design from CBR + design traffic.
 
     Payload: `cbr`, and either `design_msa` directly or CVPD inputs
     (`cvpd`, `vdf`|`terrain`, `growth`, `design_life_years`, `carriageway`) to
-    derive it via IRC:37; optional `reliability` (80|90).
+    derive it via IRC:37; optional `reliability` (80|90) and
+    `method`: "catalogue" (default) | "iitpave" (mechanistic Odemark-Boussinesq).
     """
     cbr = _f(payload, "cbr", 8.0)
     design_life = _i(payload, "design_life_years", 15)
@@ -479,15 +615,104 @@ def pavement_design(payload: dict) -> dict:
         d_msa = traffic.design_msa
     else:
         d_msa = float(d_msa)
-    reliability = payload.get("reliability")
-    reliability = int(reliability) if reliability not in (None, "") else None
-    design = design_pavement(
-        cbr=cbr, design_msa=d_msa, design_life_years=design_life, reliability=reliability,
-    )
-    out = design.as_dict()
+
+    method = str(payload.get("method", "catalogue")).strip().lower()
+    if method in ("iitpave", "mechanistic"):
+        mech = design_pavement_mechanistic(
+            cbr=cbr, design_msa=d_msa, design_life_years=design_life,
+            e_bituminous_mpa=_f(payload, "e_bituminous", 3000.0),
+        )
+        out = mech.as_dict()
+        out["method"] = "iitpave"
+        out["layers"] = _split_layers(mech.bituminous_mm, mech.granular_mm)
+    else:
+        reliability = payload.get("reliability")
+        reliability = int(reliability) if reliability not in (None, "") else None
+        design = design_pavement(
+            cbr=cbr, design_msa=d_msa, design_life_years=design_life, reliability=reliability,
+        )
+        out = design.as_dict()
+        out["method"] = "catalogue"
     if traffic is not None:
         out["traffic"] = traffic.as_dict()
     return out
+
+
+def iitpave_evaluate(payload: dict) -> dict:
+    """Mechanistic (IITPAVE-style) assessment of an existing section from its
+    layer moduli + thicknesses, e.g. FWD back-calculated 15th-percentile moduli.
+
+    Payload: e_bituminous, e_granular, e_subgrade (MPa); h_bituminous, h_granular
+    (mm); optional annual_msa, growth, cumulative_msa, design_msa.
+    """
+    standard = str(payload.get("standard", "irc37")).strip().lower()
+    # IRC:115-2014 (FWD remaining-life) uses Poisson 0.5/0.4/0.4; IRC:37 uses 0.35.
+    nu = (0.5, 0.4, 0.4) if standard == "irc115" else (0.35, 0.35, 0.35)
+    layer = LayerModel(
+        e_bituminous_mpa=_f(payload, "e_bituminous", 3000.0),
+        e_granular_mpa=_f(payload, "e_granular", 250.0),
+        e_subgrade_mpa=_f(payload, "e_subgrade", 70.0),
+        h_bituminous_mm=_f(payload, "h_bituminous", 150.0),
+        h_granular_mm=_f(payload, "h_granular", 450.0),
+        nu_bituminous=nu[0], nu_granular=nu[1], nu_subgrade=nu[2],
+    )
+    design = payload.get("design_msa")
+    design = float(design) if design not in (None, "", 0) else None
+    assessment = evaluate_section(
+        layer,
+        annual_msa=_f(payload, "annual_msa", 0.0),
+        traffic_growth_rate=_f(payload, "growth", 0.0),
+        cumulative_msa=_f(payload, "cumulative_msa", 0.0),
+        design_msa=design,
+        standard=standard,
+    )
+    out = assessment.as_dict()
+    out["layer"] = {
+        "e_bituminous_mpa": layer.e_bituminous_mpa,
+        "e_granular_mpa": layer.e_granular_mpa,
+        "e_subgrade_mpa": layer.e_subgrade_mpa,
+        "h_bituminous_mm": layer.h_bituminous_mm,
+        "h_granular_mm": layer.h_granular_mm,
+    }
+    return out
+
+
+def fwd_overlay(payload: dict) -> dict:
+    """FWD remaining-life + overlay across homogeneous sub-sections (IRC:115-2014).
+
+    Payload: `design_msa`, and `sections` -- a list of objects with
+    section_id, e_bituminous, e_granular, e_subgrade, h_bituminous, h_granular
+    (and optional chainage_from / chainage_to). Mirrors an FWD evaluation report
+    (back-calculated 15th-percentile moduli -> remaining life -> overlay).
+    """
+    rows = payload.get("sections")
+    if not isinstance(rows, list) or not rows:
+        raise ValueError("'sections' must be a non-empty list.")
+    if len(rows) > MAX_NETWORK_SEGMENTS:
+        raise ValueError(f"too many sections (max {MAX_NETWORK_SEGMENTS}).")
+    design = _f(payload, "design_msa", 0.0)
+    if design <= 0:
+        raise ValueError("'design_msa' must be positive.")
+
+    sections = []
+    for i, row in enumerate(rows, start=1):
+        if not isinstance(row, dict):
+            raise ValueError(f"section #{i} must be an object.")
+        try:
+            sections.append(FWDSection(
+                section_id=str(row.get("section_id", f"Sec-{i}")),
+                e_bituminous_mpa=float(row["e_bituminous"]),
+                e_granular_mpa=float(row["e_granular"]),
+                e_subgrade_mpa=float(row["e_subgrade"]),
+                h_bituminous_mm=float(row["h_bituminous"]),
+                h_granular_mm=float(row["h_granular"]),
+                chainage_from=(float(row["chainage_from"]) if row.get("chainage_from") not in (None, "") else None),
+                chainage_to=(float(row["chainage_to"]) if row.get("chainage_to") not in (None, "") else None),
+            ))
+        except (KeyError, TypeError, ValueError) as exc:
+            raise ValueError(f"section #{i}: needs e_bituminous, e_granular, "
+                             f"e_subgrade, h_bituminous, h_granular ({exc}).") from None
+    return evaluate_fwd_sections(sections, design).as_dict()
 
 
 def _pbmc_params_from_payload(payload: dict) -> PBMCParams:

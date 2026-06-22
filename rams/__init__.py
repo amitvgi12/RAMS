@@ -70,7 +70,7 @@ from .ingest import (
     ingest_segments,
     ingest_segments_csv,
     ingest_segments_pdf,
-    ingest_segments_xml,
+    ingest_segments_xlsx,
 )
 from .lifecycle import (
     Intervention,
@@ -131,6 +131,50 @@ from .pbmc import (
     estimate_pbmc,
     estimate_pbmc_network,
 )
+from .iitpave import (
+    FWDOverlayResult,
+    FWDOverlayRow,
+    FWDSection,
+    LayerModel,
+    MechanisticDesign,
+    SectionAssessment,
+    StrainResult,
+    compute_strains,
+    contact_radius_mm,
+    design_pavement_mechanistic,
+    evaluate_fwd_sections,
+    evaluate_section,
+)
+from .design import fatigue_life_msa_irc115
+from .survey import (
+    SurveyDefaults,
+    band_value,
+    detect_distress,
+    is_survey,
+    merge_surveys,
+    segments_from_survey,
+)
+from .sections import (
+    HomogeneousSection,
+    SectioningResult,
+    homogeneous_sections,
+    section_survey,
+)
+from .export import pdf_bytes, sections_to_pdf, sections_to_xlsx, xlsx_bytes
+from .morth import (
+    DEFAULT_CARRIAGEWAY_WIDTH_M,
+    MORTH_RATES,
+    Decision,
+    MorthRate,
+    treatment_cost_inr,
+)
+from .lca import (
+    DEFAULT_LCA_THRESHOLDS,
+    LCAResult,
+    LCAThresholds,
+    LCAYear,
+    lca_matrix,
+)
 
 __version__ = "1.0.0"
 
@@ -152,7 +196,7 @@ __all__ = [
     "TREATMENT_CATALOG",
     "ingest_segments",
     "ingest_segments_csv",
-    "ingest_segments_xml",
+    "ingest_segments_xlsx",
     "ingest_segments_pdf",
     "compute_mci",
     "mci_band",
@@ -229,5 +273,42 @@ __all__ = [
     "PBMCNetworkEstimate",
     "PBMCYear",
     "DEFAULT_MONSOON_ROUTINE_FACTOR",
+    "LayerModel",
+    "StrainResult",
+    "SectionAssessment",
+    "MechanisticDesign",
+    "compute_strains",
+    "evaluate_section",
+    "evaluate_fwd_sections",
+    "FWDSection",
+    "FWDOverlayRow",
+    "FWDOverlayResult",
+    "fatigue_life_msa_irc115",
+    "design_pavement_mechanistic",
+    "contact_radius_mm",
+    "SurveyDefaults",
+    "segments_from_survey",
+    "merge_surveys",
+    "is_survey",
+    "detect_distress",
+    "band_value",
+    "homogeneous_sections",
+    "section_survey",
+    "HomogeneousSection",
+    "SectioningResult",
+    "sections_to_xlsx",
+    "sections_to_pdf",
+    "xlsx_bytes",
+    "pdf_bytes",
+    "lca_matrix",
+    "LCAResult",
+    "LCAYear",
+    "LCAThresholds",
+    "DEFAULT_LCA_THRESHOLDS",
+    "Decision",
+    "MorthRate",
+    "MORTH_RATES",
+    "treatment_cost_inr",
+    "DEFAULT_CARRIAGEWAY_WIDTH_M",
     "__version__",
 ]

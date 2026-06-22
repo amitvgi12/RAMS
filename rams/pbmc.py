@@ -226,7 +226,7 @@ def estimate_pbmc(
     # 2. Managed lifecycle over the term -> periodic renewal schedule + PCI path.
     managed = simulate_managed_lifecycle(
         sim_segment, params.term_years,
-        policy=policy, base_unit_cost=params.base_unit_cost,
+        policy=policy, base_unit_cost=params.base_unit_cost, morth_costing=False,
         min_treatment_interval=params.min_treatment_interval,
         calibration=calibration, scoring=scoring, bounds=bounds,
         rut_model=rut_model, hdm4_calibration=hdm4_calibration,

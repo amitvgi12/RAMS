@@ -41,6 +41,7 @@ from .engine import IndianPavementDeteriorationEngine
 from .hdm4 import DEFAULT_HDM4, HDM4RutCalibration
 from .maintenance import MaintenanceFlag, MaintenancePolicy, Treatment
 from .models import SegmentInput, YearResult
+from .morth import cost_for_treatment_code_lakh
 
 
 @dataclass
@@ -77,6 +78,8 @@ def simulate_managed_lifecycle(
     *,
     policy: Optional[MaintenancePolicy] = None,
     base_unit_cost: float = 30.0,
+    width_m: float = 7.0,
+    morth_costing: bool = True,
     min_treatment_interval: int = 3,
     calibration: Calibration = DEFAULT_CALIBRATION,
     scoring: IRC82Scoring = DEFAULT_SCORING,
@@ -148,7 +151,11 @@ def simulate_managed_lifecycle(
                 yr.potholes = round(engine.potholes, 2)
             yr.treatment = treatment.name
 
-            cost = treatment_cost(treatment, v.length_km, base_unit_cost)
+            cost = (
+                round(cost_for_treatment_code_lakh(treatment.code, v.length_km, width_m), 2)
+                if morth_costing
+                else treatment_cost(treatment, v.length_km, base_unit_cost)
+            )
             total_cost += cost
             interventions.append(
                 Intervention(

@@ -1,21 +1,17 @@
 """
-Multi-format network ingestion: CSV, XML and PDF -> validated SegmentInput.
+Multi-format network ingestion: CSV, XLSX and PDF -> validated SegmentInput.
 
-Why this module exists (paper link):
-    Taniguchi & Yoshida describe the MLIT-PMS *pavement databank*, which holds
-    road-surface-attribute records -- cracking %, rut depth (mm), longitudinal
-    roughness, traffic and pavement composition -- and exchanges them as report
-    artefacts. A RAMS portal must ingest those records however they arrive: a
-    PMS export (XML), a condition-survey report (PDF) or a flat CSV. This module
-    adds XML and PDF loaders alongside the existing CSV path, all funnelled
-    through the same `SegmentInput.validate()` trust boundary.
+Why this module exists:
+    A RAMS portal must ingest condition/structural records however they arrive: a
+    flat CSV, an XLSX workbook (NSV/condition survey, possibly multi-sheet) or a
+    condition-survey PDF. All formats are funnelled through the same
+    `SegmentInput.validate()` trust boundary.
 
 Security posture (consistent with the rest of RAMS):
-    * XML is parsed with the stdlib `xml.etree.ElementTree`, and any document
-      carrying a DOCTYPE/DTD is rejected up front. That blocks the classic XML
-      attacks -- external-entity (XXE) file disclosure and "billion laughs"
-      entity-expansion DoS -- which both require a DTD, without needing a
-      third-party hardened parser in a zero-dependency government deployment.
+    * XLSX is a ZIP of XML parts read with the stdlib `zipfile` +
+      `xml.etree.ElementTree`; any internal part carrying a DOCTYPE/DTD is
+      rejected up front, blocking XXE / "billion laughs" without a third-party
+      parser in a zero-dependency government deployment.
     * PDF text is recovered with a defensive, bounded stdlib extractor (or
       `pypdf` when installed). Only the text layer is read -- no embedded
       JavaScript, no external resources are followed.
@@ -28,6 +24,7 @@ import csv
 import io
 import os
 import re
+import zipfile
 import zlib
 from typing import Dict, Iterable, List, Optional, Tuple
 from xml.etree import ElementTree as ET
@@ -41,15 +38,26 @@ from .batch import (
 )
 from .config import DEFAULT_BOUNDS, InputBounds, MonsoonZone
 from .models import SegmentInput
+from .survey import (
+    aggregate_defects,
+    detect_defect,
+    detect_distress,
+    expand_wide_lanes,
+    is_survey,
+    merge_surveys,
+    segments_from_survey,
+)
 
 __all__ = [
     "ingest_segments",
     "ingest_segments_csv",
     "ingest_segments_csv_text",
-    "ingest_segments_xml",
-    "ingest_segments_xml_text",
+    "ingest_segments_xlsx",
+    "ingest_segments_xlsx_bytes",
     "ingest_segments_pdf",
     "ingest_segments_pdf_bytes",
+    "ingest_multi_files",
+    "ingest_workbook_parts",
     "IngestResult",
 ]
 
@@ -59,15 +67,15 @@ _OPTIONAL_FIELDS = ("length_km", "roughness_mm")
 
 # Optional HDM-4 structural / FWD columns, consumed only by the HDM-4 rut model.
 # Mapped onto SegmentInput kwargs when present; absent ones fall back to defaults.
-# Hard cap on bytes we will read from an XML/PDF blob (DoS guard). CSV is read
-# row-streaming (no blob cap, just MAX_ROWS), so large NSV CSVs are fine; XML/PDF
+# Hard cap on bytes we will read from an XLSX/PDF blob (DoS guard). CSV is read
+# row-streaming (no blob cap, just MAX_ROWS), so large NSV CSVs are fine; XLSX/PDF
 # are fully buffered, hence this ceiling.
 MAX_BLOB_BYTES = 64 * 1024 * 1024
 
 
 # --- shared row -> validated SegmentInput (defined in batch, reused here) ---
 # `_segment_from_mapping` is imported from rams.batch so every importer (CSV on
-# disk, XML, PDF, pasted text) shares one row->segment contract, including the
+# disk, XLSX, PDF, pasted text) shares one row->segment contract, including the
 # optional structural/FWD columns and FWD->SNP derivation.
 
 
@@ -99,82 +107,37 @@ def ingest_segments_csv_text(
     lets the portal ingest a pasted/uploaded CSV without a temp file.
     """
     reader = csv.DictReader(io.StringIO(text))
-    missing = [c for c in REQUIRED_COLUMNS if c not in (reader.fieldnames or [])]
-    if missing:
-        raise ValueError(f"CSV missing required columns: {missing}")
-    return _ingest_mappings(reader, bounds, max_rows)
-
-
-# --- XML --------------------------------------------------------------------
-
-def ingest_segments_xml(
-    path: str, bounds: InputBounds = DEFAULT_BOUNDS, max_rows: int = MAX_ROWS
-) -> IngestResult:
-    """Load segments from an XML pavement-databank export (file path)."""
-    with open(path, "rb") as fh:
-        data = fh.read(MAX_BLOB_BYTES + 1)
-    return ingest_segments_xml_text(data, bounds, max_rows)
-
-
-def ingest_segments_xml_text(
-    data, bounds: InputBounds = DEFAULT_BOUNDS, max_rows: int = MAX_ROWS
-) -> IngestResult:
-    """Parse an XML document (str or bytes) into validated segments.
-
-    Accepted shape (fields may be attributes or child elements, mixed freely)::
-
-        <network>
-          <segment id="NH66-KL-012" length_km="12.0">
-            <base_iri>1.5</base_iri>
-            <base_rut>2.0</base_rut>
-            <base_crack>0.0</base_crack>
-            <annual_msa>4.5</annual_msa>
-            <traffic_growth_rate>0.06</traffic_growth_rate>
-            <monsoon_zone>HIGH</monsoon_zone>
-            <roughness_mm>3.0</roughness_mm>   <!-- optional sigma for MCI -->
-          </segment>
-        </network>
-    """
-    raw = data.encode("utf-8") if isinstance(data, str) else bytes(data)
-    if len(raw) > MAX_BLOB_BYTES:
-        raise ValueError("XML document too large.")
-    # Reject any DTD: defends against XXE and billion-laughs without a 3rd-party
-    # parser. Legitimate pavement-databank exports never need a DOCTYPE.
-    if re.search(rb"<!DOCTYPE", raw, re.IGNORECASE):
-        raise ValueError("XML DOCTYPE/DTD is not permitted (XXE/entity-expansion guard).")
-
-    try:
-        root = ET.fromstring(raw)
-    except ET.ParseError as exc:
-        raise ValueError(f"malformed XML: {exc}") from None
-
-    seg_nodes = root.findall(".//segment") or (
-        [root] if root.tag == "segment" else []
-    )
-    if not seg_nodes:
-        raise ValueError("no <segment> elements found in XML.")
-
-    def to_mapping(node: ET.Element) -> Dict[str, str]:
-        row: Dict[str, str] = {}
-        # Attributes first; child elements override (more specific).
-        for k, v in node.attrib.items():
-            row[_norm_key(k)] = v
-        for child in node:
-            text = (child.text or "").strip()
-            if text:
-                row[_norm_key(child.tag)] = text
-        return row
-
-    return _ingest_mappings((to_mapping(n) for n in seg_nodes), bounds, max_rows)
+    fields = reader.fieldnames or []
+    missing = [c for c in REQUIRED_COLUMNS if c not in fields]
+    if not missing:
+        return _ingest_mappings(reader, bounds, max_rows)
+    # Vendor NSV chainage survey? Normalise headers and try the survey mapper.
+    norm = {c: _norm_key(c) for c in fields}
+    if is_survey(norm.values()):
+        rows = [{norm[k]: v for k, v in row.items() if k in norm} for row in reader]
+        return segments_from_survey(rows, bounds=bounds)
+    raise ValueError(f"CSV missing required columns: {missing}")
 
 
 def _norm_key(key: str) -> str:
-    """Map common attribute/element aliases onto the canonical column names."""
-    k = key.strip().lower()
+    """Normalise a column header: lower-case, collapse whitespace/newlines to one
+    underscore, then map common aliases onto canonical names. So 'Start Chainage '
+    -> 'start_chainage', 'Lane No.' -> 'lane', 'New NH\\nNumber' -> 'new_nh_number'."""
+    k = re.sub(r"\s+", "_", str(key).strip().lower())
     return {
         "id": "segment_id",
         "sigma": "roughness_mm",
         "roughness": "roughness_mm",
+        # chainage / lane aliases (vendor variants)
+        "chainage_from": "start_chainage",
+        "from_chainage": "start_chainage",
+        "chainage_to": "end_chainage",
+        "to_chainage": "end_chainage",
+        "lane_no": "lane",
+        "lane_no.": "lane",
+        "lane_number": "lane",
+        "lane/side": "lane",
+        "direction": "lane",
         # FWD / structural aliases
         "deflection": "deflection_mm",
         "fwd_deflection": "deflection_mm",
@@ -185,6 +148,346 @@ def _norm_key(key: str) -> str:
         "comp": "compaction_pct",
         "compaction": "compaction_pct",
     }.get(k, k)
+
+
+# --- XLSX (Office Open XML spreadsheet) -------------------------------------
+# An .xlsx is a ZIP of XML parts. We read it with the stdlib zipfile + the same
+# hardened ElementTree path used for XML -- no third-party (openpyxl/pandas)
+# dependency, consistent with the zero-dependency government-deployment posture.
+# The first worksheet's first row is the header (same columns as the CSV).
+
+# Bound the *inflated* size of any single zip member and the member count, so a
+# crafted "zip bomb" cannot exhaust memory on decompression.
+_XLSX_MAX_PARTS = 1024
+_XLSX_MAX_PART_BYTES = MAX_BLOB_BYTES
+
+
+def ingest_segments_xlsx(
+    path: str, bounds: InputBounds = DEFAULT_BOUNDS, max_rows: int = MAX_ROWS
+) -> IngestResult:
+    """Load segments from an .xlsx survey/FWD workbook (file path)."""
+    with open(path, "rb") as fh:
+        data = fh.read(MAX_BLOB_BYTES + 1)
+    return ingest_segments_xlsx_bytes(data, bounds, max_rows)
+
+
+def ingest_segments_xlsx_bytes(
+    data: bytes, bounds: InputBounds = DEFAULT_BOUNDS, max_rows: int = MAX_ROWS
+) -> IngestResult:
+    """Parse an .xlsx workbook (bytes) into validated segments.
+
+    **All** worksheets are scanned: any sheet carrying the standard columns is
+    ingested as segments, any sheet that looks like an NSV chainage survey
+    (rutting/roughness/cracking/potholes) is parsed and the survey sheets are
+    merged by chainage; sheets matching neither schema are skipped (not an error).
+    Aliases (id, sigma, deflection, snp, 'Start Chainage', 'Lane No.', ...) are honoured.
+    """
+    raw = bytes(data)
+    if len(raw) > MAX_BLOB_BYTES:
+        raise ValueError("XLSX document too large.")
+    std, std_errors, rowsets, infos = ingest_workbook_parts(raw, bounds, max_rows)
+    segments = list(std)
+    errors: List[Tuple[int, str]] = list(std_errors)
+    if rowsets:
+        merged = merge_surveys(rowsets, bounds=bounds)
+        segments.extend(merged.segments)
+        errors.extend(merged.errors)
+    if not segments:
+        detail = "; ".join(f"{n} [{s}]" for n, s in infos) or "no worksheets"
+        raise ValueError(
+            "no parseable data in any worksheet (need the standard columns or an "
+            f"NSV chainage survey). Sheets: {detail}"
+        )
+    return IngestResult(segments=segments, errors=errors)
+
+
+def ingest_workbook_parts(raw: bytes, bounds: InputBounds = DEFAULT_BOUNDS,
+                          max_rows: int = MAX_ROWS):
+    """Scan every worksheet -> (standard_segments, std_errors, survey_rowsets, sheet_infos).
+
+    `survey_rowsets` is a list of normalised row-lists (one per survey sheet), so
+    several distress sheets -- here or across files -- can be merged by chainage.
+    `sheet_infos` is [(sheet_name, status)] for transparency in the UI.
+    """
+    std: List[SegmentInput] = []
+    std_errors: List[Tuple[int, str]] = []
+    rowsets: List[List[Dict[str, str]]] = []
+    infos: List[Tuple[str, str]] = []
+    for name, headers, rows in _xlsx_sheets(raw, max_rows):
+        if not rows:
+            infos.append((name, "empty"))
+            continue
+        hset = set(headers)
+        if all(c in hset for c in REQUIRED_COLUMNS):
+            res = _ingest_mappings(rows, bounds, max_rows)
+            std.extend(res.segments)
+            std_errors.extend(res.errors)
+            infos.append((name, f"standard ({len(res.segments)} rows)"))
+        elif is_survey(hset):
+            rows = expand_wide_lanes(rows)
+            rowsets.append(rows)
+            infos.append((name, f"survey:{detect_distress(hset) or 'mixed'} ({len(rows)} rows)"))
+        elif detect_defect(hset):
+            kind = detect_defect(hset)
+            agg = aggregate_defects(rows, kind)
+            rowsets.append(agg)
+            infos.append((name, f"defect:{kind} ({len(rows)} defects -> {len(agg)} sub-sections)"))
+        else:
+            infos.append((name, "skipped (unrecognised columns)"))
+    return std, std_errors, rowsets, infos
+
+
+def _xlsx_first_sheet_grid(raw: bytes, max_rows: int) -> List[Dict[str, str]]:
+    """Return the first worksheet as a list of {column-letter: cell-text} rows."""
+    try:
+        zf = zipfile.ZipFile(io.BytesIO(raw))
+    except zipfile.BadZipFile:
+        raise ValueError("not a valid .xlsx file (bad ZIP container).") from None
+    with zf:
+        names = zf.namelist()
+        if len(names) > _XLSX_MAX_PARTS:
+            raise ValueError("XLSX has too many internal parts.")
+        shared = _xlsx_shared_strings(zf, set(names))
+        sheet = _xlsx_first_sheet_path(zf, set(names))
+        root = _read_zip_xml(zf, sheet)
+        sheet_data = root.find("{*}sheetData")
+        if sheet_data is None:
+            return []
+        grid: List[Dict[str, str]] = []
+        for row in sheet_data.findall("{*}row"):
+            cells: Dict[str, str] = {}
+            for c in row.findall("{*}c"):
+                col = _xlsx_col_letters(c.get("r") or "")
+                if col:
+                    cells[col] = _xlsx_cell_value(c, shared)
+            grid.append(cells)
+            if len(grid) > max_rows + 1:  # header + capped data rows
+                break
+        return grid
+
+
+def _col_to_idx(letters: str) -> int:
+    idx = 0
+    for ch in letters:
+        idx = idx * 26 + (ord(ch.upper()) - 64)
+    return idx
+
+
+def _idx_to_col(idx: int) -> str:
+    s = ""
+    while idx > 0:
+        idx, r = divmod(idx - 1, 26)
+        s = chr(65 + r) + s
+    return s
+
+
+def _xlsx_merges(root: ET.Element):
+    """Merged-cell ranges as ((c1,r1),(c2,r2)) with 1-based column/row indices."""
+    mc = root.find("{*}mergeCells")
+    out = []
+    if mc is None:
+        return out
+    for m in mc.findall("{*}mergeCell"):
+        ref = m.get("ref") or ""
+        if ":" not in ref:
+            continue
+        a, b = ref.split(":", 1)
+
+        def cell(rf):
+            mm = re.match(r"([A-Z]+)(\d+)", rf)
+            return (_col_to_idx(mm.group(1)), int(mm.group(2))) if mm else (0, 0)
+        out.append((cell(a), cell(b)))
+    return out
+
+
+def _expand_horizontal(cells: Dict[str, str], merges, row_no: int) -> Dict[str, str]:
+    """Fill horizontal merges in a header row (a group label spread over columns)."""
+    filled = dict(cells)
+    for (c1, r1), (c2, r2) in merges:
+        if r1 == row_no and r2 == row_no and c2 > c1:
+            src = filled.get(_idx_to_col(c1), "")
+            for ci in range(c1 + 1, c2 + 1):
+                col = _idx_to_col(ci)
+                if str(filled.get(col, "")).strip() == "":
+                    filled[col] = src
+    return filled
+
+
+def _xlsx_sheets(raw: bytes, max_rows: int):
+    """Every worksheet as (sheet_name, normalised_headers, normalised_dict_rows).
+
+    Handles two real-world wrinkles generically (no per-template assumptions):
+      * **multi-row / merged headers** -- if the top row has horizontal merges
+        (group labels), the first two rows are combined into one composite header
+        ('Roughness BI' + 'L1' -> 'roughness_bi_l1') and merges are expanded;
+      * **duplicate columns** -- when several columns normalise to the same name
+        (a vendor working block repeating headers), the *first non-empty* value
+        wins, so a real measurement is never overwritten by a later flag column.
+    """
+    try:
+        zf = zipfile.ZipFile(io.BytesIO(raw))
+    except zipfile.BadZipFile:
+        raise ValueError("not a valid .xlsx file (bad ZIP container).") from None
+    out = []
+    with zf:
+        names = zf.namelist()
+        if len(names) > _XLSX_MAX_PARTS:
+            raise ValueError("XLSX has too many internal parts.")
+        nameset = set(names)
+        shared = _xlsx_shared_strings(zf, nameset)
+        for sheet_name, path in _xlsx_all_sheet_paths(zf, nameset):
+            root = _read_zip_xml(zf, path)
+            merges = _xlsx_merges(root)
+            sd = root.find("{*}sheetData")
+            grid: List[Dict[str, str]] = []
+            if sd is not None:
+                for row in sd.findall("{*}row"):
+                    cells: Dict[str, str] = {}
+                    for c in row.findall("{*}c"):
+                        col = _xlsx_col_letters(c.get("r") or "")
+                        if col:
+                            cells[col] = _xlsx_cell_value(c, shared)
+                    grid.append(cells)
+                    if len(grid) > max_rows + 2:
+                        break
+            if len(grid) < 2:
+                out.append((sheet_name, [], []))
+                continue
+
+            # Two header rows when the top row carries a horizontal (group) merge.
+            depth = 2 if any(r1 == 1 and r2 == 1 and c2 > c1
+                             for (c1, r1), (c2, r2) in merges) and len(grid) >= 3 else 1
+            hrows = [_expand_horizontal(grid[i], merges, i + 1) for i in range(depth)]
+            all_cols = [c for c in grid[0]]
+            for hr in hrows[1:]:
+                all_cols += [c for c in hr if c not in all_cols]
+            header: Dict[str, str] = {}
+            for col in all_cols:
+                parts = [str(hr.get(col, "")).strip() for hr in hrows]
+                name = "_".join(p for p in parts if p)
+                if name:
+                    header[col] = _norm_key(name)
+
+            rows = []
+            for r in grid[depth:]:
+                d: Dict[str, str] = {}
+                for col, val in r.items():          # cells are in column order
+                    key = header.get(col)
+                    if key is None:
+                        continue
+                    if key not in d or str(d[key]).strip() in ("", "None"):
+                        d[key] = val                # first non-empty wins on duplicates
+                rows.append(d)
+            out.append((sheet_name, list(dict.fromkeys(header.values())), rows))
+    return out
+
+
+def _xlsx_all_sheet_paths(zf: zipfile.ZipFile, names: set):
+    """[(sheet_name, member_path)] for every worksheet, in workbook order."""
+    try:
+        wb = _read_zip_xml(zf, "xl/workbook.xml")
+        rels = _read_zip_xml(zf, "xl/_rels/workbook.xml.rels")
+        rid2tgt = {r.get("Id"): (r.get("Target") or "") for r in rels.findall("{*}Relationship")}
+        sheets = wb.find("{*}sheets")
+        out = []
+        if sheets is not None:
+            for s in sheets.findall("{*}sheet"):
+                rid = _xlsx_attr(s, "id")
+                tgt = (rid2tgt.get(rid, "") or "").lstrip("/")
+                path = tgt if tgt.startswith("xl/") else "xl/" + tgt
+                if path in names:
+                    out.append((s.get("name") or path, path))
+        if out:
+            return out
+    except ValueError:
+        pass
+    ws = sorted(n for n in names if n.startswith("xl/worksheets/") and n.endswith(".xml"))
+    return [(n.rsplit("/", 1)[-1], n) for n in ws]
+
+
+def _read_zip_xml(zf: zipfile.ZipFile, name: str) -> ET.Element:
+    """Read and parse a ZIP member as XML, bounded and DTD-rejecting (XXE guard)."""
+    try:
+        with zf.open(name) as fh:
+            blob = fh.read(_XLSX_MAX_PART_BYTES + 1)
+    except KeyError:
+        raise ValueError(f"XLSX is missing internal part {name!r}.") from None
+    if len(blob) > _XLSX_MAX_PART_BYTES:
+        raise ValueError(f"XLSX part {name!r} too large (possible zip bomb).")
+    if re.search(rb"<!DOCTYPE", blob, re.IGNORECASE):
+        raise ValueError("XLSX XML DOCTYPE/DTD is not permitted (XXE guard).")
+    try:
+        return ET.fromstring(blob)
+    except ET.ParseError as exc:
+        raise ValueError(f"malformed XLSX XML in {name!r}: {exc}") from None
+
+
+def _xlsx_shared_strings(zf: zipfile.ZipFile, names: set) -> List[str]:
+    """Read the shared-strings table (cells of type 's' index into this)."""
+    if "xl/sharedStrings.xml" not in names:
+        return []
+    root = _read_zip_xml(zf, "xl/sharedStrings.xml")
+    return ["".join(t.text or "" for t in si.findall(".//{*}t")) for si in root.findall("{*}si")]
+
+
+def _xlsx_first_sheet_path(zf: zipfile.ZipFile, names: set) -> str:
+    """Resolve the first worksheet via workbook rels; fall back to a sensible default."""
+    try:
+        wb = _read_zip_xml(zf, "xl/workbook.xml")
+        rels = _read_zip_xml(zf, "xl/_rels/workbook.xml.rels")
+        sheets = wb.find("{*}sheets")
+        first = sheets.find("{*}sheet") if sheets is not None else None
+        rid = _xlsx_attr(first, "id") if first is not None else None
+        if rid:
+            for rel in rels.findall("{*}Relationship"):
+                if rel.get("Id") == rid:
+                    target = (rel.get("Target") or "").lstrip("/")
+                    path = target if target.startswith("xl/") else "xl/" + target
+                    if path in names:
+                        return path
+    except ValueError:
+        pass  # fall through to the conventional defaults
+    if "xl/worksheets/sheet1.xml" in names:
+        return "xl/worksheets/sheet1.xml"
+    worksheets = sorted(n for n in names if n.startswith("xl/worksheets/") and n.endswith(".xml"))
+    if worksheets:
+        return worksheets[0]
+    raise ValueError("no worksheet found in XLSX.")
+
+
+def _xlsx_attr(elem: ET.Element, local: str) -> Optional[str]:
+    """Get an attribute by local name, ignoring its XML namespace (e.g. r:id)."""
+    for key, val in elem.attrib.items():
+        if key == local or key.endswith("}" + local):
+            return val
+    return None
+
+
+def _xlsx_col_letters(ref: str) -> str:
+    """'AB12' -> 'AB' (the column part of an A1-style cell reference)."""
+    out = []
+    for ch in ref:
+        if ch.isalpha():
+            out.append(ch)
+        else:
+            break
+    return "".join(out).upper()
+
+
+def _xlsx_cell_value(cell: ET.Element, shared: List[str]) -> str:
+    """Decode a cell to text, resolving shared strings and inline strings."""
+    t = cell.get("t")
+    if t == "s":  # shared string: <v> holds the index
+        v = cell.find("{*}v")
+        if v is not None and v.text is not None:
+            idx = int(v.text)
+            return shared[idx] if 0 <= idx < len(shared) else ""
+        return ""
+    if t == "inlineStr":  # inline string: <is><t>...</t></is>
+        is_node = cell.find("{*}is")
+        return "".join(tt.text or "" for tt in is_node.findall(".//{*}t")) if is_node is not None else ""
+    v = cell.find("{*}v")  # number, boolean, or formula-string result
+    return v.text if (v is not None and v.text is not None) else ""
 
 
 # --- PDF --------------------------------------------------------------------
@@ -332,17 +635,76 @@ def _csv_rows_from_text(text: str) -> Optional[List[Dict[str, str]]]:
     return list(csv.DictReader(io.StringIO(table_text)))
 
 
+# --- multi-file ingest (merge 4-distress surveys across files & sheets) -----
+
+def _csv_parts(text: str, bounds: InputBounds, max_rows: int):
+    """Classify a CSV: (std_segments, std_errors, survey_rowsets, status)."""
+    reader = csv.DictReader(io.StringIO(text))
+    fields = reader.fieldnames or []
+    norm = {c: _norm_key(c) for c in fields}
+    rows = [{norm[k]: v for k, v in row.items() if k in norm} for row in reader]
+    hset = set(norm.values())
+    if all(c in hset for c in REQUIRED_COLUMNS):
+        res = _ingest_mappings(rows, bounds, max_rows)
+        return res.segments, res.errors, [], f"standard ({len(res.segments)} rows)"
+    if is_survey(hset):
+        return [], [], [rows], f"survey ({len(rows)} rows)"
+    return [], [], [], "skipped (unrecognised columns)"
+
+
+def ingest_multi_files(files, bounds: InputBounds = DEFAULT_BOUNDS,
+                       max_rows: int = MAX_ROWS):
+    """Ingest several files at once and merge their surveys.
+
+    `files` is [(filename, raw_bytes)]. Every survey sheet across **all** files
+    (e.g. separate rutting / roughness / cracking / pothole exports) is merged by
+    (chainage, lane) into the fully-populated condition; standard-schema sheets/
+    files are appended. Returns (IngestResult, [(filename, status)]).
+    """
+    std: List[SegmentInput] = []
+    errors: List[Tuple[int, str]] = []
+    rowsets: List[List[Dict[str, str]]] = []
+    infos: List[Tuple[str, str]] = []
+    for name, raw in files:
+        ext = os.path.splitext(name)[1].lower()
+        try:
+            if ext == ".xlsx":
+                s, e, rs, sheet_infos = ingest_workbook_parts(bytes(raw), bounds, max_rows)
+                std.extend(s); errors.extend(e); rowsets.extend(rs)
+                infos.append((name, "; ".join(f"{n} [{st}]" for n, st in sheet_infos)))
+            elif ext == ".csv":
+                s, e, rs, status = _csv_parts(
+                    raw.decode("utf-8", "replace") if isinstance(raw, (bytes, bytearray)) else raw,
+                    bounds, max_rows)
+                std.extend(s); errors.extend(e); rowsets.extend(rs)
+                infos.append((name, status))
+            elif ext == ".pdf":
+                res = ingest_segments_pdf_bytes(bytes(raw), bounds, max_rows)
+                std.extend(res.segments); errors.extend(res.errors)
+                infos.append((name, f"pdf ({len(res.segments)} segments)"))
+            else:
+                infos.append((name, "skipped (unsupported type)"))
+        except ValueError as exc:
+            infos.append((name, f"error: {exc}"))
+    segments = list(std)
+    if rowsets:
+        merged = merge_surveys(rowsets, bounds=bounds)
+        segments.extend(merged.segments)
+        errors.extend(merged.errors)
+    return IngestResult(segments=segments, errors=errors), infos
+
+
 # --- format dispatcher ------------------------------------------------------
 
 def ingest_segments(
     path: str, bounds: InputBounds = DEFAULT_BOUNDS, max_rows: int = MAX_ROWS
 ) -> IngestResult:
-    """Ingest a network file, dispatching on extension (.csv / .xml / .pdf)."""
+    """Ingest a network file, dispatching on extension (.csv / .xlsx / .pdf)."""
     ext = os.path.splitext(path)[1].lower()
     if ext == ".csv":
         return ingest_segments_csv(path, bounds, max_rows)
-    if ext == ".xml":
-        return ingest_segments_xml(path, bounds, max_rows)
+    if ext == ".xlsx":
+        return ingest_segments_xlsx(path, bounds, max_rows)
     if ext == ".pdf":
         return ingest_segments_pdf(path, bounds, max_rows)
-    raise ValueError(f"unsupported input format {ext!r} (expected .csv, .xml or .pdf).")
+    raise ValueError(f"unsupported input format {ext!r} (expected .csv, .xlsx or .pdf).")

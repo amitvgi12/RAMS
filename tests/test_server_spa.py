@@ -31,13 +31,25 @@ class TestEmbeddedSpa(unittest.TestCase):
         js = _extract_js()
         for fn in ("runForecast", "runNetwork", "importNetwork", "importSegment",
                    "runResidual", "runCalibrate", "calHint", "toggleHdm4",
-                   "runDesign", "runPBMC"):
+                   "runDesign", "runPBMC", "runIITPAVE", "runFWD",
+                   "runSections", "downloadReport", "runLCA", "downloadLCA"):
             self.assertIn(f"function {fn}", js, f"missing handler {fn}")
 
     def test_new_tabs_and_routes_present(self):
         self.assertIn('data-tab="dsn"', server.INDEX_HTML)  # Design & PBMC tab
         self.assertIn("/api/design", server._ROUTES)
         self.assertIn("/api/pbmc", server._ROUTES)
+        self.assertIn("/api/iitpave", server._ROUTES)
+        self.assertIn("/api/fwd", server._ROUTES)
+        self.assertIn("/api/sections", server._ROUTES)
+        self.assertIn("/api/ingest_multi", server._ROUTES)  # multi-file merge
+        self.assertIn("/api/lca", server._ROUTES)           # LCA decision matrix
+        self.assertIn("/api/export", server.INDEX_HTML)  # binary download (special handler)
+
+    def test_no_xml_format_references(self):
+        # XML as an upload format has been removed in favour of XLSX.
+        self.assertNotIn('accept=".csv,.xml', server.INDEX_HTML)
+        self.assertNotIn("'xml'", server.INDEX_HTML)
 
     @unittest.skipUnless(shutil.which("node"), "node not available")
     def test_js_parses_with_node(self):

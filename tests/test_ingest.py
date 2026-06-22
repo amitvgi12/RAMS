@@ -16,8 +16,6 @@ from rams import api
 from rams.ingest import (
     ingest_segments,
     ingest_segments_pdf_bytes,
-    ingest_segments_xml,
-    ingest_segments_xml_text,
 )
 from rams.mci import (
     RUT_OVERLAY_THRESHOLD_MM,
@@ -70,77 +68,6 @@ def make_pdf(lines):
     return out
 
 
-# --- XML --------------------------------------------------------------------
-
-class TestXmlIngestion(unittest.TestCase):
-    GOOD = (
-        '<network>'
-        '<segment id="A"><base_iri>1.5</base_iri><base_rut>2.0</base_rut>'
-        '<base_crack>0.0</base_crack><annual_msa>4.5</annual_msa>'
-        '<traffic_growth_rate>0.06</traffic_growth_rate>'
-        '<monsoon_zone>HIGH</monsoon_zone></segment>'
-        '<segment id="B" base_iri="2.2" base_rut="4.0" base_crack="3.0" '
-        'annual_msa="6.0" traffic_growth_rate="0.05" monsoon_zone="MEDIUM" '
-        'length_km="8.5"/>'
-        '</network>'
-    )
-
-    def test_good_rows_mixed_attr_and_element(self):
-        res = ingest_segments_xml_text(self.GOOD)
-        self.assertEqual([s.segment_id for s in res.segments], ["A", "B"])
-        self.assertEqual(res.errors, [])
-        self.assertEqual(res.segments[1].length_km, 8.5)
-
-    def test_bad_row_isolated(self):
-        xml = (
-            '<network>'
-            '<segment id="GOOD" base_iri="1.5" base_rut="2" base_crack="0" '
-            'annual_msa="4.5" traffic_growth_rate="0.06" monsoon_zone="HIGH"/>'
-            '<segment id="BADZONE" base_iri="1.5" base_rut="2" base_crack="0" '
-            'annual_msa="4.5" traffic_growth_rate="0.06" monsoon_zone="TYPO"/>'
-            '<segment id="BADMSA" base_iri="1.5" base_rut="2" base_crack="0" '
-            'annual_msa="-9" traffic_growth_rate="0.06" monsoon_zone="LOW"/>'
-            '</network>'
-        )
-        res = ingest_segments_xml_text(xml)
-        self.assertEqual(len(res.segments), 1)
-        self.assertEqual(len(res.errors), 2)
-
-    def test_missing_required_field_isolated(self):
-        xml = (
-            '<network><segment id="X"><base_iri>1.5</base_iri></segment></network>'
-        )
-        res = ingest_segments_xml_text(xml)
-        self.assertEqual(res.segments, [])
-        self.assertEqual(len(res.errors), 1)
-        self.assertIn("missing required field", res.errors[0][1])
-
-    def test_doctype_rejected_xxe_guard(self):
-        xxe = (
-            '<?xml version="1.0"?>'
-            '<!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]>'
-            '<network><segment id="A"/></network>'
-        )
-        with self.assertRaises(ValueError):
-            ingest_segments_xml_text(xxe)
-
-    def test_no_segments_raises(self):
-        with self.assertRaises(ValueError):
-            ingest_segments_xml_text("<network></network>")
-
-    def test_malformed_xml_raises(self):
-        with self.assertRaises(ValueError):
-            ingest_segments_xml_text("<network><segment></network>")
-
-    def test_file_path_loader(self):
-        fd, path = tempfile.mkstemp(suffix=".xml")
-        with os.fdopen(fd, "w") as fh:
-            fh.write(self.GOOD)
-        self.addCleanup(os.remove, path)
-        res = ingest_segments_xml(path)
-        self.assertEqual(len(res.segments), 2)
-
-
 # --- PDF --------------------------------------------------------------------
 
 class TestPdfIngestion(unittest.TestCase):
@@ -182,8 +109,6 @@ class TestPdfIngestion(unittest.TestCase):
 
 class TestDispatcher(unittest.TestCase):
     def test_dispatch_by_extension(self):
-        res = ingest_segments("examples/sample_network.xml")
-        self.assertEqual(len(res.segments), 8)
         res = ingest_segments("examples/sample_network.csv")
         self.assertEqual(len(res.segments), 8)
 
@@ -225,13 +150,6 @@ class TestMCI(unittest.TestCase):
 # --- portal API -------------------------------------------------------------
 
 class TestApiIngest(unittest.TestCase):
-    def test_xml_import(self):
-        with open("examples/sample_network.xml") as fh:
-            xml = fh.read()
-        out = api.ingest_data({"format": "xml", "content": xml})
-        self.assertEqual(out["count"], 8)
-        self.assertEqual(out["errors"], [])
-
     def test_csv_text_import(self):
         csv_text = REQUIRED + "\nA,1.5,2,0,4.5,0.06,HIGH,1\n"
         out = api.ingest_data({"format": "csv", "content": csv_text})

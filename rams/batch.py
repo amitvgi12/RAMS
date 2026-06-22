@@ -74,7 +74,7 @@ _STRUCTURAL_FIELDS = (
 
 
 def segment_from_mapping(row: Dict[str, str], bounds: InputBounds = DEFAULT_BOUNDS) -> SegmentInput:
-    """Build + validate one SegmentInput from a string mapping (CSV/XML/PDF).
+    """Build + validate one SegmentInput from a string mapping (CSV/XLSX/PDF).
 
     The single row->segment contract shared by every importer, so all formats
     pick up the optional structural/FWD columns identically. A raw FWD survey

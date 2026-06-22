@@ -9,9 +9,9 @@ Usage examples:
     # Emit an HTML report:
     python -m rams.cli --zone HIGH --html forecast.html
 
-    # Forecast a whole network from CSV / XML / PDF and triage it:
+    # Forecast a whole network from CSV / XLSX / PDF and triage it:
     python -m rams.cli --csv examples/sample_network.csv --summary
-    python -m rams.cli --xml examples/sample_network.xml --summary
+    python -m rams.cli --xlsx survey.xlsx --summary
     python -m rams.cli --pdf condition_survey.pdf --summary
 
 UI/UX note: terminal output is colour-coded by maintenance band (with a
@@ -47,10 +47,17 @@ from .hdm4 import preset as hdm4_preset
 from .ingest import (
     ingest_segments_csv,
     ingest_segments_pdf,
-    ingest_segments_xml,
+    ingest_segments_xlsx,
 )
 from .engine import IndianPavementDeteriorationEngine
 from .design import design_pavement
+from .iitpave import (
+    FWDSection,
+    LayerModel,
+    design_pavement_mechanistic,
+    evaluate_fwd_sections,
+    evaluate_section,
+)
 from .pbmc import PBMCParams, estimate_pbmc, estimate_pbmc_network
 from .residual import handback_assessment, remaining_fatigue_life
 from .traffic import default_vdf, design_msa, lane_distribution_factor
@@ -236,6 +243,17 @@ def _build_parser() -> argparse.ArgumentParser:
     p.add_argument("--design", action="store_true", help="Run an IRC:37 pavement design (needs --cbr; design MSA from --design-msa or --cvpd)")
     p.add_argument("--cbr", type=float, default=8.0, help="Subgrade CBR (%%) for the IRC:37 design")
     p.add_argument("--reliability", type=int, default=None, choices=[80, 90], help="IRC:37 reliability (default: 80 if <20 MSA else 90)")
+    p.add_argument("--design-method", default="catalogue", choices=["catalogue", "iitpave"], help="Design method: IRC:37-2018 catalogue, or IITPAVE mechanistic (Odemark-Boussinesq)")
+
+    # IITPAVE-style mechanistic check of an existing section (FWD moduli -> life)
+    p.add_argument("--iitpave", action="store_true", help="Mechanistic check of a section from layer moduli + thicknesses")
+    p.add_argument("--e-bt", type=float, default=3000.0, help="IITPAVE: bituminous modulus (MPa)")
+    p.add_argument("--e-gran", type=float, default=250.0, help="IITPAVE: granular modulus (MPa)")
+    p.add_argument("--e-sub", type=float, default=70.0, help="IITPAVE: subgrade modulus (MPa)")
+    p.add_argument("--h-bt", type=float, default=150.0, help="IITPAVE: bituminous thickness (mm)")
+    p.add_argument("--h-gran", type=float, default=450.0, help="IITPAVE: granular thickness (mm)")
+    p.add_argument("--standard", default="irc37", choices=["irc37", "irc115"], help="Mechanistic fatigue model: IRC:37-2018 (design) or IRC:115-2014 (FWD remaining-life)")
+    p.add_argument("--fwd", metavar="PATH", help="FWD overlay: CSV of homogeneous sub-sections (15th-pct moduli) -> remaining life + overlay (needs --design-msa)")
 
     # Performance-Based Maintenance Contract (PBMC) cost estimate (5-7 years)
     p.add_argument("--pbmc", action="store_true", help="Price a 5-7y PBMC for the segment/network (financial-forecast layer)")
@@ -251,7 +269,7 @@ def _build_parser() -> argparse.ArgumentParser:
     p.add_argument("--calibrate-kind", default="rut", choices=["rut", "cracking", "roughness", "skid", "potholes"], help="Which model to calibrate")
     p.add_argument("--calibrate-out", metavar="PATH", help="Write the fitted calibration to JSON")
     p.add_argument("--csv", metavar="PATH", help="Forecast a network from a CSV file")
-    p.add_argument("--xml", metavar="PATH", help="Forecast a network from an XML pavement-databank export")
+    p.add_argument("--xlsx", metavar="PATH", help="Forecast a network from an XLSX survey (RAMS or NSV chainage schema)")
     p.add_argument("--pdf", metavar="PATH", help="Forecast a network from a (text-based) PDF condition report")
     p.add_argument("--summary", action="store_true", help="Print network triage summary")
     p.add_argument("--html", metavar="PATH", help="Write a self-contained HTML report")
@@ -267,9 +285,13 @@ def main(argv: Optional[List[str]] = None) -> int:
     try:
         if args.calibrate_csv:
             return _run_calibrate(args)
+        if args.fwd:
+            return _run_fwd_overlay(args)
+        if args.iitpave:
+            return _run_iitpave(args)
         if args.design:
             return _run_design(args)
-        if args.csv or args.xml or args.pdf:
+        if args.csv or args.xlsx or args.pdf:
             return _run_network(args, policy)
         return _run_single(args, policy)
     except (ValueError, FileNotFoundError, OSError) as exc:
@@ -365,6 +387,29 @@ def _run_design(args: argparse.Namespace) -> int:
     if d_msa is None:
         raise ValueError("provide --design-msa, or --cvpd to derive it via IRC:37.")
 
+    if args.design_method == "iitpave":
+        m = design_pavement_mechanistic(
+            cbr=args.cbr, design_msa=d_msa, design_life_years=args.design_life,
+        )
+        s = m.strains
+        print(f"\nIITPAVE-style mechanistic design | CBR={m.cbr:.1f}% | "
+              f"design {m.design_msa:.0f} MSA / {m.design_life_years}y")
+        print(f"subgrade M_R {m.subgrade_modulus_mpa:.0f} MPa | bituminous E {m.e_bituminous_mpa:.0f} "
+              f"| granular E {m.e_granular_mpa:.0f} MPa")
+        print("-" * 52)
+        print(f"  {'-> bituminous (BC+DBM)':<24}{m.bituminous_mm:>6.0f} mm")
+        print(f"  {'-> granular (WMM+GSB)':<24}{m.granular_mm:>6.0f} mm")
+        print(f"  {'TOTAL above subgrade':<24}{m.total_mm:>6.0f} mm")
+        print("-" * 52)
+        print(f"  eps_t {s.tensile_microstrain:.0f} microstrain -> fatigue  {s.fatigue_life_msa:.0f} MSA")
+        print(f"  eps_v {s.vertical_microstrain:.0f} microstrain -> rutting  {s.rutting_life_msa:.0f} MSA")
+        print(f"  governing: {s.governing_mode} ({s.governing_life_msa:.0f} MSA)")
+        print(f"\n>> {m.rationale}\n")
+        if args.json:
+            import json
+            _write(args.json, json.dumps(m.as_dict(), indent=2))
+        return 0
+
     design = design_pavement(
         cbr=args.cbr, design_msa=d_msa, design_life_years=args.design_life,
         reliability=args.reliability,
@@ -386,6 +431,69 @@ def _run_design(args: argparse.Namespace) -> int:
     if args.json:
         import json
         _write(args.json, json.dumps(L.as_dict(), indent=2))
+    return 0
+
+
+def _run_iitpave(args: argparse.Namespace) -> int:
+    """Mechanistic (IITPAVE-style) check of a section from its layer moduli."""
+    layer = LayerModel(
+        e_bituminous_mpa=args.e_bt, e_granular_mpa=args.e_gran, e_subgrade_mpa=args.e_sub,
+        h_bituminous_mm=args.h_bt, h_granular_mm=args.h_gran,
+    )
+    a = evaluate_section(
+        layer, annual_msa=args.msa, traffic_growth_rate=args.growth,
+        cumulative_msa=args.cumulative_msa, design_msa=args.design_msa,
+        standard=args.standard,
+    )
+    s = a.strains
+    print(f"\nIITPAVE-style section check (Odemark-Boussinesq, {args.standard.upper()})")
+    print(f"section: BT {args.h_bt:.0f}mm @ {args.e_bt:.0f} MPa | granular {args.h_gran:.0f}mm @ "
+          f"{args.e_gran:.0f} MPa | subgrade {args.e_sub:.0f} MPa")
+    print("-" * 52)
+    print(f"  eps_t {s.tensile_microstrain:.0f} microstrain -> fatigue  {s.fatigue_life_msa:.0f} MSA")
+    print(f"  eps_v {s.vertical_microstrain:.0f} microstrain -> rutting  {s.rutting_life_msa:.0f} MSA")
+    print(f"  governing capacity: {s.governing_life_msa:.0f} MSA ({s.governing_mode})")
+    print(f"\n>> {a.rationale}\n")
+    return 0
+
+
+def _run_fwd_overlay(args: argparse.Namespace) -> int:
+    """FWD remaining-life + overlay across homogeneous sub-sections (IRC:115)."""
+    import csv as _csv
+    if args.design_msa is None:
+        raise ValueError("--fwd needs --design-msa (the pavement's design traffic).")
+    with open(args.fwd, newline="", encoding="utf-8") as fh:
+        rows = list(_csv.DictReader(fh))
+    if not rows:
+        raise ValueError("no rows in the FWD sections CSV.")
+    sections = [
+        FWDSection(
+            section_id=r.get("section_id", f"Sec-{i}"),
+            e_bituminous_mpa=float(r["e_bituminous"]), e_granular_mpa=float(r["e_granular"]),
+            e_subgrade_mpa=float(r["e_subgrade"]), h_bituminous_mm=float(r["h_bituminous"]),
+            h_granular_mm=float(r["h_granular"]),
+            chainage_from=float(r["chainage_from"]) if r.get("chainage_from") else None,
+            chainage_to=float(r["chainage_to"]) if r.get("chainage_to") else None,
+        )
+        for i, r in enumerate(rows, start=1)
+    ]
+    res = evaluate_fwd_sections(sections, args.design_msa)
+    print(f"\nFWD remaining-life & overlay (IRC:115-2014) | design {args.design_msa:.0f} MSA | "
+          f"{len(res.rows)} sub-section(s)")
+    print("-" * 78)
+    print(f"  {'Section':<14}{'eps_t':>7}{'eps_v':>7}{'Fatigue':>9}{'Rutting':>9}{'Remain':>9}  Overlay")
+    for r in res.rows:
+        flag = "YES" if r.overlay_required else "no"
+        if r.confirm_with_iitpave:
+            flag += "*"
+        print(f"  {r.section_id[:14]:<14}{r.tensile_microstrain:>7.0f}{r.vertical_microstrain:>7.0f}"
+              f"{r.remaining_fatigue_msa:>9.0f}{r.remaining_rutting_msa:>9.0f}"
+              f"{r.remaining_life_msa:>9.0f}  {flag}")
+    print("-" * 78)
+    print(f">> {res.as_dict()['verdict']}")
+    if res.borderline_sections:
+        print("   (* borderline: within 15% of design life -- confirm with IITPAVE)")
+    print()
     return 0
 
 
@@ -516,8 +624,8 @@ def _run_single(args: argparse.Namespace, policy: MaintenancePolicy) -> int:
 def _run_network(args: argparse.Namespace, policy: MaintenancePolicy) -> int:
     if args.csv:
         path, ingest = args.csv, ingest_segments_csv(args.csv)
-    elif args.xml:
-        path, ingest = args.xml, ingest_segments_xml(args.xml)
+    elif args.xlsx:
+        path, ingest = args.xlsx, ingest_segments_xlsx(args.xlsx)
     else:
         path, ingest = args.pdf, ingest_segments_pdf(args.pdf)
     print(f"loaded {len(ingest.segments)} segment(s) from {path}")

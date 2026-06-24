@@ -387,7 +387,9 @@ INDEX_HTML = r"""<!DOCTYPE html>
     <div class="card">
       <b>Calibrate a deterioration model to your field data</b>
       <p class="muted">Fit the rut, cracking, roughness, skid, or potholes model by OLS regression
-        (the paper's method). Pick the model, then paste/upload the matching observations CSV.</p>
+        (the paper's method). Pick the model, then paste or upload the matching observations
+        (<b>.csv, .xlsx or .pdf</b>). Missing optional columns fall back to defaults; only the
+        measured target and its primary driver are required.</p>
       <div class="grid">
         <div><label>Model</label><select id="c_kind" onchange="calHint()">
           <option value="rut">Rutting (Krid/Krst/Krpd)</option>
@@ -395,7 +397,7 @@ INDEX_HTML = r"""<!DOCTYPE html>
           <option value="roughness">Roughness (HDM-4)</option>
           <option value="skid">Skid (decay_k)</option>
           <option value="potholes">Potholes (rate)</option></select></div>
-        <div style="grid-column:2/-1;align-self:end"><label>Observations CSV file</label><input id="c_file" type="file" accept=".csv"></div>
+        <div style="grid-column:2/-1;align-self:end"><label>Observations file (.csv / .xlsx / .pdf)</label><input id="c_file" type="file" accept=".csv,.xlsx,.pdf"></div>
       </div>
       <p class="muted" id="c_hint"></p>
       <textarea id="c_csv" rows="6" style="width:100%;font-family:monospace;font-size:12px;border:1px solid #cdd5dd;border-radius:6px;padding:8px"></textarea>
@@ -458,20 +460,22 @@ INDEX_HTML = r"""<!DOCTYPE html>
     <div class="card">
       <b>1c. FWD remaining-life &amp; overlay (15th-percentile moduli &rarr; overlay)</b>
       <p class="muted">Paste an FWD report's homogeneous sub-sections (the corrected
-        15th-percentile back-calculated moduli + crust thickness) as CSV. RAMS computes the
-        IRC:115-2014 remaining life per section and flags where an overlay is needed for the
-        design traffic. Screening-grade (Odemark&ndash;Boussinesq, ~&plusmn;10% of IITPAVE);
-        sections within 15% of the threshold are marked to confirm with IITPAVE.
-        Columns: section_id, e_bituminous, e_granular, e_subgrade, h_bituminous, h_granular
-        (optional chainage_from, chainage_to).</p>
+        15th-percentile back-calculated moduli + crust thickness), or upload the report
+        (<b>.csv / .xlsx / .pdf</b>). RAMS computes the IRC:115-2014 remaining life per section
+        and flags where an overlay is needed for the design traffic. Screening-grade
+        (Odemark&ndash;Boussinesq, ~&plusmn;10% of IITPAVE); sections within 15% of the threshold
+        are marked to confirm with IITPAVE. Columns: section_id, e_bituminous, e_granular,
+        e_subgrade, h_bituminous, h_granular (optional chainage_from, chainage_to).
+        Missing optional columns default; only e_bituminous is required.</p>
       <div class="grid">
         <div><label>Design MSA</label><input id="f_design" type="number" step="10" value="300"></div>
+        <div style="grid-column:2/-1;align-self:end"><label>FWD report file (.csv / .xlsx / .pdf)</label><input id="f_file" type="file" accept=".csv,.xlsx,.pdf"></div>
       </div>
       <textarea id="f_csv" rows="6" style="width:100%;font-family:monospace;font-size:12px;border:1px solid #cdd5dd;border-radius:6px;padding:8px;margin-top:8px">section_id,e_bituminous,e_granular,e_subgrade,h_bituminous,h_granular
-LHS-Sec-1,870,348,77,300,350
-LHS-Sec-3,1581,235,77,300,350
-RHS-Sec-2,801,352,77,300,350
-RHS-Sec-7,865,335,77,300,350</textarea>
+Sec-1,870,348,77,300,350
+Sec-2,1581,235,77,300,350
+Sec-3,801,352,77,300,350
+Sec-4,865,335,77,300,350</textarea>
       <button class="go" onclick="runFWD()">Assess overlay</button>
       <span id="fwdErr" class="err"></span>
       <div id="fwdOut"></div>
@@ -704,6 +708,13 @@ function worstSeg(){
 }
 function _setVal(id,v){ const e=$(id); if(e&&v!=null) e.value=v; }
 
+// Which columns come from the survey file vs. are filled with defaults.
+const provenanceNote='<p class="muted" style="margin:6px 0 10px">'+
+  '<b>From the file:</b> Segment/chainage, IRI, Rut, Crack% and length (100&nbsp;m bins). '+
+  '<b>Defaults (not in an NSV survey):</b> Zone = MEDIUM, MSA = 4.5, traffic growth = 5%/yr '+
+  '&mdash; override per segment, or upload a CSV that carries <code>monsoon_zone</code>, '+
+  '<code>annual_msa</code>, <code>traffic_growth_rate</code> to use real values.</p>';
+
 function readB64(file){
   return new Promise((res,rej)=>{
     const r=new FileReader();
@@ -741,11 +752,11 @@ async function importSegment(){
       SURVEY=d.segments;
       $('segImpMsg').innerHTML='Merged <b>'+d.count+'</b> chainage points from '+fs.length+
         ' file(s). First segment ('+(s.segment_id||'')+') forecast below; homogeneous sections:'+
-        '<ul class="muted" style="margin:6px 0">'+fileList+'</ul>';
+        '<ul class="muted" style="margin:6px 0">'+fileList+'</ul>'+provenanceNote;
       runSections();
     }else{
       $('segImpMsg').innerHTML='Loaded '+(s.segment_id||'segment')+'. Forecast below.'+
-        '<ul class="muted" style="margin:6px 0">'+fileList+'</ul>';
+        '<ul class="muted" style="margin:6px 0">'+fileList+'</ul>'+provenanceNote;
     }
   }catch(e){ $('segImpErr').textContent=e.message; $('segImpMsg').textContent=''; }
 }
@@ -859,11 +870,12 @@ async function importNetwork(){
     let errHtml = d.errors.length
       ? `<p class="err">${d.errors.length} row(s) skipped: `+
         d.errors.slice(0,5).map(e=>`row ${e.row}: ${e.message}`).join('; ')+'</p>' : '';
+    const header='<tr><th>Segment</th><th>Zone</th><th>IRI</th><th>Rut</th><th>Crack%</th><th>MSA</th><th>Len km</th></tr>';
+    const rows=d.segments.map(s=>`<tr><td>${s.segment_id}</td><td>${s.monsoon_zone}</td><td>${s.base_iri}</td><td>${s.base_rut}</td><td>${s.base_crack}</td><td>${s.annual_msa}</td><td>${s.length_km}</td></tr>`);
     $('impOut').innerHTML=
       `<p class="muted">Imported <b>${d.count}</b> segment(s). Click <b>Optimise budget</b> to run.</p>`+errHtml+
-      '<table><thead><tr><th>Segment</th><th>Zone</th><th>IRI</th><th>Rut</th><th>Crack%</th><th>MSA</th><th>Len km</th></tr></thead><tbody>'+
-      d.segments.map(s=>`<tr><td>${s.segment_id}</td><td>${s.monsoon_zone}</td><td>${s.base_iri}</td><td>${s.base_rut}</td><td>${s.base_crack}</td><td>${s.annual_msa}</td><td>${s.length_km}</td></tr>`).join('')+
-      '</tbody></table>';
+      provenanceNote+'<div id="netImp"></div>';
+    renderPaged('netImp', header, rows, '');
   }catch(e){ $('impErr').textContent=e.message; $('impOut').innerHTML=''; IMPORTED=null; }
 }
 
@@ -884,6 +896,13 @@ async function runNetwork(){
       `<div class="kpi"><b style="color:${bud.unfunded.length?'#d73027':'#1a9850'}">${bud.unfunded.length}</b><span>Unfunded (&rarr; structural)</span></div>`+
       (d.handback?`<div class="kpi"><b style="color:${d.handback.counts.FAIL?'#d73027':'#1a9850'}">${d.handback.counts.FAIL}</b><span>Fail handback (&ge;${d.handback.required_residual_msa} MSA)</span></div>`:'')+
       `</div><p class="muted">${bud.rationale}</p>`+
+      (bud.unfunded.length
+        ? `<p class="muted" style="background:#fff6e5;border-left:3px solid #f0a000;padding:8px 10px;border-radius:4px">`+
+          `<b>Why &ldquo;unfunded&rdquo;?</b> ${bud.unfunded.length} of ${bud.n_at_risk} at-risk segment(s) need preventive work, `+
+          `but &#8377;${bud.annual_budget}L/yr &times; ${$('nyears').value}yr covers only the highest-priority ones &mdash; the rest miss their window and fall to costlier structural repair. `+
+          `<b>To clear the backlog</b>, raise the annual budget to &asymp; <b>&#8377;${bud.recommended_annual_budget}L/yr</b> `+
+          `(total preventive need &#8377;${bud.total_preventive_need}L over the horizon), or accept the deferral.</p>`
+        : `<p class="muted" style="color:#1a9850">All ${bud.n_at_risk} at-risk segment(s) funded within budget &mdash; no backlog.</p>`)+
       (d.handback&&d.handback.failing.length?`<p class="err">Handback FAIL: ${d.handback.failing.join(', ')} &mdash; need structural strengthening before handback.</p>`:'')+
       `</div>`;
     // spend-by-year bars
@@ -899,9 +918,13 @@ async function runNetwork(){
     // schedule table (paginated)
     const schedHeader='<tr><th>Year</th><th>Segment</th><th>Treatment</th><th>Cost (&#8377;L)</th><th>Avoided premium (&#8377;L)</th></tr>';
     const schedRows=bud.scheduled.map(s=>`<tr><td>${s.year}</td><td>${s.segment_id}</td><td>${s.treatment}</td><td>${s.cost}</td><td>${s.avoided_premium}</td></tr>`);
-    const sched=pagedCard('netSched','<b>Treatment schedule</b>',
-      (bud.unfunded.length?`<p class="err">Unfunded: ${bud.unfunded.join(', ')}</p>`:''),
-      schedHeader, schedRows);
+    const unf = bud.unfunded.length
+      ? `<details><summary class="err" style="cursor:pointer;font-weight:600">`+
+        `${bud.unfunded.length} segment(s) unfunded &mdash; will require structural mill &amp; overlay (click to list)</summary>`+
+        `<div class="muted" style="max-height:160px;overflow:auto;margin:6px 0;font-size:12px;line-height:1.6">`+
+        `${bud.unfunded.join(', ')}</div></details>`
+      : '';
+    const sched=pagedCard('netSched','<b>Treatment schedule</b>', unf, schedHeader, schedRows);
     // network risk table (structural columns shown under HDM-4)
     const hdm4 = d.model && d.model.rut_model==='HDM4';
     const hb = !!d.handback;
@@ -961,12 +984,19 @@ function calKpi(label,val){ return `<div class="kpi"><b>${val}</b><span>${label}
 async function runCalibrate(){
   $('calErr').textContent=''; $('calOut').innerHTML='<p class="muted">fitting&hellip;</p>';
   try{
-    let csv=$('c_csv').value.trim();
-    const f=$('c_file').files[0];
-    if(f && !csv){ csv=await f.text(); }
-    if(!csv){ $('calErr').textContent='paste or upload an observations CSV.'; $('calOut').innerHTML=''; return; }
     const kind=$('c_kind').value;
-    const d=await postJSON('/api/calibrate',{kind:kind, csv:csv});
+    const txt=$('c_csv').value.trim();
+    const f=$('c_file').files[0];
+    let body={kind:kind};
+    if(txt){ body.csv=txt; }
+    else if(f){
+      const n=f.name.toLowerCase();
+      if(n.endsWith('.xlsx')||n.endsWith('.pdf')){ body.content_b64=await readB64(f); body.format=n.endsWith('.xlsx')?'xlsx':'pdf'; }
+      else { body.csv=await f.text(); }
+    } else {
+      $('calErr').textContent='paste observations, or upload a .csv / .xlsx / .pdf file.'; $('calOut').innerHTML=''; return;
+    }
+    const d=await postJSON('/api/calibrate',body);
     let cards='';
     if(kind==='rut'){
       let zero=d.fixed_to_zero.length?`<p class="err">Forced to 0 (physically inadmissible): ${d.fixed_to_zero.join(', ')}</p>`:'';
@@ -990,6 +1020,7 @@ async function runCalibrate(){
         calKpi('crack threshold %',d.crack_threshold_pct)+calKpi('R&sup2; ('+d.n+' obs)',d.r_squared)+'</div>'+
         `<p class="muted">${d.label}</p>`;
     }
+    if(d.skipped){ cards+=`<p class="muted">${d.skipped} row(s) skipped (missing a required column); fitted on ${d.n}.</p>`; }
     $('calOut').innerHTML=cards;
   }catch(e){ $('calErr').textContent=e.message; $('calOut').innerHTML=''; }
 }
@@ -1020,6 +1051,7 @@ async function runDesign(){
       '</table>' : '';
     $('dsnOut').innerHTML=
       '<div class="kpis" style="margin:14px 0">'+kpis+'</div>'+
+      pavementSection(L,d)+
       '<table><tr><th>Layer</th><th>Thickness (mm)</th></tr>'+
         row2('BC &mdash; bituminous concrete (wearing)',L.bc_mm)+
         row2('DBM &mdash; dense bituminous macadam (binder)',L.dbm_mm)+
@@ -1033,6 +1065,37 @@ async function runDesign(){
 }
 function row2(label,val){ return '<tr><td>'+label+'</td><td>'+val+'</td></tr>'; }
 function kpi(big,small){ return '<div class="kpi"><b>'+big+'</b><span>'+small+'</span></div>'; }
+
+// To-scale IRC:37 pavement cross-section (BC/DBM/WMM/GSB over subgrade).
+function pavementSection(L,d){
+  const layers=[
+    {n:'BC — bituminous concrete (wearing)', mm:L.bc_mm,  c:'#23262b', t:'#fff'},
+    {n:'DBM — dense bituminous macadam (binder)', mm:L.dbm_mm, c:'#414b54', t:'#fff'},
+    {n:'WMM — wet-mix macadam (base)', mm:L.wmm_mm, c:'#b5712f', t:'#fff'},
+    {n:'GSB — granular sub-base', mm:L.gsb_mm, c:'#d8ad72', t:'#1f2a36'},
+  ].filter(x=>x.mm>0);
+  const total=d.total_mm||1;
+  const W=580, padL=60, padR=16, padT=26, padB=14, stackH=300, subH=66;
+  const innerW=W-padL-padR, scale=stackH/total, H=padT+stackH+subH+padB;
+  let y=padT, cum=0;
+  let body=`<text x="${padL+innerW/2}" y="${padT-9}" font-size="11" text-anchor="middle" fill="#666">Pavement surface</text>`+
+    `<line x1="${padL-6}" y1="${padT}" x2="${padL}" y2="${padT}" stroke="#888"/>`+
+    `<text x="${padL-9}" y="${padT+4}" font-size="10" text-anchor="end" fill="#666">0</text>`;
+  for(const ly of layers){
+    const h=Math.max(16, ly.mm*scale); cum+=ly.mm;
+    body+=`<rect x="${padL}" y="${y}" width="${innerW}" height="${h}" fill="${ly.c}" stroke="#0d0f12" stroke-width="0.6"/>`+
+      `<text x="${padL+innerW/2}" y="${y+h/2+4}" font-size="12" font-weight="600" text-anchor="middle" fill="${ly.t}">${ly.n} &middot; ${ly.mm} mm</text>`+
+      `<line x1="${padL-6}" y1="${y+h}" x2="${padL}" y2="${y+h}" stroke="#888"/>`+
+      `<text x="${padL-9}" y="${y+h+4}" font-size="10" text-anchor="end" fill="#666">${cum}</text>`;
+    y+=h;
+  }
+  body+=`<rect x="${padL}" y="${y}" width="${innerW}" height="${subH}" fill="#9a9b6f" stroke="#0d0f12" stroke-width="0.6"/>`+
+    `<text x="${padL+innerW/2}" y="${y+subH/2+4}" font-size="12" font-weight="600" text-anchor="middle" fill="#1f2a36">Subgrade &middot; CBR ${d.cbr}% &middot; M_R ${Math.round(d.subgrade_modulus_mpa)} MPa</text>`+
+    `<text x="16" y="${padT+stackH/2}" font-size="11" text-anchor="middle" fill="#666" transform="rotate(-90,16,${padT+stackH/2})">Depth (mm)</text>`;
+  return `<div class="card"><b>Pavement cross-section (IRC:37-2018)</b>`+
+    `<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-width:${W}px;margin-top:8px">${body}</svg>`+
+    `<p class="muted">${d.total_mm} mm above subgrade &mdash; ${L.bituminous_mm} mm bituminous over ${L.granular_mm} mm granular. Layer heights drawn to scale.</p></div>`;
+}
 
 async function runIITPAVE(){
   $('iitErr').textContent=''; $('iitOut').innerHTML='<p class="muted">analysing&hellip;</p>';
@@ -1062,15 +1125,16 @@ async function runIITPAVE(){
 async function runFWD(){
   $('fwdErr').textContent=''; $('fwdOut').innerHTML='<p class="muted">assessing&hellip;</p>';
   try{
-    const lines=$('f_csv').value.trim().split(/\r?\n/).filter(x=>x.trim());
-    if(lines.length<2) throw new Error('paste a header row plus at least one section.');
-    const hdr=lines[0].split(',').map(s=>s.trim());
-    const sections=lines.slice(1).map(line=>{
-      const c=line.split(','); const o={};
-      hdr.forEach((h,i)=>{ o[h]=(c[i]||'').trim(); });
-      return o;
-    });
-    const d=await postJSON('/api/fwd',{design_msa:+$('f_design').value, sections:sections});
+    const body={design_msa:+$('f_design').value};
+    const f=$('f_file').files[0];
+    const txt=$('f_csv').value.trim();
+    if(f){
+      const n=f.name.toLowerCase();
+      if(n.endsWith('.xlsx')||n.endsWith('.pdf')){ body.content_b64=await readB64(f); body.format=n.endsWith('.xlsx')?'xlsx':'pdf'; }
+      else { body.csv=await f.text(); }
+    } else if(txt){ body.csv=txt; }
+    else { throw new Error('paste sections, or upload a .csv / .xlsx / .pdf file.'); }
+    const d=await postJSON('/api/fwd',body);
     const rows=d.sections.map(r=>{
       const flag=r.overlay_required? '<span class="err">YES</span>':'<span style="color:var(--green)">no</span>';
       const star=r.confirm_with_iitpave? ' <span style="color:var(--amber)">*</span>':'';
@@ -1085,7 +1149,8 @@ async function runFWD(){
         kpi(d.n_overlay_required,'overlay required')+
         kpi(d.borderline_sections.length,'confirm w/ IITPAVE')+
         kpi(Math.round(d.min_remaining_msa)+' MSA','min remaining life')+'</div>'+
-      '<p class="muted" style="margin:4px 0">'+d.verdict+'</p>';
+      '<p class="muted" style="margin:4px 0">'+d.verdict+
+        (d.skipped?` &middot; ${d.skipped} row(s) skipped (no e_bituminous)`:'')+'</p>';
     renderPaged('fwdOut', header, rows, extra);
   }catch(e){ $('fwdOut').innerHTML=''; $('fwdErr').textContent=e.message; }
 }

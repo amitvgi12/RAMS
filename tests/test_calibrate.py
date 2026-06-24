@@ -193,5 +193,64 @@ class TestApiCalibrateResidual(unittest.TestCase):
         self.assertEqual(out["residual"]["governing_basis"], "deflection (IRC:81)")
 
 
+class TestCalibrateRobustInput(unittest.TestCase):
+    """Multi-format input + default-tolerant parsing for the Calibrate tab."""
+
+    RUT = "ye4,age,measured_rut_increment_mm\n4.5,1,3.8\n4.8,2,1.1\n5.0,3,0.9\n5.2,4,0.7"
+
+    def test_optional_columns_default(self):
+        # Only target + ye4 + age present; optional predictors must default, not error.
+        out = api.calibrate({"kind": "rut", "csv": self.RUT})
+        self.assertEqual(out["n"], 4)
+        self.assertEqual(out["skipped"], 0)
+
+    def test_xlsx_upload(self):
+        import base64
+        from rams.export import xlsx_bytes
+        xb = xlsx_bytes(
+            ["ye4", "age", "measured_rut_increment_mm"],
+            [["4.5", "1", "3.8"], ["4.8", "2", "1.1"], ["5.0", "3", "0.9"], ["5.2", "4", "0.7"]],
+            "obs",
+        )
+        out = api.calibrate(
+            {"kind": "rut", "content_b64": base64.b64encode(xb).decode(), "format": "xlsx"}
+        )
+        self.assertEqual(out["n"], 4)
+
+    def test_header_normalisation(self):
+        csv = "YE4, Age ,Measured Rut Increment mm\n4.5,1,3.8\n4.8,2,1.1\n5,3,0.9\n5.2,4,0.7"
+        out = api.calibrate({"kind": "rut", "csv": csv})
+        self.assertEqual(out["n"], 4)
+
+    def test_bad_rows_skipped_not_aborted(self):
+        csv = "ye4,age,measured_rut_increment_mm\n4.5,1,3.8\n4.8,2,\n5.0,3,0.9\n5.2,4,0.7"
+        out = api.calibrate({"kind": "rut", "csv": csv})
+        self.assertEqual(out["n"], 3)
+        self.assertEqual(out["skipped"], 1)
+
+    def test_model_file_mismatch_clear_error(self):
+        with self.assertRaises(ValueError) as cm:
+            api.calibrate({"kind": "rut", "csv": "crack_prev,crack_next\n5,8\n8,12"})
+        msg = str(cm.exception)
+        self.assertIn("measured_rut_increment_mm", msg)
+        self.assertIn("Columns found", msg)
+
+    def test_column_aliases_picked_per_model(self):
+        # Alternative template column names map to the canonical calibration inputs.
+        csv = "Rut Increment mm,ESA MSA,age,SNP\n3.8,4.5,1,4.2\n1.1,4.8,2,4.2\n0.9,5,3,4.2\n0.7,5.2,4,4.2"
+        out = api.calibrate({"kind": "rut", "csv": csv})
+        self.assertEqual(out["n"], 4)
+        out2 = api.calibrate({"kind": "cracking", "csv": "crack_t0,crack_t1\n0,0.4\n0.4,0.86\n0.86,1.4"})
+        self.assertEqual(out2["n"], 3)
+
+    def test_condition_survey_gets_actionable_message(self):
+        # Survey-style columns (rut depth / crack area) -> snapshot guidance, not a wall.
+        csv = ("l1_rut_depth_(in_mm),l1_%_crack_area,chainage\n"
+               "4.6,8.2,154400\n5.1,0.0,154500")
+        with self.assertRaises(ValueError) as cm:
+            api.calibrate({"kind": "rut", "csv": csv})
+        self.assertIn("condition survey", str(cm.exception))
+
+
 if __name__ == "__main__":
     unittest.main()

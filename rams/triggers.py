@@ -14,7 +14,7 @@ Thresholds reference (defaults; every value is overridable per concession/agency
     * IRC:81-1997  -- Benkelman-beam deflection survey & overlay (strengthening)
       design. High rebound deflection => structural strengthening.
     * IRC:82-2015  -- maintenance of bituminous roads (functional triggers).
-    * IRC:SP:16 / MoRTH & NHAI O&M -- riding-quality (IRI) and rut/crack defect
+    * IRC:SP:16 / MoRTH & NH O&M -- riding-quality (IRI) and rut/crack defect
       limits used in concession O&M (e.g. rut > 10 mm and cracking > 10% area are
       common corrective-maintenance defect limits).
 
@@ -63,7 +63,7 @@ class InterventionTriggers:
     """Indian condition + traffic intervention thresholds (defaults overridable)."""
 
     # Rutting (mm).
-    rut_functional_mm: float = 10.0     # IRC:82 / NHAI O&M corrective limit
+    rut_functional_mm: float = 10.0     # IRC:82 / NH O&M corrective limit
     rut_structural_mm: float = 20.0     # structural overlay candidate
 
     # Cracking (% area).
@@ -142,7 +142,7 @@ def evaluate_triggers(
             "IRC:SP:16", "severe unevenness -> overlay / reprofiling")
     elif year.iri >= triggers.iri_functional:
         add("roughness", TriggerSeverity.FUNCTIONAL, year.iri, triggers.iri_functional,
-            "IRC:SP:16 / NHAI O&M", "riding quality past limit -> corrective resurfacing")
+            "IRC:SP:16 / NH O&M", "riding quality past limit -> corrective resurfacing")
 
     # --- FWD/Benkelman deflection (IRC:81) ---------------------------------
     if deflection_mm is not None and deflection_mm >= triggers.deflection_structural_mm:

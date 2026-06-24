@@ -51,7 +51,7 @@ class LCAThresholds:
     reconstruction_pci: float = 1.50  # below -> reconstruction due
     rut_overlay_mm: float = 20.0    # IRC:81 structural rutting
     crack_overlay_pct: float = 20.0  # IRC:37 structural cracking
-    iri_overlay: float = 4.0        # NHAI O&M structural roughness (mm/m)
+    iri_overlay: float = 4.0        # NH O&M structural roughness (mm/m)
     min_major_interval: int = 3     # min years between major treatments
 
 

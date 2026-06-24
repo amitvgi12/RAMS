@@ -12,6 +12,12 @@ original prototype (Solution Architecture, UI/UX, QA, Security, Performance).
 See [Cross-functional analysis](#cross-functional-analysis) for what each
 discipline changed and why.
 
+**Documentation:**
+- [User Guide & Handbook](docs/USER_GUIDE.md) — how to use every feature, the data
+  each one needs, accepted formats, and how the calculations are done.
+- **Client presentation** — regenerate the deck with
+  `python scripts/make_ppt.py` → `docs/RAMS_Client_Presentation.pptx`.
+
 ---
 
 ## Quick start
@@ -251,7 +257,7 @@ N = (365 · ((1+r)^n − 1)/r) · CVPD · D · VDF / 1e6
 
 ```bash
 # Drive the forecast from CVPD/VDF: derives annual MSA + the IRC:37 design MSA
-# (which feeds the residual-life / fatigue-life trigger), e.g. NH-44:
+# (which feeds the residual-life / fatigue-life trigger), e.g. a 4-lane NH:
 python -m rams.cli --cvpd 4500 --vdf 4.5 --carriageway two_lane --design-life 15 \
     --required-residual-msa 20
 # -> annual 5.54 MSA, 15y design 129 MSA
@@ -277,7 +283,7 @@ complementary to, the IRC:82 PCI bands:
 |------------|---------|----------------|-----------|
 | Rutting    | 10 mm / 20 mm | functional → structural | IRC:82 / IRC:81 |
 | Cracking   | 10% / 20% area | functional → structural | IRC:82 / IRC:37 |
-| Roughness  | IRI 2.5 / 4.0 mm/m | functional → structural | IRC:SP:16 / NHAI O&M |
+| Roughness  | IRI 2.5 / 4.0 mm/m | functional → structural | IRC:SP:16 / NH O&M |
 | Deflection | 1.0 mm rebound | structural | IRC:81 |
 | **Traffic (MSA)** | **80% of design MSA** | **structural** | **IRC:37** |
 
@@ -512,7 +518,7 @@ survey's homogeneous-section report).
 ### Calibration & accuracy (validated against real IITPAVE output)
 
 The Odemark–Boussinesq strains are calibrated to **real IITPAVE results** — the
-IRC:37-2018 Annex II worked examples and a 33 km NH-152D FWD evaluation report —
+IRC:37-2018 Annex II worked examples and a published FWD evaluation report —
 with multipliers (`TENSILE_CORRECTION_IRC37=1.30`, `TENSILE_CORRECTION_IRC115=1.38`,
 `VERTICAL_CORRECTION=0.97`) that bring εt/εv to within **~5–10%** of IITPAVE over
 the validated range (50–1600 MPa bituminous modulus, 190–310 mm thickness). The
@@ -529,8 +535,8 @@ decision), using the **IRC:115-2014** fatigue model (`0.711e-4`, no mix C factor
 Poisson 0.5/0.4/0.4) that those reports use.
 
 ```bash
-# Overlay screening from a homogeneous-section moduli table (real NH-152D data)
-python -m rams.cli --fwd examples/fwd_sections_nh152d.csv --design-msa 300
+# Overlay screening from a homogeneous-section moduli table (sample FWD data)
+python -m rams.cli --fwd examples/fwd_sections_sample.csv --design-msa 300
 #   -> per-section remaining life vs the 300 MSA design life, overlay yes/no,
 #      and borderline sections flagged (*) for IITPAVE confirmation
 ```
@@ -544,8 +550,8 @@ print(res.overlay_sections, res.borderline_sections)
 ```
 
 Exposed at `POST /api/fwd` and the dashboard's **FWD remaining-life & overlay**
-card (paste the report's 15th-percentile moduli as CSV). `examples/fwd_sections_nh152d.csv`
-is the real corrected 15th-percentile moduli table from the NH-152D report.
+card (paste the report's 15th-percentile moduli as CSV, or upload .csv/.xlsx/.pdf).
+`examples/fwd_sections_sample.csv` is a sample corrected 15th-percentile moduli table.
 
 ## NSV chainage-survey ingestion (vendor schemas)
 
@@ -703,7 +709,7 @@ docs/             ARCHITECTURE.md (design rationale)
   non-TTY fallbacks are respected.
 - **Offline by design.** The report is a single self-contained HTML file with an
   inline SVG chart — no CDN, no JS framework — so it opens on an air-gapped
-  PWD/NHAI workstation and can be emailed as one artifact.
+  agency workstation and can be emailed as one artifact.
 
 ### Lead QA
 - **Found and documented a spec defect:** the brief's sample output table does

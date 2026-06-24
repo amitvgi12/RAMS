@@ -3,8 +3,8 @@ NSV chainage-survey ingestion (ROMDAS / Hawkeye-style network survey vendors).
 
 Real Indian condition surveys do not arrive in RAMS' canonical schema: a network
 survey ships one *distress per file*, keyed to chainage and GPS, with vendor
-column names and **text condition bands** rather than raw values. The
-Trichy--Karur survey set is the reference:
+column names and **text condition bands** rather than raw values. A typical
+multi-distress NSV survey set looks like:
 
     Rutting    : Start_Chainage, End_Chainage, ..., Lane, Rutting (mm)
     Roughness  : ...,                                Lane, BI m/km, Lane IRI (m/km)

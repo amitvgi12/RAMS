@@ -54,6 +54,8 @@ from .hdm4 import preset as hdm4_preset
 from .residual import handback_assessment, remaining_fatigue_life
 from .traffic import default_vdf, design_msa, lane_distribution_factor
 from .ingest import (
+    _extract_pdf_text,
+    _xlsx_sheets,
     ingest_segments_csv,
     ingest_segments_csv_text,
     ingest_segments_pdf,
@@ -65,7 +67,7 @@ from .lifecycle import simulate_managed_lifecycle
 from .maintenance import MaintenancePolicy, annotate_timeline, build_maintenance_plan
 from .mci import compute_mci, mci_band
 from .models import SegmentInput
-from .optimize import BudgetParams, optimize_budget
+from .optimize import BudgetParams, optimize_budget, recommend_budget_to_clear
 from .triggers import evaluate_triggers
 
 _POLICY = MaintenancePolicy()
@@ -686,33 +688,55 @@ def fwd_overlay(payload: dict) -> dict:
     (back-calculated 15th-percentile moduli -> remaining life -> overlay).
     """
     rows = payload.get("sections")
-    if not isinstance(rows, list) or not rows:
-        raise ValueError("'sections' must be a non-empty list.")
-    if len(rows) > MAX_NETWORK_SEGMENTS:
-        raise ValueError(f"too many sections (max {MAX_NETWORK_SEGMENTS}).")
+    if isinstance(rows, list) and rows:
+        rows = [_apply_aliases({_norm_calib_key(k): v for k, v in r.items()}, _FWD_ALIASES)
+                for r in rows if isinstance(r, dict)]
+    else:
+        rows = _fwd_rows(payload)  # csv text / xlsx / pdf upload
     design = _f(payload, "design_msa", 0.0)
     if design <= 0:
         raise ValueError("'design_msa' must be positive.")
+    # A condition survey misuploaded here would have no moduli -- guide, don't choke.
+    if not any(r.get("e_bituminous") not in (None, "") for r in rows) and _looks_like_survey(rows):
+        raise ValueError(
+            "This looks like a condition survey, not an FWD report. The overlay check "
+            "needs back-calculated layer moduli (e_bituminous, e_granular, e_subgrade) "
+            "and crust thickness from an FWD evaluation -- a condition survey has none. "
+            "Use this file in the Segment Forecast / Sections tabs instead.")
+    if len(rows) > MAX_NETWORK_SEGMENTS:
+        raise ValueError(f"too many sections (max {MAX_NETWORK_SEGMENTS}).")
 
-    sections = []
+    sections, skipped = [], 0
     for i, row in enumerate(rows, start=1):
-        if not isinstance(row, dict):
-            raise ValueError(f"section #{i} must be an object.")
         try:
             sections.append(FWDSection(
-                section_id=str(row.get("section_id", f"Sec-{i}")),
-                e_bituminous_mpa=float(row["e_bituminous"]),
-                e_granular_mpa=float(row["e_granular"]),
-                e_subgrade_mpa=float(row["e_subgrade"]),
-                h_bituminous_mm=float(row["h_bituminous"]),
-                h_granular_mm=float(row["h_granular"]),
+                section_id=str(row.get("section_id") or f"Sec-{i}"),
+                e_bituminous_mpa=_fnum(row, "e_bituminous"),  # primary; required
+                e_granular_mpa=_fnum(row, "e_granular", _FWD_DEFAULTS["e_granular"]),
+                e_subgrade_mpa=_fnum(row, "e_subgrade", _FWD_DEFAULTS["e_subgrade"]),
+                h_bituminous_mm=_fnum(row, "h_bituminous", _FWD_DEFAULTS["h_bituminous"]),
+                h_granular_mm=_fnum(row, "h_granular", _FWD_DEFAULTS["h_granular"]),
                 chainage_from=(float(row["chainage_from"]) if row.get("chainage_from") not in (None, "") else None),
                 chainage_to=(float(row["chainage_to"]) if row.get("chainage_to") not in (None, "") else None),
             ))
-        except (KeyError, TypeError, ValueError) as exc:
-            raise ValueError(f"section #{i}: needs e_bituminous, e_granular, "
-                             f"e_subgrade, h_bituminous, h_granular ({exc}).") from None
-    return evaluate_fwd_sections(sections, design).as_dict()
+        except _MissingCol:
+            skipped += 1
+    if not sections:
+        if _looks_like_survey(rows):
+            raise ValueError(
+                "This looks like a condition survey, not an FWD report. The overlay check "
+                "needs back-calculated layer moduli (e_bituminous, e_granular, e_subgrade) "
+                "and crust thickness from an FWD evaluation -- a condition survey has none. "
+                "Use this file in the Segment Forecast / Sections tabs instead."
+            )
+        found = sorted({k for r in rows for k in r.keys() if k})
+        raise ValueError(
+            "No usable sections. Each needs e_bituminous (and optionally e_granular, "
+            "e_subgrade, h_bituminous, h_granular -- these default if absent). Columns "
+            "found: " + (", ".join(found[:40]) if found else "(none)") + ".")
+    result = evaluate_fwd_sections(sections, design).as_dict()
+    result["skipped"] = skipped
+    return result
 
 
 def _pbmc_params_from_payload(payload: dict) -> PBMCParams:
@@ -763,20 +787,218 @@ def pbmc(payload: dict) -> dict:
     return estimate_pbmc(seg, params, **engine_kw).as_dict()
 
 
-def _csv_rows(payload: dict) -> List[dict]:
-    """Parse the `csv` text field into dict rows (shared by all calibrations)."""
+def _norm_calib_key(key: str) -> str:
+    """Lower-case, collapse whitespace/newlines to '_' (matches xlsx header norm)."""
+    import re
+    return re.sub(r"\s+", "_", str(key or "").strip().lower())
+
+
+# Each calibration column and the alternative header names it may appear under,
+# so every model "picks the related fields" regardless of the file's template.
+# Exact (normalised) matches only -- never alias an absolute reading to an
+# increment (e.g. rut_depth is NOT a rut increment), which would fit garbage.
+_CALIB_ALIASES = {
+    "measured_rut_increment_mm": [
+        "rut_increment_mm", "rut_increment", "measured_rut_increment",
+        "delta_rut_mm", "delta_rut", "rut_change_mm", "drut_mm"],
+    "ye4": ["esa_msa", "cumulative_esa", "cumulative_msa", "esa", "ye4_msa"],
+    "age": ["age_years", "pavement_age", "age_yr"],
+    "structural_number": ["snp", "sn", "snc"],
+    "deflection_mm": ["deflection", "d0_mm", "peak_deflection_mm"],
+    "measured_iri_increment": [
+        "iri_increment", "measured_iri_increment", "delta_iri", "iri_change", "diri"],
+    "iri": ["roughness_iri", "iri_m_km"],
+    "d_msa": ["delta_msa", "msa_year", "yearly_msa"],
+    "d_crack_pct": ["delta_crack_pct", "crack_increment_pct"],
+    "d_rut_mm": ["delta_rut_mm", "rut_increment_mm"],
+    "crack_prev": ["crack_year1", "crack_t0", "crack_start", "crack_before", "crack_prev_pct"],
+    "crack_next": ["crack_year2", "crack_t1", "crack_end", "crack_after", "crack_next_pct"],
+    "measured_sfc_decrement": [
+        "sfc_decrement", "delta_sfc", "sfc_change", "skid_decrement"],
+    "sfc": ["skid", "side_force_coefficient", "sfc_value"],
+    "measured_pothole_increment": [
+        "pothole_increment", "delta_pothole", "pothole_change", "pothole_increment_pct"],
+    "cracking_pct": ["crack_pct", "crack_area_pct", "percent_crack_area", "cracking_percent"],
+}
+
+# Markers that identify a single condition survey (vs a calibration observation file).
+_SURVEY_MARKERS = (
+    "rut_depth", "crack_area", "roughness", "lane_roughness", "_bi_",
+    "pothole", "ravelling", "deflection", "chainage", "severity")
+
+
+def _apply_aliases(row: dict, alias_map: dict) -> dict:
+    """Map a row's columns onto canonical names via `alias_map` (exact normalised
+    matches). Existing canonical keys win; aliases only fill what is absent."""
+    out = dict(row)
+    for canon, aliases in alias_map.items():
+        if out.get(canon) not in (None, ""):
+            continue
+        for alt in aliases:
+            if row.get(alt) not in (None, ""):
+                out[canon] = row[alt]
+                break
+    return out
+
+
+def _canonicalize_calib_row(row: dict) -> dict:
+    return _apply_aliases(row, _CALIB_ALIASES)
+
+
+def _looks_like_survey(rows: List[dict]) -> bool:
+    """True if the columns look like a one-time condition survey (not paired/observation data)."""
+    found = {k for r in rows for k in r.keys() if k}
+    return any(any(m in c for m in _SURVEY_MARKERS) for c in found)
+
+
+# FWD overlay columns and their alternative header names (any report template).
+_FWD_ALIASES = {
+    "section_id": ["section", "sec_id", "homogeneous_section", "sub_section"],
+    "e_bituminous": ["e_bit", "e_bc", "e_bituminous_mpa", "modulus_bituminous",
+                     "bituminous_modulus", "e1"],
+    "e_granular": ["e_gran", "e_base", "e_granular_mpa", "granular_modulus", "e2"],
+    "e_subgrade": ["e_sg", "e_subgrade_mpa", "subgrade_modulus", "mr_subgrade",
+                   "m_r_subgrade", "e3"],
+    "h_bituminous": ["h_bit", "h_bc", "thickness_bituminous", "bituminous_thickness_mm", "h1"],
+    "h_granular": ["h_gran", "h_base", "thickness_granular", "granular_thickness_mm", "h2"],
+    "chainage_from": ["from_chainage", "start_chainage", "chainage_start"],
+    "chainage_to": ["to_chainage", "end_chainage", "chainage_end"],
+}
+# Defaults for FWD columns a report may omit (typical NH crust; editable per call).
+_FWD_DEFAULTS = {"e_granular": 250.0, "e_subgrade": 50.0,
+                 "h_bituminous": 150.0, "h_granular": 450.0}
+
+
+def _dictrows_from_csv_text(text: str, target_col: Optional[str] = None) -> List[dict]:
+    """DictReader CSV text. If `target_col` is given, skip preamble lines until a
+    header row that actually contains it (handives PDF text / banner lines)."""
     import csv as _csv
     import io
 
-    text = payload.get("csv")
-    if not isinstance(text, str) or not text.strip():
-        raise ValueError("'csv' (text with a header row) is required.")
-    rows = list(_csv.DictReader(io.StringIO(text)))
+    lines = [ln for ln in text.splitlines() if ln.strip()]
+    if target_col:
+        for i, ln in enumerate(lines):
+            cells = [_norm_calib_key(c) for c in ln.split(",")]
+            if target_col in cells:
+                lines = lines[i:]
+                break
+    rows = list(_csv.DictReader(io.StringIO("\n".join(lines))))
+    return [{_norm_calib_key(k): v for k, v in r.items()} for r in rows]
+
+
+def _file_rows(payload: dict, target_col: Optional[str] = None) -> List[dict]:
+    """Tabular rows from `csv` text **or** an uploaded csv/xlsx/pdf (base64).
+
+    Keys are normalised (lower-case, whitespace -> '_'). Reuses the same XLSX/PDF
+    parsers as the network importer, so any report/workbook works. No domain
+    aliasing here -- callers apply their own (calibration / FWD) alias map.
+    """
+    b64 = payload.get("content_b64")
+    if isinstance(b64, str) and b64.strip():
+        try:
+            raw = base64.b64decode(b64, validate=True)
+        except (ValueError, base64.binascii.Error):
+            raise ValueError("content_b64 is not valid base64.") from None
+        fmt = str(payload.get("format", "")).strip().lower()
+        if fmt == "xlsx" or raw[:2] == b"PK":
+            rows: List[dict] = []
+            for _name, _hdr, sheet_rows in _xlsx_sheets(raw, 100_000):
+                rows.extend(sheet_rows)  # keys already normalised by _xlsx_sheets
+            if not rows:
+                raise ValueError("no rows found in the XLSX.")
+        elif fmt == "pdf" or raw[:5] == b"%PDF-":
+            rows = _dictrows_from_csv_text(_extract_pdf_text(raw), target_col)
+            if not rows:
+                raise ValueError("no calibration table found in the PDF text layer.")
+        else:
+            rows = _dictrows_from_csv_text(raw.decode("utf-8-sig", "replace"))
+    else:
+        text = payload.get("csv")
+        if not isinstance(text, str) or not text.strip():
+            raise ValueError("provide observations as `csv` text or upload a .csv/.xlsx/.pdf file.")
+        rows = _dictrows_from_csv_text(text)
     if not rows:
-        raise ValueError("no data rows found in the CSV.")
+        raise ValueError("no data rows found.")
     if len(rows) > 100_000:
         raise ValueError("too many rows (max 100000).")
     return rows
+
+
+def _calib_rows(payload: dict, target_col: Optional[str] = None) -> List[dict]:
+    """Calibration observations (multi-format) with the calibration alias map applied."""
+    return [_canonicalize_calib_row(r) for r in _file_rows(payload, target_col)]
+
+
+def _fwd_rows(payload: dict) -> List[dict]:
+    """FWD sub-section rows (multi-format) with the FWD alias map applied."""
+    return [_apply_aliases(r, _FWD_ALIASES) for r in _file_rows(payload, "e_bituminous")]
+
+
+# Sentinel: column is required (no default) for a calibration observation.
+_REQUIRED = object()
+
+
+class _MissingCol(Exception):
+    def __init__(self, col: str):
+        self.col = col
+        super().__init__(col)
+
+
+def _fnum(row: dict, key: str, default=_REQUIRED) -> float:
+    """Float a cell; fall back to `default` for missing/blank/non-numeric.
+
+    When no default is given the column is required -> raises `_MissingCol`, which
+    the caller uses to skip just that row (not abort the whole file)."""
+    v = row.get(key)
+    if v is None or str(v).strip() == "":
+        if default is _REQUIRED:
+            raise _MissingCol(key)
+        return float(default)
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        if default is _REQUIRED:
+            raise _MissingCol(key)
+        return float(default)
+
+
+def _calib_build(rows: List[dict], required: List[str], build):
+    """Build observations row-by-row, skipping rows missing a required column.
+
+    Returns (observations, skipped_count). Raises a clear, actionable error
+    naming the required columns and the columns actually found if nothing parses
+    (e.g. the chosen model does not match the uploaded file)."""
+    obs, skipped = [], 0
+    for r in rows:
+        try:
+            obs.append(build(r))
+        except _MissingCol:
+            skipped += 1
+    if not obs:
+        if _looks_like_survey(rows):
+            raise ValueError(
+                "This looks like a single condition survey, not calibration data. "
+                "Calibration fits a deterioration *rate*, so it needs repeat surveys of "
+                "the same segment (year-on-year " + required[0] + "), or per-segment age + "
+                "traffic. A one-time NSV snapshot only has current condition. "
+                "Use this file in the Segment Forecast / Network & Budget / LCA tabs "
+                "(it already feeds them); for calibration, upload before/after observations "
+                "with column '" + required[0] + "'."
+            )
+        found = sorted({k for r in rows for k in r.keys() if k})
+        raise ValueError(
+            "No usable rows for this model. It needs column(s): "
+            + ", ".join(required)
+            + ". Columns found in the file: "
+            + (", ".join(found[:40]) + (", …" if len(found) > 40 else ""))
+            + ". Pick the model that matches your file, or add the missing column."
+        )
+    return obs, skipped
+
+
+def _csv_rows(payload: dict) -> List[dict]:
+    """Back-compat shim: calibration rows from the `csv` text field or a file."""
+    return _calib_rows(payload)
 
 
 def calibrate(payload: dict) -> dict:
@@ -790,106 +1012,89 @@ def calibrate(payload: dict) -> dict:
     if kind == "rut":
         rows = payload.get("observations")
         if not isinstance(rows, list) or not rows:
-            rows = _csv_rows(payload)
-        try:
-            obs = [
-                RutObservation(
-                    measured_rut_increment_mm=float(r["measured_rut_increment_mm"]),
-                    ye4=float(r["ye4"]), age=int(float(r["age"])),
-                    deflection_mm=float(r.get("deflection_mm", 0.5) or 0.5),
-                    structural_number=float(r.get("structural_number", 4.0) or 4.0),
-                    compaction_pct=float(r.get("compaction_pct", 98.0) or 98.0),
-                    cds=float(r.get("cds", 1.0) or 1.0),
-                    heavy_speed_kmh=float(r.get("heavy_speed_kmh", 50.0) or 50.0),
-                    surfacing_thickness_mm=float(r.get("surfacing_thickness_mm", 100.0) or 100.0),
-                )
-                for r in rows
-            ]
-        except (KeyError, TypeError, ValueError) as exc:
-            raise ValueError(f"bad rut observation: {exc}") from None
+            rows = _calib_rows(payload, "measured_rut_increment_mm")
+        else:
+            rows = [{_norm_calib_key(k): v for k, v in r.items()} for r in rows]
+        obs, skipped = _calib_build(
+            rows, ["measured_rut_increment_mm", "ye4", "age"],
+            lambda r: RutObservation(
+                measured_rut_increment_mm=_fnum(r, "measured_rut_increment_mm"),
+                ye4=_fnum(r, "ye4"), age=int(_fnum(r, "age")),
+                deflection_mm=_fnum(r, "deflection_mm", 0.5),
+                structural_number=_fnum(r, "structural_number", 4.0),
+                compaction_pct=_fnum(r, "compaction_pct", 98.0),
+                cds=_fnum(r, "cds", 1.0),
+                heavy_speed_kmh=_fnum(r, "heavy_speed_kmh", 50.0),
+                surfacing_thickness_mm=_fnum(r, "surfacing_thickness_mm", 100.0),
+            ))
         res = calibrate_hdm4_rut(obs)
         return {
             "kind": "rut",
             "k_rid": res.k_rid, "k_rst": res.k_rst, "k_rpd": res.k_rpd,
             "r_squared": res.r_squared, "rmse_before": res.rmse_before,
-            "rmse_after": res.rmse_after, "n": res.n,
+            "rmse_after": res.rmse_after, "n": res.n, "skipped": skipped,
             "fixed_to_zero": list(res.fixed_to_zero),
             "label": res.calibration.label, "summary": res.summary(),
         }
 
     if kind == "cracking":
-        rows = _csv_rows(payload)
-        try:
-            pairs = [(float(r["crack_prev"]), float(r["crack_next"])) for r in rows]
-        except (KeyError, TypeError, ValueError) as exc:
-            raise ValueError(f"cracking CSV needs columns crack_prev,crack_next: {exc}") from None
-        res = calibrate_mlit_cracking(pairs)
+        rows = _calib_rows(payload, "crack_next")
+        obs, skipped = _calib_build(
+            rows, ["crack_prev", "crack_next"],
+            lambda r: (_fnum(r, "crack_prev"), _fnum(r, "crack_next")))
+        res = calibrate_mlit_cracking(obs)
         return {
             "kind": "cracking", "a": res.a, "b": res.b,
-            "r_squared": res.r_squared, "n": res.n,
+            "r_squared": res.r_squared, "n": res.n, "skipped": skipped,
             "label": res.model.label, "summary": res.summary(),
         }
 
     if kind == "roughness":
-        rows = _csv_rows(payload)
-        try:
-            obs = [
-                RoughnessObservation(
-                    measured_iri_increment=float(r["measured_iri_increment"]),
-                    iri=float(r["iri"]), structural_number=float(r["structural_number"]),
-                    age=int(float(r["age"])), d_msa=float(r["d_msa"]),
-                    d_crack_pct=float(r["d_crack_pct"]), d_rut_mm=float(r["d_rut_mm"]),
-                )
-                for r in rows
-            ]
-        except (KeyError, TypeError, ValueError) as exc:
-            raise ValueError(f"bad roughness observation: {exc}") from None
+        rows = _calib_rows(payload, "measured_iri_increment")
+        obs, skipped = _calib_build(
+            rows, ["measured_iri_increment", "iri", "age"],
+            lambda r: RoughnessObservation(
+                measured_iri_increment=_fnum(r, "measured_iri_increment"),
+                iri=_fnum(r, "iri"), structural_number=_fnum(r, "structural_number", 4.0),
+                age=int(_fnum(r, "age")), d_msa=_fnum(r, "d_msa", 1.0),
+                d_crack_pct=_fnum(r, "d_crack_pct", 0.0), d_rut_mm=_fnum(r, "d_rut_mm", 0.0),
+            ))
         res = calibrate_hdm4_roughness(obs)
         return {
             "kind": "roughness", "env_coeff": res.env_coeff, "struct_a0": res.struct_a0,
             "crack_coeff": res.crack_coeff, "rut_coeff": res.rut_coeff,
-            "r_squared": res.r_squared, "rmse": res.rmse, "n": res.n,
+            "r_squared": res.r_squared, "rmse": res.rmse, "n": res.n, "skipped": skipped,
             "label": res.model.label, "summary": res.summary(),
         }
 
     if kind == "skid":
-        rows = _csv_rows(payload)
-        try:
-            obs = [
-                SkidObservation(
-                    measured_sfc_decrement=float(r["measured_sfc_decrement"]),
-                    sfc=float(r["sfc"]), d_msa=float(r["d_msa"]),
-                )
-                for r in rows
-            ]
-        except (KeyError, TypeError, ValueError) as exc:
-            raise ValueError(f"skid CSV needs columns measured_sfc_decrement,sfc,d_msa: {exc}") from None
+        rows = _calib_rows(payload, "measured_sfc_decrement")
+        obs, skipped = _calib_build(
+            rows, ["measured_sfc_decrement", "sfc"],
+            lambda r: SkidObservation(
+                measured_sfc_decrement=_fnum(r, "measured_sfc_decrement"),
+                sfc=_fnum(r, "sfc"), d_msa=_fnum(r, "d_msa", 1.0),
+            ))
         res = calibrate_hdm4_skid(obs)
         return {
             "kind": "skid", "decay_k": res.decay_k, "sfc_min": res.sfc_min,
-            "r_squared": res.r_squared, "n": res.n,
+            "r_squared": res.r_squared, "n": res.n, "skipped": skipped,
             "label": res.model.label, "summary": res.summary(),
         }
 
     if kind in ("pothole", "potholes"):
-        rows = _csv_rows(payload)
-        try:
-            obs = [
-                PotholeObservation(
-                    measured_pothole_increment=float(r["measured_pothole_increment"]),
-                    cracking_pct=float(r["cracking_pct"]), d_msa=float(r["d_msa"]),
-                )
-                for r in rows
-            ]
-        except (KeyError, TypeError, ValueError) as exc:
-            raise ValueError(
-                f"potholes CSV needs columns measured_pothole_increment,cracking_pct,d_msa: {exc}"
-            ) from None
+        rows = _calib_rows(payload, "measured_pothole_increment")
+        obs, skipped = _calib_build(
+            rows, ["measured_pothole_increment", "cracking_pct"],
+            lambda r: PotholeObservation(
+                measured_pothole_increment=_fnum(r, "measured_pothole_increment"),
+                cracking_pct=_fnum(r, "cracking_pct"), d_msa=_fnum(r, "d_msa", 1.0),
+            ))
         res = calibrate_hdm4_potholes(obs)
         return {
             "kind": "potholes", "rate": res.rate,
             "crack_threshold_pct": res.crack_threshold_pct,
-            "r_squared": res.r_squared, "n": res.n,
+            "r_squared": res.r_squared, "n": res.n, "skipped": skipped,
             "label": res.model.label, "summary": res.summary(),
         }
 
@@ -925,6 +1130,7 @@ def network_and_budget(payload: dict) -> dict:
         base_unit_cost=_f(payload, "base_unit_cost", 30.0),
     )
     budget = optimize_budget(segments, forecasts, params)
+    clearing = recommend_budget_to_clear(segments, forecasts, params)
 
     # Per-segment remaining structural life + (optional) handback verdict.
     design_msa = payload.get("design_msa")
@@ -994,6 +1200,10 @@ def network_and_budget(payload: dict) -> dict:
             "total_avoided_premium": budget.total_avoided_premium,
             "do_nothing_structural_cost": budget.do_nothing_structural_cost,
             "net_savings": savings,
+            "n_at_risk": clearing["n_at_risk"],
+            "total_preventive_need": clearing["total_preventive_need"],
+            "recommended_annual_budget": clearing["recommended_annual_budget"],
+            "clears_at_current": clearing["clears_at_current"],
             "rationale": budget.rationale,
         },
     }

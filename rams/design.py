@@ -140,7 +140,7 @@ def fatigue_life_msa_irc115(
 
         Nf = 0.711e-4 * (1/eps_t)^3.89 * (1/MR)^0.854   (90% reliability)
 
-    This is the model FWD remaining-life reports use (e.g. the NH-152D
+    This is the model FWD remaining-life reports use (back-calculated moduli
     evaluation). Unlike the IRC:37-2018 form it carries no mix `C` factor, and
     `MR` is the (temperature-corrected) back-calculated bituminous modulus. The
     90% constant is validated against published reports; the 80% constant

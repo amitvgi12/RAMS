@@ -4,7 +4,7 @@ IRC:115-2014 fatigue model, and the FWD remaining-life / overlay workflow.
 
 Golden values are taken from:
   * IRC:37-2018 Annex II worked example II.3 (CBR 7%, 131 MSA design)
-  * the NH-152D FWD evaluation report (IRC:115-2014, 15th-percentile moduli)
+  * a published FWD evaluation report (IRC:115-2014, 15th-percentile moduli)
 The Odemark-Boussinesq approximation is calibrated to track these to ~10-12%.
 """
 import unittest
@@ -26,7 +26,7 @@ def _rel(a, b):
 
 class TestIRC115Fatigue(unittest.TestCase):
     def test_reproduces_report_fatigue_life(self):
-        # NH-152D Sec-1: eps_t=0.0001254, MR=870 -> report Nf = 330.5 MSA.
+        # FWD report Sec-1: eps_t=0.0001254, MR=870 -> report Nf = 330.5 MSA.
         nf = fatigue_life_msa_irc115(0.0001254, 870)
         self.assertLess(_rel(nf, 330.5), 0.02)
 
@@ -47,7 +47,7 @@ class TestStrainCalibration(unittest.TestCase):
         # Both allowable for 131 MSA at 90% reliability -> section is adequate.
         self.assertGreaterEqual(s.governing_life_msa, 131)
 
-    def test_nh152d_section_irc115(self):
+    def test_fwd_section_irc115(self):
         # E=870/348/77, h=300/350, Poisson 0.5/0.4/0.4 -> IITPAVE eps_t=125.4, eps_v=213.
         lyr = LayerModel(870, 348, 77, 300, 350,
                          nu_bituminous=0.5, nu_granular=0.4, nu_subgrade=0.4)
@@ -75,27 +75,27 @@ class TestEvaluateSectionStandard(unittest.TestCase):
 
 
 class TestFWDOverlay(unittest.TestCase):
-    def _nh152d(self):
-        rows = [  # real NH-152D 15th-percentile moduli (Table 6.4)
-            ("LHS-1", 870, 348), ("LHS-3", 1581, 235), ("LHS-7", 1040, 367),
-            ("RHS-2", 801, 352), ("RHS-4", 1100, 365), ("RHS-7", 865, 335),
+    def _fwd_sections(self):
+        rows = [  # published 15th-percentile back-calculated moduli
+            ("CW1-1", 870, 348), ("CW1-3", 1581, 235), ("CW1-7", 1040, 367),
+            ("CW2-2", 801, 352), ("CW2-4", 1100, 365), ("CW2-7", 865, 335),
         ]
         return [FWDSection(i, eb, eg, 77, 300, 350) for i, eb, eg in rows]
 
     def test_overlay_assessment(self):
-        res = evaluate_fwd_sections(self._nh152d(), 300)
+        res = evaluate_fwd_sections(self._fwd_sections(), 300)
         self.assertEqual(len(res.rows), 6)
-        # Strong sub-sections (e.g. RHS-4) comfortably exceed 300 MSA.
+        # Strong sub-sections (e.g. CW2-4) comfortably exceed 300 MSA.
         by_id = {r.section_id: r for r in res.rows}
-        self.assertGreater(by_id["RHS-4"].remaining_life_msa, 300)
-        self.assertFalse(by_id["RHS-4"].overlay_required)
+        self.assertGreater(by_id["CW2-4"].remaining_life_msa, 300)
+        self.assertFalse(by_id["CW2-4"].overlay_required)
         # Marginal sub-sections within 15% of the threshold are flagged.
         self.assertTrue(any(r.confirm_with_iitpave for r in res.rows))
 
     def test_design_validation_and_dict(self):
         with self.assertRaises(ValueError):
-            evaluate_fwd_sections(self._nh152d(), 0)
-        d = evaluate_fwd_sections(self._nh152d(), 300).as_dict()
+            evaluate_fwd_sections(self._fwd_sections(), 0)
+        d = evaluate_fwd_sections(self._fwd_sections(), 300).as_dict()
         self.assertEqual(d["n_sections"], 6)
         self.assertIn("verdict", d)
         self.assertIn("borderline_sections", d)
@@ -129,6 +129,36 @@ class TestFWDApi(unittest.TestCase):
         })
         self.assertIn("strains", out)
         self.assertTrue(out["adequate"])
+
+
+class TestFWDRobustInput(unittest.TestCase):
+    """Multi-format input + default-tolerant parsing for the FWD overlay card."""
+
+    def test_csv_text(self):
+        csv = ("section_id,e_bituminous,e_granular,e_subgrade,h_bituminous,h_granular\n"
+               "S1,870,348,77,300,350\nS2,1581,235,77,300,350")
+        out = api.fwd_overlay({"design_msa": 300, "csv": csv})
+        self.assertEqual(out["n_sections"], 2)
+
+    def test_xlsx_with_defaults(self):
+        import base64
+        from rams.export import xlsx_bytes
+        xb = xlsx_bytes(["section_id", "e_bituminous"], [["S1", "870"], ["S2", "1581"]], "fwd")
+        out = api.fwd_overlay(
+            {"design_msa": 300, "content_b64": base64.b64encode(xb).decode(), "format": "xlsx"})
+        self.assertEqual(out["n_sections"], 2)  # e_granular/e_subgrade/thickness defaulted
+
+    def test_column_aliases(self):
+        csv = "section,E_BC,E_base,E_sg,H_BC,H_base\nA,870,348,77,300,350"
+        out = api.fwd_overlay({"design_msa": 300, "csv": csv})
+        self.assertEqual(out["n_sections"], 1)
+        self.assertEqual(out["sections"][0]["section_id"], "A")
+
+    def test_condition_survey_message(self):
+        csv = "l1_rut_depth_(in_mm),l1_%_crack_area,chainage\n4.6,8.2,154400"
+        with self.assertRaises(ValueError) as cm:
+            api.fwd_overlay({"design_msa": 300, "csv": csv})
+        self.assertIn("FWD report", str(cm.exception))
 
 
 if __name__ == "__main__":

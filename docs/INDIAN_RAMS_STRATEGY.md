@@ -33,7 +33,7 @@ calibration.** HDM-4's defaults and the paper's K-factors are *not* Indian. The
 honest, defensible position is: ship the **forms** (mechanistic + empirical),
 keep every coefficient as data, and run a calibration programme against NSV +
 FWD + traffic-census data. That calibration *is* the moat — it is what makes the
-tool credible to NHAI/PWDs and is hard for a generic foreign import to match.
+tool credible to national-highway agencies / PWDs and is hard for a generic foreign import to match.
 
 **Recommended build-out order (each is an additive module, not a rewrite):**
 1. Calibration harness: regress engine/HDM-4 coefficients against measured
@@ -46,12 +46,12 @@ tool credible to NHAI/PWDs and is hard for a generic foreign import to match.
 
 ---
 
-## 2. Customer: private BOT/HAM concessionaires vs. state PWDs / NHAI?
+## 2. Customer: private BOT/HAM concessionaires vs. state PWDs / NH agencies?
 
 These are **different products sharing one engine**. A recommendation, not a
 mandate — but the split matters because it changes the objective function.
 
-| | BOT / HAM concessionaire | State PWD / NHAI |
+| | BOT / HAM concessionaire | State PWD / NH agency |
 |---|---|---|
 | Objective | NPV over the **concession period**; meet **handback** condition with least spend | **Network-level** condition at a fixed annual budget |
 | Time horizon | Fixed (15–20 yr concession / O&M period) | Rolling, perpetual |
@@ -62,7 +62,7 @@ mandate — but the split matters because it changes the objective function.
 **Recommendation: start with BOT/HAM concessionaires.** Faster sales cycle,
 clearer ROI (penalty/handback avoidance is a hard number), they already collect
 NSV/FWD for compliance, and they are willing to pay for software that reduces
-O&M spend. Then move up-market to PWD/NHAI network deployments, where the
+O&M spend. Then move up-market to PWD / NH-agency network deployments, where the
 budget-optimiser and auditability become the lead features. The codebase already
 leans this way: the optimiser models the *avoided structural premium* (a
 concessionaire's exact cost-avoidance argument) and uses a transparent,

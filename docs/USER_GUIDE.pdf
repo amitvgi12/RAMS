@@ -1,0 +1,2867 @@
+%PDF-1.4
+%âãÏÓ
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [8 0 R 10 0 R 12 0 R 14 0 R 16 0 R 18 0 R 20 0 R] /Count 7 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier /Encoding /WinAnsiEncoding >>
+endobj
+7 0 obj
+<< /Length 2924 >>
+stream
+0.122 0.231 0.341 rg 0.00 632.00 595.00 210.00 re f
+0.950 0.620 0.000 rg 0.00 626.00 595.00 6.00 re f
+BT /F2 30.00 Tf 1.000 1.000 1.000 rg 54.00 738.00 Td (RAMS — User Guide & Handbook) Tj ET
+BT /F1 13.00 Tf 0.860 0.900 0.940 rg 54.00 704.00 Td (RAMS \(Road Asset Management System\) is an Indian pavement deterioration,) Tj ET
+BT /F1 13.00 Tf 0.860 0.900 0.940 rg 54.00 686.00 Td (remaining-life and investment-planning engine.) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 54.00 582.00 Td (RAMS \(Road Asset Management System\) is an Indian pavement deterioration, remaining-life and) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 54.00 567.50 Td (investment-planning engine. It takes you from pavement design -> field-condition data -> deterioration) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 54.00 553.00 Td (forecasting -> investment decisions \(life-cycle analysis, network budgeting, PBMC pricing\), with every rule) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 54.00 538.50 Td (citing its IRC clause and every cost grounded in the MoRTH Standard Data Book.) Tj ET
+BT /F2 11.00 Tf 0.122 0.231 0.341 rg 54.00 515.00 Td (WHAT'S INSIDE) Tj ET
+BT /F2 10.00 Tf 0.950 0.620 0.000 rg 54.00 494.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 68.00 494.00 Td (1. Getting started) Tj ET
+BT /F2 10.00 Tf 0.950 0.620 0.000 rg 54.00 476.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 68.00 476.00 Td (2. Data formats \(general rules\)) Tj ET
+BT /F2 10.00 Tf 0.950 0.620 0.000 rg 54.00 458.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 68.00 458.00 Td (3. Tab: Segment Forecast) Tj ET
+BT /F2 10.00 Tf 0.950 0.620 0.000 rg 54.00 440.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 68.00 440.00 Td (4. Tab: Network & Budget) Tj ET
+BT /F2 10.00 Tf 0.950 0.620 0.000 rg 54.00 422.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 68.00 422.00 Td (5. Tab: Calibrate & Residual Life) Tj ET
+BT /F2 10.00 Tf 0.950 0.620 0.000 rg 309.50 494.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 323.50 494.00 Td (6. Tab: Design & PBMC) Tj ET
+BT /F2 10.00 Tf 0.950 0.620 0.000 rg 309.50 476.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 323.50 476.00 Td (7. Costing basis \(MoRTH Standard Data Book\)) Tj ET
+BT /F2 10.00 Tf 0.950 0.620 0.000 rg 309.50 458.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 323.50 458.00 Td (8. Outputs & reporting) Tj ET
+BT /F2 10.00 Tf 0.950 0.620 0.000 rg 309.50 440.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 323.50 440.00 Td (9. Limitations & honest caveats) Tj ET
+BT /F2 10.00 Tf 0.950 0.620 0.000 rg 309.50 422.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 323.50 422.00 Td (10. Quick reference — required columns) Tj ET
+0.800 0.840 0.880 RG 0.50 w 54.00 104.00 m 541.00 104.00 l S
+BT /F3 9.00 Tf 0.420 0.460 0.500 rg 54.00 88.00 Td (Standards: IRC:37-2018 / IRC:115 / IRC:82 / IRC:81  -  HDM-4  -  MoRTH Standard Data Book   |   RAMS documentation) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 22470 >>
+stream
+BT /F1 8.00 Tf 0.620 0.660 0.700 rg 418.74 804.00 Td (RAMS — User Guide & Handbook) Tj ET
+0.800 0.840 0.880 RG 0.50 w 54.00 799.00 m 541.00 799.00 l S
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 774.00 Td (This) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 72.89 774.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 75.67 774.00 Td (guide) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 100.13 774.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 102.91 774.00 Td (explains) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 139.59 774.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 142.37 774.00 Td (how) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 162.37 774.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 165.15 774.00 Td (to) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 174.59 774.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 177.37 774.00 Td (use) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 194.60 774.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 197.38 774.00 Td (each) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 220.17 774.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 222.95 774.00 Td (feature,) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 259.07 774.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 261.85 774.00 Td (what) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 284.63 774.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 287.41 774.00 Td (data) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 307.97 774.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 310.75 774.00 Td (it) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 316.86 774.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 319.64 774.00 Td (needs,) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 351.32 774.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 354.10 774.00 Td (the) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 369.10 774.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 371.88 774.00 Td (accepted) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 415.23 774.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 418.01 774.00 Td (file) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 432.46 774.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 435.24 774.00 Td (formats,) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 474.69 774.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 477.47 774.00 Td (and) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 495.25 774.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 498.03 774.00 Td (how) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 518.03 774.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 520.81 774.00 Td (the) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 535.81 774.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 54.00 759.50 Td (calculations) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 111.80 759.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 114.58 759.50 Td (are) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 129.59 759.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 132.37 759.50 Td (done) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 156.26 759.50 Td (.) Tj ET
+0.800 0.840 0.880 RG 0.50 w 54.00 743.00 m 541.00 743.00 l S
+BT /F2 15.00 Tf 0.122 0.231 0.341 rg 54.00 700.00 Td (1. Getting started) Tj ET
+0.122 0.231 0.341 RG 0.90 w 54.00 694.00 m 541.00 694.00 l S
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 671.00 Td (RAMS) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 82.89 671.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 85.67 671.00 Td (is) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 92.89 671.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 95.67 671.00 Td (pure-Python) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 150.14 671.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 152.92 671.00 Td (\(standard) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 195.16 671.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 197.94 671.00 Td (library) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 225.16 671.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 227.94 671.00 Td (only) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 246.28 671.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 249.06 671.00 Td (—) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 259.06 671.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 261.84 671.00 Td (no) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 272.96 671.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 275.74 671.00 Td (installation) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 322.98 671.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 325.76 671.00 Td (of) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 334.10 671.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 336.88 671.00 Td (third-party) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 381.89 671.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 384.67 671.00 Td (packages\).) Tj ET
+BT /F2 11.50 Tf 0.122 0.231 0.341 rg 54.00 637.50 Td (Run the dashboard) Tj ET
+0.945 0.960 0.975 rg 54.00 582.50 487.00 40.00 re f
+BT /F4 9.00 Tf 0.200 0.240 0.280 rg 61.00 606.50 Td (python -m rams.server --port 8000) Tj ET
+BT /F4 9.00 Tf 0.200 0.240 0.280 rg 61.00 593.50 Td (# then open http://127.0.0.1:8000) Tj ET
+BT /F2 11.50 Tf 0.122 0.231 0.341 rg 54.00 551.50 Td (Command line \(batch / automation\)) Tj ET
+0.945 0.960 0.975 rg 54.00 483.50 487.00 53.00 re f
+BT /F4 9.00 Tf 0.200 0.240 0.280 rg 61.00 520.50 Td (python -m rams.cli --design --cbr 8 --design-msa 120 --design-life 15) Tj ET
+BT /F4 9.00 Tf 0.200 0.240 0.280 rg 61.00 507.50 Td (python -m rams.cli --fwd examples/fwd_sections_sample.csv --design-msa 300) Tj ET
+BT /F4 9.00 Tf 0.200 0.240 0.280 rg 61.00 494.50 Td (python -m rams.cli --pbmc --term-years 5            # see --help for all flags) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 465.50 Td (The) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 71.23 465.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 74.01 465.50 Td (dashboard) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 121.26 465.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 124.04 465.50 Td (has) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 140.16 465.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 142.94 465.50 Td (four) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 162.38 465.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 165.16 465.50 Td (tabs) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 185.72 465.50 Td (:) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 188.50 465.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 191.28 465.50 Td (*Segment) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 235.19 465.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 237.97 465.50 Td (Forecast*,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 283.54 465.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 286.32 465.50 Td (*Network) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 326.88 465.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 329.66 465.50 Td (&) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 336.33 465.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 339.11 465.50 Td (Budget*,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 377.47 465.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 380.25 465.50 Td (*Calibrate) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 424.15 465.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 426.93 465.50 Td (&) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 433.60 465.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 436.38 465.50 Td (Residual) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 475.28 465.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 478.06 465.50 Td (Life*,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 500.85 465.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 503.63 465.50 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 520.31 465.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 451.00 Td (*Design) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 89.01 451.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 91.79 451.00 Td (&) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 98.46 451.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 101.24 451.00 Td (PBMC*.) Tj ET
+0.800 0.840 0.880 RG 0.50 w 54.00 434.50 m 541.00 434.50 l S
+BT /F2 15.00 Tf 0.122 0.231 0.341 rg 54.00 391.50 Td (2. Data formats \(general rules\)) Tj ET
+0.122 0.231 0.341 RG 0.90 w 54.00 385.50 m 541.00 385.50 l S
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 362.50 Td (These) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 81.79 362.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 84.57 362.50 Td (rules) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 106.24 362.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 109.02 362.50 Td (apply) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 132.92 362.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 135.70 362.50 Td (everywhere) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 187.38 362.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 190.16 362.50 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 195.72 362.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 198.50 362.50 Td (file) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 211.28 362.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 214.06 362.50 Td (is) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 221.28 362.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 224.06 362.50 Td (accepted:) Tj ET
+0.800 0.840 0.880 RG 0.40 w 54.00 346.00 m 541.00 346.00 l S
+0.122 0.231 0.341 rg 54.00 324.00 487.00 22.00 re f
+BT /F2 9.00 Tf 1.000 1.000 1.000 rg 59.00 332.00 Td (Format) Tj ET
+BT /F2 9.00 Tf 1.000 1.000 1.000 rg 104.45 332.00 Td (Notes) Tj ET
+0.800 0.840 0.880 RG 0.40 w 54.00 324.00 m 541.00 324.00 l S
+0.800 0.840 0.880 RG 0.40 w 54.00 346.00 m 54.00 324.00 l S
+0.800 0.840 0.880 RG 0.40 w 99.45 346.00 m 99.45 324.00 l S
+0.800 0.840 0.880 RG 0.40 w 541.00 346.00 m 541.00 324.00 l S
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 310.00 Td (**CSV**) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 104.45 310.00 Td (A header row plus data rows. Most universal.) Tj ET
+0.800 0.840 0.880 RG 0.40 w 54.00 302.00 m 541.00 302.00 l S
+0.800 0.840 0.880 RG 0.40 w 54.00 324.00 m 54.00 302.00 l S
+0.800 0.840 0.880 RG 0.40 w 99.45 324.00 m 99.45 302.00 l S
+0.800 0.840 0.880 RG 0.40 w 541.00 324.00 m 541.00 302.00 l S
+0.945 0.960 0.975 rg 54.00 268.00 487.00 34.00 re f
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 288.00 Td (**XLSX**) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 104.45 288.00 Td (Multiple sheets are read; merged/grouped two-row headers are combined; the *first non-empty* value wins) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 104.45 276.00 Td (for duplicate columns.) Tj ET
+0.800 0.840 0.880 RG 0.40 w 54.00 268.00 m 541.00 268.00 l S
+0.800 0.840 0.880 RG 0.40 w 54.00 302.00 m 54.00 268.00 l S
+0.800 0.840 0.880 RG 0.40 w 99.45 302.00 m 99.45 268.00 l S
+0.800 0.840 0.880 RG 0.40 w 541.00 302.00 m 541.00 268.00 l S
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 254.00 Td (**PDF**) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 104.45 254.00 Td (Text-based \(machine-readable\) PDFs only — the table is recovered from the text layer. Scanned/image) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 104.45 242.00 Td (PDFs are not OCR'd.) Tj ET
+0.800 0.840 0.880 RG 0.40 w 54.00 234.00 m 541.00 234.00 l S
+0.800 0.840 0.880 RG 0.40 w 54.00 268.00 m 54.00 234.00 l S
+0.800 0.840 0.880 RG 0.40 w 99.45 268.00 m 99.45 234.00 l S
+0.800 0.840 0.880 RG 0.40 w 541.00 268.00 m 541.00 234.00 l S
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 54.00 214.00 Td (Column) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 91.22 214.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 94.00 214.00 Td (naming) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 129.56 214.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 132.34 214.00 Td (is) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 140.68 214.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 143.46 214.00 Td (forgiving.) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 189.02 214.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 191.80 214.00 Td (Headers) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 229.59 214.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 232.37 214.00 Td (are) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 246.82 214.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 249.60 214.00 Td (normalised) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 298.50 214.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 301.28 214.00 Td (\(lower-cased,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 361.29 214.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 364.07 214.00 Td (spaces) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 395.75 214.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 398.53 214.00 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 415.21 214.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 417.99 214.00 Td (newlines) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 456.89 214.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 459.67 214.00 Td (become) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 495.24 214.00 Td ( ) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 498.02 214.00 Td (_) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 504.02 214.00 Td (\),) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 510.13 214.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 512.91 214.00 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 529.59 214.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 199.50 Td (each) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 75.68 199.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 78.46 199.50 Td (feature) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 109.59 199.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 112.37 199.50 Td (keeps) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 139.05 199.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 141.83 199.50 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 147.39 199.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 150.17 199.50 Td (list) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 162.39 199.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 165.17 199.50 Td (of) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 173.51 199.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 176.29 199.50 Td (aliases) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 209.65 199.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 212.43 199.50 Td (so) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 222.99 199.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 225.77 199.50 Td (common) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 264.11 199.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 266.89 199.50 Td (template) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 305.24 199.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 308.02 199.50 Td (variations) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 350.81 199.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 353.59 199.50 Td (are) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 368.04 199.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 370.82 199.50 Td (recognised) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 419.73 199.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 422.51 199.50 Td (automatically.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 54.00 179.00 Td (Missing) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 91.23 179.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 94.01 179.00 Td (optional) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 132.90 179.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 135.68 179.00 Td (columns) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 176.80 179.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 179.58 179.00 Td (fall) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 194.03 179.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 196.81 179.00 Td (back) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 219.60 179.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 222.38 179.00 Td (to) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 231.82 179.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 234.60 179.00 Td (documented) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 294.05 179.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 296.83 179.00 Td (defaults) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 335.17 179.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 337.95 179.00 Td (rather) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 364.07 179.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 366.85 179.00 Td (than) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 386.31 179.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 389.09 179.00 Td (erroring) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 423.54 179.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 426.32 179.00 Td (—) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 436.32 179.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 439.10 179.00 Td (only) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 457.44 179.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 460.22 179.00 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 474.12 179.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 476.90 179.00 Td (*primary*) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 518.01 179.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 164.50 Td (field\(s\)) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 84.00 164.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 86.78 164.50 Td (of) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 95.12 164.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 97.90 164.50 Td (each) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 119.58 164.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 122.36 164.50 Td (feature) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 153.49 164.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 156.27 164.50 Td (are) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 170.72 164.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 173.50 164.50 Td (required.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 54.00 144.00 Td (One) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 73.45 144.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 76.23 144.00 Td (upload,) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 111.79 144.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 114.57 144.00 Td (many) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 140.69 144.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 143.47 144.00 Td (tabs.) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 166.81 144.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 169.59 144.00 Td (A) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 176.26 144.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 179.04 144.00 Td (survey) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 208.49 144.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 211.27 144.00 Td (loaded) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 241.29 144.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 244.07 144.00 Td (in) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 251.85 144.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 254.63 144.00 Td (*Segment) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 298.54 144.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 301.32 144.00 Td (Forecast) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 340.22 144.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 343.00 144.00 Td (->) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 352.17 144.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 354.95 144.00 Td (Load) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 377.19 144.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 379.97 144.00 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 385.53 144.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 388.31 144.00 Td (segment*) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 430.55 144.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 433.33 144.00 Td (is) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 440.55 144.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 443.33 144.00 Td (shared) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 473.90 144.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 476.68 144.00 Td (with) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 494.46 144.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 497.24 144.00 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 511.14 144.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 129.50 Td (Network,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 93.45 129.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 96.23 129.50 Td (PBMC) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 125.12 129.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 127.90 129.50 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 144.58 129.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 147.36 129.50 Td (LCA) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 166.81 129.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 169.59 129.50 Td (tabs) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 188.49 129.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 191.27 129.50 Td (\(look) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 212.94 129.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 215.72 129.50 Td (for) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 227.39 129.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 230.17 129.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 244.07 129.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 246.85 129.50 Td (green) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 272.42 129.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 275.20 129.50 Td (“Use) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 296.87 129.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 299.65 129.50 Td (uploaded) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 344.10 129.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 346.88 129.50 Td (survey”) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 382.45 129.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 385.23 129.50 Td (button\),) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 419.14 129.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 421.92 129.50 Td (so) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 432.48 129.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 435.26 129.50 Td (you) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 451.38 129.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 454.16 129.50 Td (don't) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 475.53 129.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 478.31 129.50 Td (re-upload.) Tj ET
+0.800 0.840 0.880 RG 0.50 w 54.00 113.00 m 541.00 113.00 l S
+0.42 0.46 0.50 rg BT /F1 8 Tf 277.04 30.00 Td (Page 2 of 7) Tj ET
+0.80 0.84 0.88 RG 0.5 w 54.00 42.00 m 541.00 42.00 l S
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 34129 >>
+stream
+BT /F1 8.00 Tf 0.620 0.660 0.700 rg 418.74 804.00 Td (RAMS — User Guide & Handbook) Tj ET
+0.800 0.840 0.880 RG 0.50 w 54.00 799.00 m 541.00 799.00 l S
+BT /F2 15.00 Tf 0.122 0.231 0.341 rg 54.00 773.00 Td (3. Tab: Segment Forecast) Tj ET
+0.122 0.231 0.341 RG 0.90 w 54.00 767.00 m 541.00 767.00 l S
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 54.00 744.00 Td (Purpose:) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 97.34 744.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 100.12 744.00 Td (project) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 130.13 744.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 132.91 744.00 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 138.47 744.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 141.25 744.00 Td (single) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 167.37 744.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 170.15 744.00 Td (segment) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 208.50 744.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 211.28 744.00 Td (\(or) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 223.50 744.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 226.28 744.00 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 231.84 744.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 234.62 744.00 Td (loaded) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 264.64 744.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 267.42 744.00 Td (survey\)) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 300.20 744.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 302.98 744.00 Td (forward) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 336.32 744.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 339.10 744.00 Td (in) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 346.88 744.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 349.66 744.00 Td (time) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 368.55 744.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 371.33 744.00 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 388.01 744.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 390.79 744.00 Td (see) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 406.91 744.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 409.69 744.00 Td (when) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 433.59 744.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 436.37 744.00 Td (it) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 441.37 744.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 444.15 744.00 Td (crosses) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 478.60 744.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 481.38 744.00 Td (maintenance) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 538.63 744.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 729.50 Td (thresholds.) Tj ET
+BT /F2 11.50 Tf 0.122 0.231 0.341 rg 54.00 696.00 Td (Inputs) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 679.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 679.00 Td (Condition:) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 113.02 679.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 115.80 679.00 Td (IRI) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 128.58 679.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 131.36 679.00 Td (\(mm/m\),) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 168.57 679.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 171.35 679.00 Td (rut) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 183.02 679.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 185.80 679.00 Td (\(mm\),) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 211.90 679.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 214.68 679.00 Td (cracking) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 251.91 679.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 254.69 679.00 Td (\(%) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 266.91 679.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 269.69 679.00 Td (area\),) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 295.81 679.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 298.59 679.00 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 315.27 679.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 318.05 679.00 Td (traffic) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 342.50 679.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 345.28 679.00 Td (\(annual) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 378.63 679.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 381.41 679.00 Td (MSA,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 663.50 Td (growth\).) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 90.12 663.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 92.90 663.50 Td (Monsoon) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 134.03 663.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 136.81 663.50 Td (zone) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 158.49 663.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 161.27 663.50 Td (\(HIGH/MEDIUM/LOW\)) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 261.82 663.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 264.60 663.50 Td (scales) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 292.94 663.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 295.72 663.50 Td (environmental) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 358.52 663.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 361.30 663.50 Td (deterioration.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 647.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 647.00 Td (Optional) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 105.24 647.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 108.02 647.00 Td (structural) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 149.14 647.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 151.92 647.00 Td (inputs) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 178.60 647.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 181.38 647.00 Td (\(FWD) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 207.48 647.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 210.26 647.00 Td (deflection,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 255.84 647.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 258.62 647.00 Td (structural) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 299.74 647.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 302.52 647.00 Td (number\)) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 339.75 647.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 342.53 647.00 Td (when) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 366.43 647.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 369.21 647.00 Td (using) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 393.11 647.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 395.89 647.00 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 631.50 Td (HDM-4) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 85.66 631.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 88.44 631.50 Td (rut) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 100.11 631.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 102.89 631.50 Td (model.) Tj ET
+BT /F2 11.50 Tf 0.122 0.231 0.341 rg 54.00 598.00 Td (Load a segment from a survey / FWD file) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 581.00 Td (Upload) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 85.68 581.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 88.46 581.00 Td (one) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 105.14 581.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 107.92 581.00 Td (or) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 116.81 581.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 119.59 581.00 Td (more) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 142.37 581.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 145.15 581.00 Td (.csv) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 164.61 581.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 167.39 581.00 Td (/) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 170.17 581.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 172.95 581.00 Td (.xlsx) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 195.19 581.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 197.97 581.00 Td (/) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 200.75 581.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 203.53 581.00 Td (.pdf) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 221.86 581.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 224.64 581.00 Td (files.) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 245.20 581.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 247.98 581.00 Td (RAMS:) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 564.50 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 564.50 Td (detects) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 100.24 564.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 103.02 564.50 Td (rut) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 114.69 564.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 117.47 564.50 Td (/) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 120.25 564.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 123.03 564.50 Td (roughness) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 169.72 564.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 172.50 564.50 Td (/) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 175.28 564.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 178.06 564.50 Td (cracking) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 215.29 564.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 218.07 564.50 Td (/) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 220.85 564.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 223.63 564.50 Td (pothole) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 256.43 564.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 259.21 564.50 Td (surveys) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 293.66 564.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 296.44 564.50 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 313.12 564.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 315.90 564.50 Td (**merges) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 357.02 564.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 359.80 564.50 Td (them) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 382.03 564.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 384.81 564.50 Td (by) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 549.00 Td (chainage**) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 102.36 549.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 105.14 549.00 Td (into) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 121.26 549.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 124.04 549.00 Td (one) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 140.72 549.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 143.50 549.00 Td (dataset;) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 532.50 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 532.50 Td (builds) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 94.12 532.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 96.90 532.50 Td (homogeneous) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 165.24 532.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 168.02 532.50 Td (sections) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 208.59 532.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 211.37 532.50 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 228.05 532.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 230.83 532.50 Td (shows) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 259.17 532.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 261.95 532.50 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 267.51 532.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 270.29 532.50 Td (paginated) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 314.21 532.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 316.99 532.50 Td (table;) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 517.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 517.00 Td (fills) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 82.44 517.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 85.22 517.00 Td (traffic/zone) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 134.13 517.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 136.91 517.00 Td (with) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 154.69 517.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 157.47 517.00 Td (defaults) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 192.49 517.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 195.27 517.00 Td (if) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 200.27 517.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 203.05 517.00 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 216.95 517.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 219.73 517.00 Td (survey) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 249.18 517.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 251.96 517.00 Td (doesn't) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 283.89 517.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 286.67 517.00 Td (carry) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 308.89 517.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 311.67 517.00 Td (them) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 333.90 517.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 336.68 517.00 Td (\(it) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 345.01 517.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 347.79 517.00 Td (usually) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 501.50 Td (doesn't) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 85.93 501.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 88.71 501.50 Td (—) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 98.71 501.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 101.49 501.50 Td (an) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 112.61 501.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 115.39 501.50 Td (NSV) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 135.95 501.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 138.73 501.50 Td (survey) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 168.18 501.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 170.96 501.50 Td (is) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 178.18 501.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 180.96 501.50 Td (condition-only\).) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 248.76 501.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 251.54 501.50 Td (A) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 258.21 501.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 260.99 501.50 Td (provenance) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 313.24 501.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 316.02 501.50 Td (note) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 335.48 501.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 338.26 501.50 Td (states) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 364.94 501.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 367.72 501.50 Td (exactly) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 398.84 501.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 401.62 501.50 Td (which) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 427.18 501.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 429.96 501.50 Td (columns) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 467.19 501.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 469.97 501.50 Td (came) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 494.42 501.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 497.20 501.50 Td (from) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 517.20 501.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 519.98 501.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 533.88 501.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 487.00 Td (file) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 66.78 487.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 69.56 487.00 Td (vs.) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 82.34 487.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 85.12 487.00 Td (defaults.) Tj ET
+BT /F2 11.50 Tf 0.122 0.231 0.341 rg 54.00 453.50 Td (What you get) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 436.50 Td (•) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 68.00 436.50 Td (PCI) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 84.67 436.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 87.45 436.50 Td (curve) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 114.13 436.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 116.91 436.50 Td (\(IRC:82\)) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 154.69 436.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 157.47 436.50 Td (with) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 175.25 436.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 178.03 436.50 Td (decision-band) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 240.28 436.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 243.06 436.50 Td (shading.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 421.00 Td (•) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 68.00 421.00 Td (Untreated) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 114.67 421.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 117.45 421.00 Td (vs) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 128.57 421.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 131.35 421.00 Td (managed) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 175.25 421.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 178.03 421.00 Td (trajectories) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 226.93 421.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 229.71 421.00 Td (\(the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 246.94 421.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 249.72 421.00 Td (managed) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 291.41 421.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 294.19 421.00 Td (line) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 309.75 421.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 312.53 421.00 Td (applies) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 344.21 421.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 346.99 421.00 Td (treatments) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 394.23 421.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 397.01 421.00 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 405.50 Td (resets) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 81.23 405.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 84.01 405.50 Td (condition\).) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 389.00 Td (•) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 68.00 389.00 Td (Intervention) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 125.23 389.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 128.01 389.00 Td (triggers) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 165.24 389.00 Td (,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 168.02 389.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 170.80 389.00 Td (HDM-4) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 202.46 389.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 205.24 389.00 Td (breakdowns,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 261.93 389.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 264.71 389.00 Td (skid,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 285.27 389.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 288.05 389.00 Td (potholes,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 328.63 389.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 331.41 389.00 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 348.09 389.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 350.87 389.00 Td (an) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 361.99 389.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 364.77 389.00 Td (MCI) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 373.50 Td (cross-reference) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 123.46 373.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 126.24 373.50 Td (—) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 136.24 373.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 139.02 373.50 Td (each) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 160.70 373.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 163.48 373.50 Td (in) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 171.26 373.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 174.04 373.50 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 179.60 373.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 182.38 373.50 Td (paginated) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 226.30 373.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 229.08 373.50 Td (table.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 357.00 Td (•) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 68.00 357.00 Td (Treatments) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 121.90 357.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 124.68 357.00 Td (applied) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 159.69 357.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 162.47 357.00 Td (with) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 180.25 357.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 183.03 357.00 Td (MoRTH-based) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 250.25 357.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 253.03 357.00 Td (costs) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 279.15 357.00 Td (.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 341.50 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 341.50 Td (Download) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 112.46 341.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 115.24 341.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 129.14 341.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 131.92 341.50 Td (homogeneous-section) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 230.30 341.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 233.08 341.50 Td (report) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 259.20 341.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 261.98 341.50 Td (as) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 272.54 341.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 275.32 341.50 Td (XLSX) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 301.44 341.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 304.22 341.50 Td (/) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 307.00 341.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 309.78 341.50 Td (PDF) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 329.78 341.50 Td (.) Tj ET
+BT /F2 11.50 Tf 0.122 0.231 0.341 rg 54.00 309.00 Td (How it's calculated) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 292.00 Td (•) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 68.00 292.00 Td (PCI) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 84.67 292.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 87.45 292.00 Td (from) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 107.45 292.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 110.23 292.00 Td (IRI,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 125.79 292.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 128.57 292.00 Td (rut) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 140.24 292.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 143.02 292.00 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 159.70 292.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 162.48 292.00 Td (cracking) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 199.71 292.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 202.49 292.00 Td (per) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 216.94 292.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 219.72 292.00 Td (IRC:82.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 276.50 Td (•) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 68.00 276.50 Td (Rut) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 84.66 276.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 87.44 276.50 Td (/) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 90.22 276.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 93.00 276.50 Td (cracking) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 134.13 276.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 136.91 276.50 Td (/) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 139.69 276.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 142.47 276.50 Td (roughness) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 193.59 276.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 196.37 276.50 Td (progress) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 235.27 276.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 238.05 276.50 Td (year-by-year) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 294.17 276.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 296.95 276.50 Td (using) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 320.85 276.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 323.63 276.50 Td (IRC:82) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 354.75 276.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 357.53 276.50 Td (power-law) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 261.00 Td (defaults) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 89.02 261.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 91.80 261.00 Td (or) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 100.69 261.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 103.47 261.00 Td (HDM-4) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 135.13 261.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 137.91 261.00 Td (models) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 170.14 261.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 172.92 261.00 Td (\(driven) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 203.48 261.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 206.26 261.00 Td (by) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 216.82 261.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 219.60 261.00 Td (traffic) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 244.05 261.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 246.83 261.00 Td (and,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 266.29 261.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 269.07 261.00 Td (under) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 294.64 261.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 297.42 261.00 Td (HDM-4,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 331.86 261.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 334.64 261.00 Td (FWD) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 357.41 261.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 360.19 261.00 Td (deflection) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 402.99 261.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 405.77 261.00 Td (/) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 408.55 261.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 411.33 261.00 Td (structural) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 452.45 261.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 455.23 261.00 Td (number\).) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 244.50 Td (•) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 68.00 244.50 Td (Triggers) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 108.01 244.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 110.79 244.50 Td (fire) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 124.68 244.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 127.46 244.50 Td (at) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 135.80 244.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 138.58 244.50 Td (IRC) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 155.80 244.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 158.58 244.50 Td (thresholds) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 204.71 244.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 207.49 244.50 Td (\(rut,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 225.27 244.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 228.05 244.50 Td (cracking,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 268.06 244.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 270.84 244.50 Td (IRI,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 286.40 244.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 289.18 244.50 Td (deflection,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 334.76 244.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 337.54 244.50 Td (MSA\).) Tj ET
+0.800 0.840 0.880 RG 0.50 w 54.00 229.00 m 541.00 229.00 l S
+BT /F2 15.00 Tf 0.122 0.231 0.341 rg 54.00 186.00 Td (4. Tab: Network & Budget) Tj ET
+0.122 0.231 0.341 RG 0.90 w 54.00 180.00 m 541.00 180.00 l S
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 54.00 157.00 Td (Purpose:) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 97.34 157.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 100.12 157.00 Td (allocate) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 134.58 157.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 137.36 157.00 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 142.92 157.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 145.70 157.00 Td (fixed) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 166.82 157.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 169.60 157.00 Td (annual) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 199.62 157.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 202.40 157.00 Td (budget) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 232.98 157.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 235.76 157.00 Td (across) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 265.21 157.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 267.99 157.00 Td (many) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 292.44 157.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 295.22 157.00 Td (segments) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 338.57 157.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 341.35 157.00 Td (to) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 349.69 157.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 352.47 157.00 Td (maximise) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 394.69 157.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 397.47 157.00 Td (avoided) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 432.49 157.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 435.27 157.00 Td (structural) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 476.39 157.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 479.17 157.00 Td (cost.) Tj ET
+BT /F2 11.50 Tf 0.122 0.231 0.341 rg 54.00 123.50 Td (Inputs) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 106.50 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 106.50 Td (A) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 74.67 106.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 77.45 106.50 Td (network:) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 115.24 106.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 118.02 106.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 131.92 106.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 134.70 106.50 Td (demo) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 159.71 106.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 162.49 106.50 Td (network,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 200.28 106.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 203.06 106.50 Td (an) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 214.18 106.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 216.96 106.50 Td (imported) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 255.86 106.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 258.64 106.50 Td (file,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 274.20 106.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 276.98 106.50 Td (or) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 285.87 106.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 288.65 106.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 302.55 106.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 305.33 106.50 Td (uploaded) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 349.78 106.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 352.56 106.50 Td (survey) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 384.80 106.50 Td (.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 91.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 91.00 Td (Annual) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 99.13 91.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 101.91 91.00 Td (budget) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 132.49 91.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 135.27 91.00 Td (\(Rs) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 150.82 91.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 153.60 91.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 156.38 91.00 Td (lakh\),) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 180.83 91.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 183.61 91.00 Td (unit) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 199.73 91.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 202.51 91.00 Td (cost,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 223.63 91.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 226.41 91.00 Td (horizon,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 261.98 91.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 264.76 91.00 Td (rut) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 276.43 91.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 279.21 91.00 Td (model,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 309.22 91.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 312.00 91.00 Td (design) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 341.46 91.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 344.24 91.00 Td (MSA,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 368.69 91.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 371.47 91.00 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 388.15 91.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 390.93 91.00 Td (an) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 75.50 Td (optional) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 89.02 75.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 91.80 75.50 Td (handback) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 135.16 75.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 137.94 75.50 Td (requirement) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 191.29 75.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 194.07 75.50 Td (\(residual) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 232.41 75.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 235.19 75.50 Td (MSA\).) Tj ET
+0.42 0.46 0.50 rg BT /F1 8 Tf 277.04 30.00 Td (Page 3 of 7) Tj ET
+0.80 0.84 0.88 RG 0.5 w 54.00 42.00 m 541.00 42.00 l S
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 29636 >>
+stream
+BT /F1 8.00 Tf 0.620 0.660 0.700 rg 418.74 804.00 Td (RAMS — User Guide & Handbook) Tj ET
+0.800 0.840 0.880 RG 0.50 w 54.00 799.00 m 541.00 799.00 l S
+BT /F2 11.50 Tf 0.122 0.231 0.341 rg 54.00 776.00 Td (Import / preview) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 759.00 Td (Upload) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 85.68 759.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 88.46 759.00 Td (.csv) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 107.92 759.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 110.70 759.00 Td (/) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 113.48 759.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 116.26 759.00 Td (.xlsx) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 138.50 759.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 141.28 759.00 Td (/) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 144.06 759.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 146.84 759.00 Td (.pdf) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 165.17 759.00 Td (.) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 167.95 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 170.73 759.00 Td (The) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 187.96 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 190.74 759.00 Td (preview) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 225.19 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 227.97 759.00 Td (table) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 249.65 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 252.43 759.00 Td (is) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 259.65 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 262.43 759.00 Td (paginated;) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 309.13 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 311.91 759.00 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 317.47 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 320.25 759.00 Td (note) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 339.71 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 342.49 759.00 Td (shows) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 370.83 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 373.61 759.00 Td (which) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 399.17 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 401.95 759.00 Td (columns) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 439.18 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 441.96 759.00 Td (are) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 456.41 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 459.19 759.00 Td (file-derived) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 508.09 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 510.87 759.00 Td (vs) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 520.87 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 744.50 Td (defaulted.) Tj ET
+BT /F2 11.50 Tf 0.122 0.231 0.341 rg 54.00 711.00 Td (What you get) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 694.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 694.00 Td (KPIs:) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 91.90 694.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 94.68 694.00 Td (total) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 113.58 694.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 116.36 694.00 Td (spend,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 146.38 694.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 149.16 694.00 Td (avoided) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 184.18 694.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 186.96 694.00 Td (structural) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 228.08 694.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 230.86 694.00 Td (cost,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 251.98 694.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 254.76 694.00 Td (segments) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 298.11 694.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 300.89 694.00 Td (funded) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 331.47 694.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 334.25 694.00 Td (/) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 337.03 694.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 339.81 694.00 Td (unfunded) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 385.36 694.00 Td (.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 678.50 Td (•) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 68.00 678.50 Td (Spend-by-year) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 137.46 678.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 140.24 678.50 Td (bars) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 159.69 678.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 162.47 678.50 Td (vs) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 172.47 678.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 175.25 678.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 189.15 678.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 191.93 678.50 Td (annual) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 221.95 678.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 224.73 678.50 Td (budget.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 663.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 663.00 Td (A) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 74.67 663.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 77.45 663.00 Td (paginated) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 121.37 663.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 124.15 663.00 Td (treatment) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 169.71 663.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 172.49 663.00 Td (schedule) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 215.84 663.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 218.62 663.00 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 235.30 663.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 238.08 663.00 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 243.64 663.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 246.42 663.00 Td (network) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 284.76 663.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 287.54 663.00 Td (risk) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 305.33 663.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 308.11 663.00 Td (/) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 310.89 663.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 313.67 663.00 Td (residual-life) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 369.80 663.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 372.58 663.00 Td (table.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 647.50 Td (•) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 68.00 647.50 Td (“Unfunded”) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 121.32 647.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 124.10 647.50 Td (explainer:) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 171.34 647.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 174.12 647.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 188.02 647.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 190.80 647.50 Td (recommended) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 254.71 647.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 257.49 647.50 Td (annual) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 287.51 647.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 290.29 647.50 Td (budget) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 320.87 647.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 323.65 647.50 Td (that) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 340.33 647.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 343.11 647.50 Td (would) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 369.23 647.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 372.01 647.50 Td (clear) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 393.68 647.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 396.46 647.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 632.00 Td (backlog) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 88.46 632.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 91.24 632.00 Td (\(so) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 105.13 632.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 107.91 632.00 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 121.81 632.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 124.59 632.00 Td (warning) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 159.60 632.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 162.38 632.00 Td (becomes) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 202.95 632.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 205.73 632.00 Td (an) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 216.85 632.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 219.63 632.00 Td (actionable) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 265.21 632.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 267.99 632.00 Td (number\).) Tj ET
+BT /F2 11.50 Tf 0.122 0.231 0.341 rg 54.00 598.50 Td (How it's calculated) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 581.50 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 581.50 Td (Each) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 90.79 581.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 93.57 581.50 Td (segment) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 131.92 581.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 134.70 581.50 Td (is) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 141.92 581.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 144.70 581.50 Td (forecast;) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 183.05 581.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 185.83 581.50 Td (those) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 210.29 581.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 213.07 581.50 Td (entering) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 249.20 581.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 251.98 581.50 Td (their) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 271.43 581.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 274.21 581.50 Td (preventive) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 320.34 581.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 323.12 581.50 Td (window) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 356.46 581.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 359.24 581.50 Td (become) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 566.00 Td (candidates,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 105.14 566.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 107.92 566.00 Td (ranked) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 138.49 566.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 141.27 566.00 Td (by) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 151.83 566.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 154.61 566.00 Td (exposure) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 195.74 566.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 198.52 566.00 Td (\(MSA) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 223.52 566.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 226.30 566.00 Td (×) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 232.14 566.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 234.92 566.00 Td (length\),) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 268.27 566.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 271.05 566.00 Td (deadline,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 311.63 566.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 314.41 566.00 Td (then) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 333.87 566.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 336.65 566.00 Td (cost.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 549.50 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 549.50 Td (A) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 74.67 549.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 77.45 549.50 Td (greedy) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 108.02 549.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 110.80 549.50 Td (multi-year) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 154.69 549.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 157.47 549.50 Td (allocation) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 199.71 549.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 202.49 549.50 Td (funds) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 226.95 549.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 229.73 549.50 Td (each) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 251.41 549.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 254.19 549.50 Td (candidate) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 297.55 549.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 300.33 549.50 Td (in) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 308.11 549.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 310.89 549.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 324.79 549.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 327.57 549.50 Td (first) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 343.68 549.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 346.46 549.50 Td (in-window) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 390.91 549.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 393.69 549.50 Td (year) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 534.00 Td (with) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 71.78 534.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 74.56 534.00 Td (budget) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 105.14 534.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 107.92 534.00 Td (left;) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 124.04 534.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 126.82 534.00 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 140.72 534.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 143.50 534.00 Td (rest) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 160.17 534.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 162.95 534.00 Td (are) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 177.40 534.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 180.18 534.00 Td (unfunded) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 225.73 534.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 228.51 534.00 Td (\(they) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 250.74 534.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 253.52 534.00 Td (fall) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 266.30 534.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 269.08 534.00 Td (to) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 277.42 534.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 280.20 534.00 Td (costlier) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 311.87 534.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 314.65 534.00 Td (structural) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 355.77 534.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 358.55 534.00 Td (repair) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 384.11 534.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 386.89 534.00 Td (later\).) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 517.50 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 517.50 Td (The) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 85.23 517.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 88.01 517.50 Td (recommended) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 151.92 517.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 154.70 517.50 Td (budget) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 185.28 517.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 188.06 517.50 Td (is) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 195.28 517.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 198.06 517.50 Td (found) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 223.08 517.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 225.86 517.50 Td (by) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 236.42 517.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 239.20 517.50 Td (binary-searching) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 313.11 517.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 315.89 517.50 Td (for) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 327.56 517.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 330.34 517.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 344.24 517.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 347.02 517.50 Td (smallest) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 383.69 517.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 386.47 517.50 Td (annual) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 502.00 Td (budget) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 84.58 502.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 87.36 502.00 Td (that) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 104.04 502.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 106.82 502.00 Td (leaves) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 135.72 502.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 138.50 502.00 Td (zero) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 157.95 502.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 160.73 502.00 Td (unfunded.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 485.50 Td (•) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 68.00 485.50 Td (Residual) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 109.68 485.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 112.46 485.50 Td (life) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 126.91 485.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 129.69 485.50 Td (=) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 135.53 485.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 138.31 485.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 152.21 485.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 154.99 485.50 Td (governing) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 198.90 485.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 201.68 485.50 Td (minimum) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 242.23 485.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 245.01 485.50 Td (of) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 253.35 485.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 256.13 485.50 Td (IRC:81) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 287.25 485.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 290.03 485.50 Td (deflection) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 332.83 485.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 335.61 485.50 Td (capacity) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 372.29 485.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 375.07 485.50 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 391.75 485.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 394.53 485.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 470.00 Td (IRC:37) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 85.12 470.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 87.90 470.00 Td (traffic) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 112.35 470.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 115.13 470.00 Td (budget.) Tj ET
+0.800 0.840 0.880 RG 0.50 w 54.00 453.50 m 541.00 453.50 l S
+BT /F2 15.00 Tf 0.122 0.231 0.341 rg 54.00 410.50 Td (5. Tab: Calibrate & Residual Life) Tj ET
+0.122 0.231 0.341 RG 0.90 w 54.00 404.50 m 541.00 404.50 l S
+BT /F2 11.50 Tf 0.122 0.231 0.341 rg 54.00 368.50 Td (5a. Calibrate a deterioration model) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 54.00 347.50 Td (Purpose:) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 97.34 347.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 100.12 347.50 Td (fit) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 107.90 347.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 110.68 347.50 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 116.24 347.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 119.02 347.50 Td (deterioration) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 174.60 347.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 177.38 347.50 Td (model's) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 211.52 347.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 214.30 347.50 Td (coefficients) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 264.32 347.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 267.10 347.50 Td (to) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 275.44 347.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 278.22 347.50 Td (*your*) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 305.45 347.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 308.23 347.50 Td (field) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 326.57 347.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 329.35 347.50 Td (data) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 348.81 347.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 351.59 347.50 Td (by) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 362.15 347.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 364.93 347.50 Td (OLS) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 384.94 347.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 387.72 347.50 Td (regression,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 437.18 347.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 439.96 347.50 Td (so) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 450.52 347.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 453.30 347.50 Td (forecasts) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 493.87 347.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 496.65 347.50 Td (match) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 523.88 347.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 333.00 Td (local) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 74.56 333.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 77.34 333.00 Td (behaviour.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 54.00 312.50 Td (Pick) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 74.57 312.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 77.35 312.50 Td (the) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 92.35 312.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 95.13 312.50 Td (model,) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 127.36 312.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 130.14 312.50 Td (then) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 151.25 312.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 154.03 312.50 Td (paste) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 180.15 312.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 182.93 312.50 Td (or) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 192.93 312.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 195.71 312.50 Td (upload) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 228.49 312.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 231.27 312.50 Td (observations) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 293.51 312.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 296.29 312.50 Td (\(.csv) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 319.08 312.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 321.86 312.50 Td (/) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 324.64 312.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 327.42 312.50 Td (.xlsx) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 349.66 312.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 352.44 312.50 Td (/) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 355.22 312.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 358.00 312.50 Td (.pdf\).) Tj ET
+0.800 0.840 0.880 RG 0.40 w 54.00 296.00 m 541.00 296.00 l S
+0.122 0.231 0.341 rg 54.00 274.00 487.00 22.00 re f
+BT /F2 9.00 Tf 1.000 1.000 1.000 rg 59.00 282.00 Td (Model) Tj ET
+BT /F2 9.00 Tf 1.000 1.000 1.000 rg 125.61 282.00 Td (Required columns) Tj ET
+BT /F2 9.00 Tf 1.000 1.000 1.000 rg 252.70 282.00 Td (Optional \(defaulted\)) Tj ET
+0.800 0.840 0.880 RG 0.40 w 54.00 274.00 m 541.00 274.00 l S
+0.800 0.840 0.880 RG 0.40 w 54.00 296.00 m 54.00 274.00 l S
+0.800 0.840 0.880 RG 0.40 w 120.61 296.00 m 120.61 274.00 l S
+0.800 0.840 0.880 RG 0.40 w 247.70 296.00 m 247.70 274.00 l S
+0.800 0.840 0.880 RG 0.40 w 541.00 296.00 m 541.00 274.00 l S
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 260.00 Td (Rutting) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 248.00 Td (\(Krid/Krst/Krpd\)) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 125.61 260.00 Td (`measured_rut_increment_mm`,) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 125.61 248.00 Td (`ye4`, `age`) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 252.70 260.00 Td (`deflection_mm`, `structural_number`, `compaction_pct`, `cds`,) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 252.70 248.00 Td (`heavy_speed_kmh`, `surfacing_thickness_mm`) Tj ET
+0.800 0.840 0.880 RG 0.40 w 54.00 240.00 m 541.00 240.00 l S
+0.800 0.840 0.880 RG 0.40 w 54.00 274.00 m 54.00 240.00 l S
+0.800 0.840 0.880 RG 0.40 w 120.61 274.00 m 120.61 240.00 l S
+0.800 0.840 0.880 RG 0.40 w 247.70 274.00 m 247.70 240.00 l S
+0.800 0.840 0.880 RG 0.40 w 541.00 274.00 m 541.00 240.00 l S
+0.945 0.960 0.975 rg 54.00 206.00 487.00 34.00 re f
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 226.00 Td (Cracking) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 214.00 Td (\(MLIT a,b\)) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 125.61 226.00 Td (`crack_prev`, `crack_next`) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 252.70 226.00 Td (—) Tj ET
+0.800 0.840 0.880 RG 0.40 w 54.00 206.00 m 541.00 206.00 l S
+0.800 0.840 0.880 RG 0.40 w 54.00 240.00 m 54.00 206.00 l S
+0.800 0.840 0.880 RG 0.40 w 120.61 240.00 m 120.61 206.00 l S
+0.800 0.840 0.880 RG 0.40 w 247.70 240.00 m 247.70 206.00 l S
+0.800 0.840 0.880 RG 0.40 w 541.00 240.00 m 541.00 206.00 l S
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 192.00 Td (Roughness) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 180.00 Td (\(HDM-4\)) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 125.61 192.00 Td (`measured_iri_increment`,) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 125.61 180.00 Td (`iri`, `age`) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 252.70 192.00 Td (`structural_number`, `d_msa`, `d_crack_pct`, `d_rut_mm`) Tj ET
+0.800 0.840 0.880 RG 0.40 w 54.00 172.00 m 541.00 172.00 l S
+0.800 0.840 0.880 RG 0.40 w 54.00 206.00 m 54.00 172.00 l S
+0.800 0.840 0.880 RG 0.40 w 120.61 206.00 m 120.61 172.00 l S
+0.800 0.840 0.880 RG 0.40 w 247.70 206.00 m 247.70 172.00 l S
+0.800 0.840 0.880 RG 0.40 w 541.00 206.00 m 541.00 172.00 l S
+0.945 0.960 0.975 rg 54.00 138.00 487.00 34.00 re f
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 158.00 Td (Skid) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 146.00 Td (\(decay_k\)) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 125.61 158.00 Td (`measured_sfc_decrement`,) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 125.61 146.00 Td (`sfc`) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 252.70 158.00 Td (`d_msa`) Tj ET
+0.800 0.840 0.880 RG 0.40 w 54.00 138.00 m 541.00 138.00 l S
+0.800 0.840 0.880 RG 0.40 w 54.00 172.00 m 54.00 138.00 l S
+0.800 0.840 0.880 RG 0.40 w 120.61 172.00 m 120.61 138.00 l S
+0.800 0.840 0.880 RG 0.40 w 247.70 172.00 m 247.70 138.00 l S
+0.800 0.840 0.880 RG 0.40 w 541.00 172.00 m 541.00 138.00 l S
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 124.00 Td (Potholes) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 112.00 Td (\(rate\)) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 125.61 124.00 Td (`measured_pothole_increment`,) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 125.61 112.00 Td (`cracking_pct`) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 252.70 124.00 Td (`d_msa`) Tj ET
+0.800 0.840 0.880 RG 0.40 w 54.00 104.00 m 541.00 104.00 l S
+0.800 0.840 0.880 RG 0.40 w 54.00 138.00 m 54.00 104.00 l S
+0.800 0.840 0.880 RG 0.40 w 120.61 138.00 m 120.61 104.00 l S
+0.800 0.840 0.880 RG 0.40 w 247.70 138.00 m 247.70 104.00 l S
+0.800 0.840 0.880 RG 0.40 w 541.00 138.00 m 541.00 104.00 l S
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 84.00 Td (•) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 68.00 84.00 Td (Column) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 105.22 84.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 108.00 84.00 Td (aliases) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 141.36 84.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 144.14 84.00 Td (are) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 158.59 84.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 161.37 84.00 Td (recognised) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 210.28 84.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 213.06 84.00 Td (\(e.g.) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 233.07 84.00 Td ( ) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 235.85 84.00 Td (Rut) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 253.85 84.00 Td ( ) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 259.85 84.00 Td (Increment) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 313.85 84.00 Td ( ) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 319.85 84.00 Td (mm) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 331.85 84.00 Td (,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 334.63 84.00 Td ( ) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 337.41 84.00 Td (ESA) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 355.41 84.00 Td ( ) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 361.41 84.00 Td (MSA) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 379.41 84.00 Td (->) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 388.58 84.00 Td (ye4) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 406.58 84.00 Td (,) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 54.00 68.50 Td (SNP) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 72.00 68.50 Td (->) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 81.17 68.50 Td (structural_number) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 183.17 68.50 Td (,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 185.95 68.50 Td ( ) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 188.73 68.50 Td (crack_t0/crack_t1) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 290.73 68.50 Td (\).) Tj ET
+0.42 0.46 0.50 rg BT /F1 8 Tf 277.04 30.00 Td (Page 4 of 7) Tj ET
+0.80 0.84 0.88 RG 0.5 w 54.00 42.00 m 541.00 42.00 l S
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> /Contents 13 0 R >>
+endobj
+15 0 obj
+<< /Length 49221 >>
+stream
+BT /F1 8.00 Tf 0.620 0.660 0.700 rg 418.74 804.00 Td (RAMS — User Guide & Handbook) Tj ET
+0.800 0.840 0.880 RG 0.50 w 54.00 799.00 m 541.00 799.00 l S
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 778.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 778.00 Td (Each) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 90.79 778.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 93.57 778.00 Td (model) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 120.80 778.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 123.58 778.00 Td (only) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 141.92 778.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 144.70 778.00 Td (consumes) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 190.27 778.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 193.05 778.00 Td (rows) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 214.16 778.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 216.94 778.00 Td (\(from) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 240.27 778.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 243.05 778.00 Td (any) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 259.17 778.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 261.95 778.00 Td (sheet\)) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 289.74 778.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 292.52 778.00 Td (that) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 309.20 778.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 311.98 778.00 Td (carry) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 334.20 778.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 336.98 778.00 Td (its) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 346.98 778.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 349.76 778.00 Td (target) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 375.33 778.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 378.11 778.00 Td (column;) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 762.50 Td (bad) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 70.68 762.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 73.46 762.50 Td (rows) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 94.57 762.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 97.35 762.50 Td (are) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 111.80 762.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 114.58 762.50 Td (skipped,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 151.82 762.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 154.60 762.50 Td (not) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 168.50 762.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 171.28 762.50 Td (fatal.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 70.00 738.00 Td (Important) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 116.11 738.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 118.89 738.00 Td (—) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 128.89 738.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 131.67 738.00 Td (calibration) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 182.24 738.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 185.02 738.00 Td (needs) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 213.92 738.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 216.70 738.00 Td (*change) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 255.60 738.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 258.38 738.00 Td (over) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 279.50 738.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 282.28 738.00 Td (time.) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 305.62 738.00 Td (*) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 309.51 738.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 312.29 738.00 Td (Calibration) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 360.08 738.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 362.86 738.00 Td (fits) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 375.64 738.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 378.42 738.00 Td (a) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 383.98 738.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 386.76 738.00 Td (deterioration) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 442.34 738.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 445.12 738.00 Td (rate) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 463.46 738.00 Td (,) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 466.24 738.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 469.02 738.00 Td (so) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 479.58 738.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 482.36 738.00 Td (it) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 487.36 738.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 490.14 738.00 Td (requires) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 526.26 738.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 70.00 723.50 Td (either) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 95.01 723.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 97.79 723.50 Td (repeat) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 126.14 723.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 128.92 723.50 Td (surveys) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 163.37 723.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 166.15 723.50 Td (of) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 174.49 723.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 177.27 723.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 191.17 723.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 193.95 723.50 Td (same) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 218.40 723.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 221.18 723.50 Td (segment) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 259.53 723.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 262.31 723.50 Td (\(year-on-year) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 322.32 723.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 325.10 723.50 Td (increments\)) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 377.33 723.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 380.11 723.50 Td (or) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 389.00 723.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 391.78 723.50 Td (per-segment) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 447.91 723.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 450.69 723.50 Td (age) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 467.37 723.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 470.15 723.50 Td (+) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 475.99 723.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 478.77 723.50 Td (traffic.) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 506.00 723.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 508.78 723.50 Td (A) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 515.45 723.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 70.00 709.00 Td (single) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 96.12 709.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 98.90 709.00 Td (NSV) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 119.46 709.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 122.24 709.00 Td (condition) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 162.26 709.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 165.04 709.00 Td (snapshot) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 205.62 709.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 208.40 709.00 Td (only) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 226.74 709.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 229.52 709.00 Td (has) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 245.64 709.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 248.42 709.00 Td (current) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 279.54 709.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 282.32 709.00 Td (condition) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 322.34 709.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 325.12 709.00 Td (—) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 335.12 709.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 337.90 709.00 Td (RAMS) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 366.79 709.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 369.57 709.00 Td (detects) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 401.81 709.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 404.59 709.00 Td (this) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 420.15 709.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 422.93 709.00 Td (and) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 439.61 709.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 442.39 709.00 Td (tells) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 460.17 709.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 462.95 709.00 Td (you) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 479.07 709.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 481.85 709.00 Td (to) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 490.19 709.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 492.97 709.00 Td (use) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 509.09 709.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 511.87 709.00 Td (that) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 528.55 709.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 70.00 694.50 Td (file) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 82.78 694.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 85.56 694.50 Td (in) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 93.34 694.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 96.12 694.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 110.02 694.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 112.80 694.50 Td (Forecast) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 151.70 694.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 154.48 694.50 Td (/) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 157.26 694.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 160.04 694.50 Td (Sections) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 198.39 694.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 201.17 694.50 Td (/) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 203.95 694.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 206.73 694.50 Td (Network) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 243.40 694.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 246.18 694.50 Td (/) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 248.96 694.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 251.74 694.50 Td (LCA) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 271.19 694.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 273.97 694.50 Td (tabs) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 292.87 694.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.200 0.240 0.280 rg 295.65 694.50 Td (instead.) Tj ET
+0.122 0.231 0.341 rg 54.00 692.00 3.00 56.00 re f
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 54.00 672.00 Td (How) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 75.11 672.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 77.89 672.00 Td (it's) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 91.94 672.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 94.72 672.00 Td (calculated:) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 146.96 672.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 149.74 672.00 Td (ordinary) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 185.86 672.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 188.64 672.00 Td (least) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 209.76 672.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 212.54 672.00 Td (squares) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 248.11 672.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 250.89 672.00 Td (on) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 262.01 672.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 264.79 672.00 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 278.69 672.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 281.47 672.00 Td (model's) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 315.61 672.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 318.39 672.00 Td (linear) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 342.84 672.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 345.62 672.00 Td (form,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 368.40 672.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 371.18 672.00 Td (with) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 388.96 672.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 391.74 672.00 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 397.30 672.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 400.08 672.00 Td (non-negativity) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 462.33 672.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 465.11 672.00 Td (refit) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 481.78 672.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 484.56 672.00 Td (\(coefficients) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 537.91 672.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 657.50 Td (that) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 70.68 657.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 73.46 657.50 Td (come) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 97.91 657.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 100.69 657.50 Td (out) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 114.59 657.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 117.37 657.50 Td (negative) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 155.17 657.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 157.95 657.50 Td (are) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 172.40 657.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 175.18 657.50 Td (pinned) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 205.20 657.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 207.98 657.50 Td (to) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 216.32 657.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 219.10 657.50 Td (zero) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 238.55 657.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 241.33 657.50 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 258.01 657.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 260.79 657.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 274.69 657.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 277.47 657.50 Td (rest) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 294.14 657.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 296.92 657.50 Td (re-fit\).) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 323.03 657.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 325.81 657.50 Td (Reports) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 360.82 657.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 363.60 657.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 377.50 657.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 380.28 657.50 Td (coefficients,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 433.08 657.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 435.86 657.50 Td (R²,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 449.19 657.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 451.97 657.50 Td (RMSE) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 480.86 657.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 483.64 657.50 Td (before/after,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 537.56 657.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 643.00 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 70.68 643.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 73.46 643.00 Td (rows) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 94.57 643.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 97.35 643.00 Td (used.) Tj ET
+BT /F2 11.50 Tf 0.122 0.231 0.341 rg 54.00 609.50 Td (5b. Residual life) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 592.50 Td (Enter) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 77.90 592.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 80.68 592.50 Td (FWD) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 103.45 592.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 106.23 592.50 Td (deflection,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 151.81 592.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 154.59 592.50 Td (traffic) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 179.04 592.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 181.82 592.50 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 198.50 592.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 201.28 592.50 Td (\(optionally\)) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 250.18 592.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 252.96 592.50 Td (design) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 282.42 592.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 285.20 592.50 Td (MSA) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 306.87 592.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 309.65 592.50 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 326.33 592.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 329.11 592.50 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 334.67 592.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 337.45 592.50 Td (required) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 374.13 592.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 376.91 592.50 Td (residual) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 411.92 592.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 414.70 592.50 Td (MSA.) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 439.15 592.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 441.93 592.50 Td (Returns) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 476.94 592.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 479.72 592.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 493.62 592.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 496.40 592.50 Td (IRC:81) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 528.07 592.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 54.00 578.00 Td (deflection) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 101.23 578.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 104.01 578.00 Td (capacity) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 144.03 578.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 146.81 578.00 Td (vs) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 157.93 578.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 160.71 578.00 Td (IRC:37) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 192.38 578.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 195.16 578.00 Td (traffic) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 222.94 578.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 225.72 578.00 Td (budget) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 259.05 578.00 Td (,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 261.83 578.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 264.61 578.00 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 278.51 578.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 281.29 578.00 Td (governing) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 325.20 578.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 327.98 578.00 Td (minimum,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 371.31 578.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 374.09 578.00 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 390.77 578.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 393.55 578.00 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 399.11 578.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 401.89 578.00 Td (HAM) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 424.66 578.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 427.44 578.00 Td (handback) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 474.12 578.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 476.90 578.00 Td (verdict) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 509.69 578.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 563.50 Td (\(PASS) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 84.01 563.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 86.79 563.50 Td (/) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 89.57 563.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 92.35 563.50 Td (MARGINAL) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 144.58 563.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 147.36 563.50 Td (/) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 150.14 563.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 152.92 563.50 Td (FAIL\)) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 177.37 563.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 180.15 563.50 Td (with) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 197.93 563.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 200.71 563.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 214.61 563.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 217.39 563.50 Td (overlay) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 249.62 563.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 252.40 563.50 Td (deflection) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 295.20 563.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 297.98 563.50 Td (target) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 323.55 563.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 326.33 563.50 Td (needed) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 359.69 563.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 362.47 563.50 Td (to) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 370.81 563.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 373.59 563.50 Td (pass.) Tj ET
+0.800 0.840 0.880 RG 0.50 w 54.00 547.00 m 541.00 547.00 l S
+BT /F2 15.00 Tf 0.122 0.231 0.341 rg 54.00 504.00 Td (6. Tab: Design & PBMC) Tj ET
+0.122 0.231 0.341 RG 0.90 w 54.00 498.00 m 541.00 498.00 l S
+BT /F2 11.50 Tf 0.122 0.231 0.341 rg 54.00 462.00 Td (6.1 IRC:37 pavement design \(CBR -> layer thicknesses\)) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 54.00 445.00 Td (Inputs:) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 87.33 445.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 90.11 445.00 Td (subgrade) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 131.80 445.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 134.58 445.00 Td (CBR,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 158.47 445.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 161.25 445.00 Td (design) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 190.71 445.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 193.49 445.00 Td (traffic) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 217.94 445.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 220.72 445.00 Td (\(design) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 253.51 445.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 256.29 445.00 Td (MSA) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 277.96 445.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 280.74 445.00 Td (directly,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 315.19 445.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 317.97 445.00 Td (or) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 326.86 445.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 329.64 445.00 Td (CVPD) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 357.42 445.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 360.20 445.00 Td (×) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 366.04 445.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 368.82 445.00 Td (VDF) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 388.82 445.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 391.60 445.00 Td (->) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 400.77 445.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 403.55 445.00 Td (MSA) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 425.22 445.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 428.00 445.00 Td (via) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 440.78 445.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 443.56 445.00 Td (IRC:37\),) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 480.79 445.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 483.57 445.00 Td (design) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 513.03 445.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 515.81 445.00 Td (life,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 531.37 445.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 430.50 Td (carriageway,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 110.68 430.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 113.46 430.50 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 130.14 430.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 132.92 430.50 Td (method) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 166.27 430.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 169.05 430.50 Td (\() Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 172.38 430.50 Td (Catalogue) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 220.72 430.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 223.50 430.50 Td (or) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 232.39 430.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 235.17 430.50 Td (IITPAVE) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 274.07 430.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 276.85 430.50 Td (mechanistic) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 334.65 430.50 Td (\).) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 54.00 410.00 Td (Outputs:) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 95.66 410.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 98.44 410.00 Td (BC) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 112.33 410.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 115.11 410.00 Td (/) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 117.89 410.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 120.67 410.00 Td (DBM) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 142.89 410.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 145.67 410.00 Td (/) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 148.45 410.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 151.23 410.00 Td (WMM) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 177.33 410.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 180.11 410.00 Td (/) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 182.89 410.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 185.67 410.00 Td (GSB) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 206.79 410.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 209.57 410.00 Td (thicknesses,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 264.59 410.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 267.37 410.00 Td (subgrade) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 309.06 410.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 311.84 410.00 Td (modulus,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 352.41 410.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 355.19 410.00 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 360.75 410.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 363.53 410.00 Td (to-scale) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 401.32 410.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 404.10 410.00 Td (cross-section) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 469.12 410.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 471.90 410.00 Td (diagram) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 510.80 410.00 Td (,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 513.58 410.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 516.36 410.00 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 533.04 410.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 395.50 Td (\(mechanistic) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 110.12 395.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 112.90 395.50 Td (method\)) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 149.58 395.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 152.36 395.50 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 157.92 395.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 160.70 395.50 Td (fatigue/rutting) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 221.29 395.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 224.07 395.50 Td (strain) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 248.52 395.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 251.30 395.50 Td (check.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 54.00 375.00 Td (How) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 75.11 375.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 77.89 375.00 Td (it's) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 91.94 375.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 94.72 375.00 Td (calculated:) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 358.50 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 358.50 Td (*Catalogue*) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 121.36 358.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 124.14 358.50 Td (—) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 134.14 358.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 136.92 358.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 150.82 358.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 153.60 358.50 Td (IRC:37-2018) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 210.29 358.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 213.07 358.50 Td (design) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 242.53 358.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 245.31 358.50 Td (catalogue) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 288.67 358.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 291.45 358.50 Td (section) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 323.13 358.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 325.91 358.50 Td (for) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 337.58 358.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 340.36 358.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 354.26 358.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 357.04 358.50 Td (CBR) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 378.15 358.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 380.93 358.50 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 397.61 358.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 400.39 358.50 Td (traffic.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 343.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 343.00 Td (*Mechanistic*) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 128.57 343.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 131.35 343.00 Td (—) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 141.35 343.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 144.13 343.00 Td (sizes) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 166.91 343.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 169.69 343.00 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 183.59 343.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 186.37 343.00 Td (least-cost) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 233.05 343.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 235.83 343.00 Td (section) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 267.51 343.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 270.29 343.00 Td (whose) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 299.19 343.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 301.97 343.00 Td (Odemark–Boussinesq) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 327.50 Td (fatigue) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 84.02 327.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 86.80 327.50 Td (\(eps_t) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 114.59 327.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 117.37 327.50 Td (at) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 125.71 327.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 128.49 327.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 142.39 327.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 145.17 327.50 Td (bottom) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 175.74 327.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 178.52 327.50 Td (of) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 186.86 327.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 189.64 327.50 Td (bituminous\)) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 241.32 327.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 244.10 327.50 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 260.78 327.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 263.56 327.50 Td (rutting) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 291.35 327.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 294.13 327.50 Td (\(eps_v) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 324.14 327.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 326.92 327.50 Td (at) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 335.26 327.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 338.04 327.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 351.94 327.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 354.72 327.50 Td (subgrade) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 396.41 327.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 399.19 327.50 Td (top\)) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 416.42 327.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 419.20 327.50 Td (strains) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 448.65 327.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 451.43 327.50 Td (both) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 470.89 327.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 473.67 327.50 Td (satisfy) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 502.01 327.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 504.79 327.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 518.69 327.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 313.00 Td (design) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 83.46 313.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 86.24 313.00 Td (traffic,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 113.47 313.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 116.25 313.00 Td (calibrated) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 159.60 313.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 162.38 313.00 Td (to) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 170.72 313.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 173.50 313.00 Td (IITPAVE.) Tj ET
+BT /F2 11.50 Tf 0.122 0.231 0.341 rg 54.00 279.50 Td (6.2 IITPAVE section check) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 262.50 Td (Enter) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 77.90 262.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 80.68 262.50 Td (layer) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 102.35 262.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 105.13 262.50 Td (moduli) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 134.58 262.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 137.36 262.50 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 154.04 262.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 156.82 262.50 Td (thicknesses) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 209.06 262.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 211.84 262.50 Td (->) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 221.01 262.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 223.79 262.50 Td (tensile/vertical) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 287.14 262.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 289.92 262.50 Td (strains) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 319.37 262.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 322.15 262.50 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 338.83 262.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 341.61 262.50 Td (fatigue/rutting) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 402.20 262.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 404.98 262.50 Td (life) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 417.76 262.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 420.54 262.50 Td (\(IRC:37) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 454.99 262.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 457.77 262.50 Td (or) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 466.66 262.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 469.44 262.50 Td (IRC:115) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 506.12 262.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 248.00 Td (standard\).) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 99.02 248.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 101.80 248.00 Td (Used) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 125.14 248.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 127.92 248.00 Td (to) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 136.26 248.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 139.04 248.00 Td (confirm) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 171.82 248.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 174.60 248.00 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 180.16 248.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 182.94 248.00 Td (design) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 212.40 248.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 215.18 248.00 Td (or) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 224.07 248.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 226.85 248.00 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 232.41 248.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 235.19 248.00 Td (back-calculated) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 304.66 248.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 307.44 248.00 Td (section.) Tj ET
+BT /F2 11.50 Tf 0.122 0.231 0.341 rg 54.00 214.50 Td (6.3 FWD remaining-life & overlay) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 54.00 197.50 Td (Purpose:) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 97.34 197.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 100.12 197.50 Td (from) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 120.12 197.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 122.90 197.50 Td (an) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 134.02 197.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 136.80 197.50 Td (FWD) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 159.57 197.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 162.35 197.50 Td (report's) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 195.38 197.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 198.16 197.50 Td (homogeneous) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 261.53 197.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 264.31 197.50 Td (sub-sections,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 323.22 197.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 326.00 197.50 Td (compute) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 364.35 197.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 367.13 197.50 Td (remaining) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 411.03 197.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 413.81 197.50 Td (life) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 426.59 197.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 429.37 197.50 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 446.05 197.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 448.83 197.50 Td (flag) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 464.95 197.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 467.73 197.50 Td (overlays.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 177.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 177.00 Td (Paste) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 93.57 177.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 96.35 177.00 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 110.25 177.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 113.03 177.00 Td (sections,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 152.49 177.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 155.27 177.00 Td (or) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 164.16 177.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 166.94 177.00 Td (upload) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 196.96 177.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 199.74 177.00 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 213.64 177.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 216.42 177.00 Td (report) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 242.54 177.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 245.32 177.00 Td (\() Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 248.65 177.00 Td (.csv) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 268.11 177.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 270.89 177.00 Td (/) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 273.67 177.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 276.45 177.00 Td (.xlsx) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 298.69 177.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 301.47 177.00 Td (/) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 304.25 177.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 307.03 177.00 Td (.pdf) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 325.36 177.00 Td (\).) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 161.50 Td (•) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 68.00 161.50 Td (Columns:) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 114.11 161.50 Td ( ) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 116.89 161.50 Td (section_id) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 176.89 161.50 Td (,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 179.67 161.50 Td ( ) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 182.45 161.50 Td (e_bituminous) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 254.45 161.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 257.23 161.50 Td (\() Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 260.56 161.50 Td (required) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 300.57 161.50 Td (\),) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 306.68 161.50 Td ( ) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 309.46 161.50 Td (e_granular) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 369.46 161.50 Td (,) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 54.00 146.00 Td (e_subgrade) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 114.00 146.00 Td (,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 116.78 146.00 Td ( ) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 119.56 146.00 Td (h_bituminous) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 191.56 146.00 Td (,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 194.34 146.00 Td ( ) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 197.12 146.00 Td (h_granular) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 257.12 146.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 259.90 146.00 Td (\(optional) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 298.25 146.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 301.03 146.00 Td (—) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 311.03 146.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 313.81 146.00 Td (default) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 346.59 146.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 349.37 146.00 Td (if) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 355.48 146.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 358.26 146.00 Td (absent) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 390.49 146.00 Td (\),) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 396.60 146.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 399.38 146.00 Td (plus) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 417.72 146.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 420.50 146.00 Td (optional) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 455.52 146.00 Td ( ) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 54.00 131.50 Td (chainage_from/to) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 150.00 131.50 Td (.) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 152.78 131.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 155.56 131.50 Td (Aliases) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 187.79 131.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 190.57 131.50 Td (like) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 205.57 131.50 Td ( ) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 208.35 131.50 Td (E_BC) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 232.35 131.50 Td (,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 235.13 131.50 Td ( ) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 237.91 131.50 Td (E_base) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 273.91 131.50 Td (,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 276.69 131.50 Td ( ) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 279.47 131.50 Td (E_sg) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 303.47 131.50 Td (,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 306.25 131.50 Td ( ) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 309.03 131.50 Td (H_BC) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 333.03 131.50 Td (,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 335.81 131.50 Td ( ) Tj ET
+BT /F4 10.00 Tf 0.130 0.160 0.190 rg 338.59 131.50 Td (H_base) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 374.59 131.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 377.37 131.50 Td (are) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 391.82 131.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 394.60 131.50 Td (recognised.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 115.00 Td (•) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 68.00 115.00 Td (How) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 89.11 115.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 91.89 115.00 Td (it's) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 105.94 115.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 108.72 115.00 Td (calculated:) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 160.96 115.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 163.74 115.00 Td (Odemark–Boussinesq) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 262.11 115.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 264.89 115.00 Td (strains) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 294.34 115.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 297.12 115.00 Td (->) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 306.29 115.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 309.07 115.00 Td (IRC:115-2014) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 371.32 115.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 374.10 115.00 Td (remaining) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 99.50 Td (fatigue/rutting) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 114.59 99.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 117.37 99.50 Td (life;) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 132.93 99.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 135.71 99.50 Td (sections) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 172.39 99.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 175.17 99.50 Td (below) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 201.29 99.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 204.07 99.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 217.97 99.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 220.75 99.50 Td (design) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 250.21 99.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 252.99 99.50 Td (traffic) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 277.44 99.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 280.22 99.50 Td (need) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 302.46 99.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 305.24 99.50 Td (an) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 316.36 99.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 319.14 99.50 Td (overlay,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 354.15 99.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 356.93 99.50 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 373.61 99.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 376.39 99.50 Td (those) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 400.85 99.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 403.63 99.50 Td (within) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 429.19 99.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 431.97 99.50 Td (15%) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 451.98 99.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 454.76 99.50 Td (of) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 463.10 99.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 465.88 99.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 479.78 99.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 482.56 99.50 Td (threshold) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 523.69 99.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 526.47 99.50 Td (are) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 540.92 99.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 85.00 Td (marked) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 87.34 85.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 90.12 85.00 Td (*confirm) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 126.79 85.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 129.57 85.00 Td (with) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 147.35 85.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 150.13 85.00 Td (IITPAVE*) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 192.37 85.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 195.15 85.00 Td (\(screening-grade,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 273.51 85.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 276.29 85.00 Td (~±10%) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 307.98 85.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 310.76 85.00 Td (of) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 319.10 85.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 321.88 85.00 Td (full) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 334.66 85.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 337.44 85.00 Td (IITPAVE\).) Tj ET
+0.42 0.46 0.50 rg BT /F1 8 Tf 277.04 30.00 Td (Page 5 of 7) Tj ET
+0.80 0.84 0.88 RG 0.5 w 54.00 42.00 m 541.00 42.00 l S
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> /Contents 15 0 R >>
+endobj
+17 0 obj
+<< /Length 40949 >>
+stream
+BT /F1 8.00 Tf 0.620 0.660 0.700 rg 418.74 804.00 Td (RAMS — User Guide & Handbook) Tj ET
+0.800 0.840 0.880 RG 0.50 w 54.00 799.00 m 541.00 799.00 l S
+BT /F2 11.50 Tf 0.122 0.231 0.341 rg 54.00 776.00 Td (6.4 PBMC estimate \(5–7 yr\)) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 759.00 Td (Prices) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 81.78 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 84.56 759.00 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 90.12 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 92.90 759.00 Td (Performance-Based) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 181.82 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 184.60 759.00 Td (Maintenance) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 241.85 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 244.63 759.00 Td (Contract) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 282.42 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 285.20 759.00 Td (to) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 293.54 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 296.32 759.00 Td (hold) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 315.22 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 318.00 759.00 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 323.56 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 326.34 759.00 Td (service) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 358.01 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 360.79 759.00 Td (level.) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 384.13 759.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 386.91 759.00 Td (Inputs:) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 420.24 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 423.02 759.00 Td (term,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 445.80 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 448.58 759.00 Td (performance) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 504.71 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 507.49 759.00 Td (PCI,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 526.94 759.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 744.50 Td (routine) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 84.57 744.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 87.35 744.50 Td (rate,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 107.36 744.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 110.14 744.50 Td (escalation,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 157.94 744.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 160.72 744.50 Td (contingency,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 216.86 744.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 219.64 744.50 Td (overhead,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 264.11 744.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 266.89 744.50 Td (discount) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 304.13 744.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 306.91 744.50 Td (rate) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 324.14 744.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 326.92 744.50 Td (\(and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 346.93 744.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 349.71 744.50 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 355.27 744.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 358.05 744.50 Td (segment) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 396.40 744.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 399.18 744.50 Td (or) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 408.07 744.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 410.85 744.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 424.75 744.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 427.53 744.50 Td (uploaded) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 468.67 744.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 471.45 744.50 Td (survey\).) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 507.01 744.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 54.00 730.00 Td (Outputs:) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 95.66 730.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 98.44 730.00 Td (per-year) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 135.67 730.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 138.45 730.00 Td (cash) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 159.57 730.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 162.35 730.00 Td (flow) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 180.13 730.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 182.91 730.00 Td (\(routine) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 216.81 730.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 219.59 730.00 Td (+) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 225.43 730.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 228.21 730.00 Td (periodic) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 263.22 730.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 266.00 730.00 Td (+) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 271.84 730.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 274.62 730.00 Td (initial) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 297.40 730.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 300.18 730.00 Td (rectification\),) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 356.86 730.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 359.64 730.00 Td (contract) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 395.21 730.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 397.99 730.00 Td (value,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 424.67 730.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 427.45 730.00 Td (cost) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 445.79 730.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 448.57 730.00 Td (per) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 463.02 730.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 465.80 730.00 Td (km,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 481.91 730.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 484.69 730.00 Td (NPV,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 508.03 730.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 510.81 730.00 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 527.49 730.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 530.27 730.00 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 535.83 730.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 715.50 Td (service-level) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 109.56 715.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 112.34 715.50 Td (compliance) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 162.91 715.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 165.69 715.50 Td (check.) Tj ET
+BT /F2 11.50 Tf 0.122 0.231 0.341 rg 54.00 682.00 Td (6.5 Life-Cycle Analysis \(LCA\) & decision matrix) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 54.00 665.00 Td (Purpose:) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 97.34 665.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 100.12 665.00 Td (project) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 130.13 665.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 132.91 665.00 Td (one) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 149.59 665.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 152.37 665.00 Td (segment) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 190.72 665.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 193.50 665.00 Td (over) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 212.95 665.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 215.73 665.00 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 221.29 665.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 224.07 665.00 Td (horizon) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 256.86 665.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 259.64 665.00 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 276.32 665.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 279.10 665.00 Td (decide,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 311.34 665.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 314.12 665.00 Td (each) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 335.80 665.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 338.58 665.00 Td (year,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 360.81 665.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 363.59 665.00 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 377.49 665.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 380.27 665.00 Td (treatment) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 422.51 665.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 425.29 665.00 Td (that) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 441.97 665.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 444.75 665.00 Td (keeps) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 471.43 665.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 474.21 665.00 Td (it) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 479.21 665.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 481.99 665.00 Td (serviceable) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 532.56 665.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 650.50 Td (—) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 64.00 650.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 66.78 650.50 Td (at) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 75.12 650.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 77.90 650.50 Td (MoRTH) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 112.34 650.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 115.12 650.50 Td (cost.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 630.00 Td (•) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 68.00 630.00 Td (Decisions:) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 118.57 630.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 121.35 630.00 Td (ROUTINE) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 166.35 630.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 169.13 630.00 Td (->) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 178.30 630.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 181.08 630.00 Td (PREVENTIVE) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 244.43 630.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 247.21 630.00 Td (->) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 256.38 630.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 259.16 630.00 Td (OVERLAY) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 306.40 630.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 309.18 630.00 Td (->) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 318.35 630.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 321.13 630.00 Td (RECONSTRUCTION,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 418.35 630.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 421.13 630.00 Td (triggered) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 460.59 630.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 463.37 630.00 Td (by) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 614.50 Td (PCI) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 70.67 614.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 73.45 614.50 Td (/) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 76.23 614.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 79.01 614.50 Td (rut) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 90.68 614.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 93.46 614.50 Td (/) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 96.24 614.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 99.02 614.50 Td (cracking) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 136.25 614.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 139.03 614.50 Td (/) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 141.81 614.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 144.59 614.50 Td (roughness) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 191.28 614.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 194.06 614.50 Td (thresholds,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 242.97 614.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 245.75 614.50 Td (with) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 263.53 614.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 266.31 614.50 Td (condition) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 306.33 614.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 309.11 614.50 Td (reset) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 331.34 614.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 334.12 614.50 Td (after) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 354.13 614.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 356.91 614.50 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 362.47 614.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 365.25 614.50 Td (major) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 390.25 614.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 393.03 614.50 Td (treatment) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 435.27 614.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 438.05 614.50 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 454.73 614.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 457.51 614.50 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 463.07 614.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 600.00 Td (minimum-interval) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 130.11 600.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 132.89 600.00 Td (deferral.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 583.50 Td (•) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 68.00 583.50 Td (Costs:) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 99.11 583.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 101.89 583.50 Td (MoRTH) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 136.33 583.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 139.11 583.50 Td (SDB) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 159.67 583.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 162.45 583.50 Td (rate) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 179.68 583.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 182.46 583.50 Td (×) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 188.30 583.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 191.08 583.50 Td (carriageway) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 244.98 583.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 247.76 583.50 Td (area;) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 270.55 583.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 273.33 583.50 Td (reports) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 304.45 583.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 307.23 583.50 Td (total,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 328.91 583.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 331.69 583.50 Td (NPV) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 352.25 583.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 355.03 583.50 Td (and) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 54.00 568.00 Td (EUAC) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 82.33 568.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 85.11 568.00 Td (\(equivalent) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 134.02 568.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 136.80 568.00 Td (uniform) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 170.14 568.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 172.92 568.00 Td (annual) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 202.94 568.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 205.72 568.00 Td (cost\).) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 551.50 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 551.50 Td (Download) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 112.46 551.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 115.24 551.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 129.14 551.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 131.92 551.50 Td (matrix) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 159.14 551.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 161.92 551.50 Td (as) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 172.48 551.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 175.26 551.50 Td (XLSX) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 201.38 551.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 204.16 551.50 Td (/) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 206.94 551.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 209.72 551.50 Td (PDF) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 229.72 551.50 Td (.) Tj ET
+0.800 0.840 0.880 RG 0.50 w 54.00 536.00 m 541.00 536.00 l S
+BT /F2 15.00 Tf 0.122 0.231 0.341 rg 54.00 493.00 Td (7. Costing basis \(MoRTH Standard Data Book\)) Tj ET
+0.122 0.231 0.341 RG 0.90 w 54.00 487.00 m 541.00 487.00 l S
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 464.00 Td (All) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 65.11 464.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 67.89 464.00 Td (maintenance/treatment) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 170.16 464.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 172.94 464.00 Td (costs) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 196.28 464.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 199.06 464.00 Td (use) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 215.18 464.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 217.96 464.00 Td (indicative) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 264.09 464.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 266.87 464.00 Td (MoRTH) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 301.86 464.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 304.64 464.00 Td (SDB) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 325.75 464.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 328.53 464.00 Td (unit) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 346.86 464.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 349.64 464.00 Td (rates) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 373.54 464.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 376.32 464.00 Td (\(Rs) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 391.87 464.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 394.65 464.00 Td (/m²\):) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 415.20 464.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 417.98 464.00 Td (routine) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 448.55 464.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 451.33 464.00 Td (Rs) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 463.55 464.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 466.33 464.00 Td (60,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 480.23 464.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 449.50 Td (microsurfacing) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 119.01 449.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 121.79 449.50 Td (Rs) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 134.01 449.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 136.79 449.50 Td (160,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 156.25 449.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 159.03 449.50 Td (mill) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 174.02 449.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 176.80 449.50 Td (&) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 183.47 449.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 186.25 449.50 Td (overlay) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 218.48 449.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 221.26 449.50 Td (Rs) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 233.48 449.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 236.26 449.50 Td (820,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 255.72 449.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 258.50 449.50 Td (reconstruction) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 321.30 449.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 324.08 449.50 Td (Rs) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 336.30 449.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 339.08 449.50 Td (3200,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 364.10 449.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 366.88 449.50 Td (each) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 388.56 449.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 391.34 449.50 Td (×) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 397.18 449.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 399.96 449.50 Td (carriageway) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 453.86 449.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 456.64 449.50 Td (area) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 476.65 449.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 479.43 449.50 Td (\(length) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 510.00 449.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 512.78 449.50 Td (×) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 518.62 449.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 435.00 Td (width,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 80.12 435.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 82.90 435.00 Td (default) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 112.92 435.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 115.70 435.00 Td (7) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 121.26 435.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 124.04 435.00 Td (m\).) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 138.48 435.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 141.26 435.00 Td (These) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 169.05 435.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 171.83 435.00 Td (rates) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 194.06 435.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 196.84 435.00 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 213.52 435.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 216.30 435.00 Td (all) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 226.30 435.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 229.08 435.00 Td (thresholds) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 275.21 435.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 277.99 435.00 Td (are) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 292.44 435.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 295.22 435.00 Td (editable) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 333.01 435.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 335.79 435.00 Td (data,) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 359.13 435.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 361.91 435.00 Td (not) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 377.46 435.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 380.24 435.00 Td (hard-coded) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 434.69 435.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 437.47 435.00 Td (logic) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 460.81 435.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 463.59 435.00 Td (—) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 473.59 435.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 476.37 435.00 Td (replace) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 509.16 435.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 511.94 435.00 Td (them) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 534.17 435.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 420.50 Td (with) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 71.78 420.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 74.56 420.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 88.46 420.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 91.24 420.50 Td (current) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 122.36 420.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 125.14 420.50 Td (SDB) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 145.70 420.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 148.48 420.50 Td (/) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 151.26 420.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 154.04 420.50 Td (State) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 177.39 420.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 180.17 420.50 Td (Schedule) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 221.86 420.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 224.64 420.50 Td (of) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 232.98 420.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 235.76 420.50 Td (Rates) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 261.88 420.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 264.66 420.50 Td (before) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 293.01 420.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 295.79 420.50 Td (tendering.) Tj ET
+0.800 0.840 0.880 RG 0.50 w 54.00 404.00 m 541.00 404.00 l S
+BT /F2 15.00 Tf 0.122 0.231 0.341 rg 54.00 361.00 Td (8. Outputs & reporting) Tj ET
+0.122 0.231 0.341 RG 0.90 w 54.00 355.00 m 541.00 355.00 l S
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 332.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 332.00 Td (Interactive) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 114.13 332.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 116.91 332.00 Td (tables) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 143.59 332.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 146.37 332.00 Td (are) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 160.82 332.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 163.60 332.00 Td (paginated) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 210.83 332.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 213.61 332.00 Td (\(25) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 228.06 332.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 230.84 332.00 Td (/) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 233.62 332.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 236.40 332.00 Td (50) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 247.52 332.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 250.30 332.00 Td (/) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 253.08 332.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 255.86 332.00 Td (100) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 272.54 332.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 275.32 332.00 Td (/) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 278.10 332.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 280.88 332.00 Td (all) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 290.88 332.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 293.66 332.00 Td (rows\)) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 318.10 332.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 320.88 332.00 Td (so) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 331.44 332.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 334.22 332.00 Td (large) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 316.50 Td (surveys) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 88.45 316.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 91.23 316.50 Td (load) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 110.13 316.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 112.91 316.50 Td (fast.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 300.00 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 300.00 Td (Homogeneous) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 133.03 300.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 135.81 300.00 Td (sections,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 175.27 300.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 178.05 300.00 Td (LCA) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 197.50 300.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 200.28 300.00 Td (matrices) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 238.06 300.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 240.84 300.00 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 257.52 300.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 260.30 300.00 Td (forecasts) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 300.87 300.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 303.65 300.00 Td (export) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 331.44 300.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 334.22 300.00 Td (to) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 342.56 300.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 345.34 300.00 Td (XLSX) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 371.46 300.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 374.24 300.00 Td (and) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 392.02 300.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 394.80 300.00 Td (PDF) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 414.80 300.00 Td (.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 284.50 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 284.50 Td (Reports) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 103.01 284.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 105.79 284.50 Td (are) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 120.24 284.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 123.02 284.50 Td (self-contained) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 190.81 284.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 193.59 284.50 Td (and) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 211.37 284.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 214.15 284.50 Td (offline) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 244.15 284.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 246.93 284.50 Td (—) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 256.93 284.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 259.71 284.50 Td (they) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 278.61 284.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 281.39 284.50 Td (open) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 303.63 284.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 306.41 284.50 Td (on) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 317.53 284.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 320.31 284.50 Td (an) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 331.43 284.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 334.21 284.50 Td (air-gapped) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 269.00 Td (workstation) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 104.57 269.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 107.35 269.00 Td (and) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 124.03 269.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 126.81 269.00 Td (can) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 142.93 269.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 145.71 269.00 Td (be) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 156.83 269.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 159.61 269.00 Td (emailed) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 194.62 269.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 197.40 269.00 Td (as) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 207.96 269.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 210.74 269.00 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 216.30 269.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 219.08 269.00 Td (single) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 245.20 269.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 247.98 269.00 Td (file.) Tj ET
+0.800 0.840 0.880 RG 0.50 w 54.00 252.50 m 541.00 252.50 l S
+BT /F2 15.00 Tf 0.122 0.231 0.341 rg 54.00 209.50 Td (9. Limitations & honest caveats) Tj ET
+0.122 0.231 0.341 RG 0.90 w 54.00 203.50 m 541.00 203.50 l S
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 180.50 Td (•) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 68.00 180.50 Td (Mechanistic) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 125.24 180.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 128.02 180.50 Td (strains) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 160.81 180.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 163.59 180.50 Td (are) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 178.60 180.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 181.38 180.50 Td (screening-grade) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 259.18 180.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 261.96 180.50 Td (\(Odemark–Boussinesq\).) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 369.77 180.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 372.55 180.50 Td (Confirm) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 165.00 Td (borderline) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 98.46 165.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 101.24 165.00 Td (sections) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 137.92 165.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 140.70 165.00 Td (with) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 158.48 165.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 161.26 165.00 Td (full) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 174.04 165.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 176.82 165.00 Td (IITPAVE) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 215.17 165.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 217.95 165.00 Td (before) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 246.30 165.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 249.08 165.00 Td (construction/tender.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 148.50 Td (•) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 68.00 148.50 Td (MoRTH) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 102.99 148.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 105.77 148.50 Td (rates) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 129.67 148.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 132.45 148.50 Td (are) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 147.46 148.50 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 150.24 148.50 Td (indicative.) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 199.15 148.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 201.93 148.50 Td (Load) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 224.17 148.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 226.95 148.50 Td (the) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 240.85 148.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 243.63 148.50 Td (current) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 274.75 148.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 277.53 148.50 Td (SDB) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 298.09 148.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 300.87 148.50 Td (/) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 303.65 148.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 306.43 148.50 Td (State) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 329.78 148.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 332.56 148.50 Td (SoR) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 352.01 148.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 354.79 148.50 Td (for) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 366.46 148.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 369.24 148.50 Td (tendering.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 133.00 Td (•) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 68.00 133.00 Td (Calibration) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 120.23 133.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 123.01 133.00 Td (needs) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 151.91 133.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 154.69 133.00 Td (repeat) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 184.70 133.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 187.48 133.00 Td (surveys) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 225.28 133.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 228.06 133.00 Td (\(or) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 240.28 133.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 243.06 133.00 Td (age) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 259.74 133.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 262.52 133.00 Td (+) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 268.36 133.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 271.14 133.00 Td (traffic\).) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 301.70 133.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 304.48 133.00 Td (A) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 311.15 133.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 313.93 133.00 Td (single) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 340.05 133.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 342.83 133.00 Td (condition) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 117.50 Td (snapshot) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 94.58 117.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 97.36 117.50 Td (feeds) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 121.82 117.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 124.60 117.50 Td (forecasting,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 176.29 117.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 179.07 117.50 Td (not) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 192.97 117.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 195.75 117.50 Td (rate-fitting.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 101.00 Td (•) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 68.00 101.00 Td (PDF) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 88.00 101.00 Td ( ) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 90.78 101.00 Td (ingestion) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 135.23 101.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 138.01 101.00 Td (requires) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 174.13 101.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 176.91 101.00 Td (a) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 182.47 101.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 185.25 101.00 Td (text) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 201.37 101.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 204.15 101.00 Td (layer;) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 228.60 101.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 231.38 101.00 Td (scanned) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 269.18 101.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 271.96 101.00 Td (images) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 304.19 101.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 306.97 101.00 Td (are) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 321.42 101.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 324.20 101.00 Td (not) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 338.10 101.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 340.88 101.00 Td (OCR'd.) Tj ET
+BT /F2 10.00 Tf 0.122 0.231 0.341 rg 56.00 85.50 Td (•) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 68.00 85.50 Td (Defaults) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 104.68 85.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 107.46 85.50 Td (\(traffic) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 135.24 85.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 138.02 85.50 Td (MSA,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 162.47 85.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 165.25 85.50 Td (monsoon) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 206.38 85.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 209.16 85.50 Td (zone,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 233.62 85.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 236.40 85.50 Td (lane) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 255.30 85.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 258.08 85.50 Td (width,) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 284.20 85.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 286.98 85.50 Td (layer) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 308.65 85.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 311.43 85.50 Td (thicknesses\)) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 367.00 85.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 369.78 85.50 Td (are) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 384.23 85.50 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 387.01 85.50 Td (clearly) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 54.00 70.00 Td (flagged) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 86.80 70.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 89.58 70.00 Td (where) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 116.81 70.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 119.59 70.00 Td (used;) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 144.05 70.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 146.83 70.00 Td (override) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 182.95 70.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 185.73 70.00 Td (them) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 207.96 70.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 210.74 70.00 Td (with) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 228.52 70.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 231.30 70.00 Td (real) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 247.97 70.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 250.75 70.00 Td (values) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 279.65 70.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 282.43 70.00 Td (for) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 294.10 70.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 296.88 70.00 Td (project-grade) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 355.79 70.00 Td ( ) Tj ET
+BT /F1 10.00 Tf 0.130 0.160 0.190 rg 358.57 70.00 Td (results.) Tj ET
+0.42 0.46 0.50 rg BT /F1 8 Tf 277.04 30.00 Td (Page 6 of 7) Tj ET
+0.80 0.84 0.88 RG 0.5 w 54.00 42.00 m 541.00 42.00 l S
+endstream
+endobj
+18 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> /Contents 17 0 R >>
+endobj
+19 0 obj
+<< /Length 5639 >>
+stream
+BT /F1 8.00 Tf 0.620 0.660 0.700 rg 418.74 804.00 Td (RAMS — User Guide & Handbook) Tj ET
+0.800 0.840 0.880 RG 0.50 w 54.00 799.00 m 541.00 799.00 l S
+0.800 0.840 0.880 RG 0.50 w 54.00 788.00 m 541.00 788.00 l S
+BT /F2 15.00 Tf 0.122 0.231 0.341 rg 54.00 745.00 Td (10. Quick reference — required columns) Tj ET
+0.122 0.231 0.341 RG 0.90 w 54.00 739.00 m 541.00 739.00 l S
+0.800 0.840 0.880 RG 0.40 w 54.00 720.00 m 541.00 720.00 l S
+0.122 0.231 0.341 rg 54.00 698.00 487.00 22.00 re f
+BT /F2 9.00 Tf 1.000 1.000 1.000 rg 59.00 706.00 Td (Feature) Tj ET
+BT /F2 9.00 Tf 1.000 1.000 1.000 rg 160.55 706.00 Td (Required) Tj ET
+BT /F2 9.00 Tf 1.000 1.000 1.000 rg 315.96 706.00 Td (Common optional \(defaulted\)) Tj ET
+0.800 0.840 0.880 RG 0.40 w 54.00 698.00 m 541.00 698.00 l S
+0.800 0.840 0.880 RG 0.40 w 54.00 720.00 m 54.00 698.00 l S
+0.800 0.840 0.880 RG 0.40 w 155.55 720.00 m 155.55 698.00 l S
+0.800 0.840 0.880 RG 0.40 w 310.96 720.00 m 310.96 698.00 l S
+0.800 0.840 0.880 RG 0.40 w 541.00 720.00 m 541.00 698.00 l S
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 684.00 Td (Survey / Forecast /) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 672.00 Td (Sections) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 160.55 684.00 Td (chainage + at least one of rut / IRI /) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 160.55 672.00 Td (cracking) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 315.96 684.00 Td (traffic MSA, monsoon zone, growth, length) Tj ET
+0.800 0.840 0.880 RG 0.40 w 54.00 664.00 m 541.00 664.00 l S
+0.800 0.840 0.880 RG 0.40 w 54.00 698.00 m 54.00 664.00 l S
+0.800 0.840 0.880 RG 0.40 w 155.55 698.00 m 155.55 664.00 l S
+0.800 0.840 0.880 RG 0.40 w 310.96 698.00 m 310.96 664.00 l S
+0.800 0.840 0.880 RG 0.40 w 541.00 698.00 m 541.00 664.00 l S
+0.945 0.960 0.975 rg 54.00 630.00 487.00 34.00 re f
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 650.00 Td (FWD overlay) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 160.55 650.00 Td (`e_bituminous`) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 315.96 650.00 Td (`e_granular`, `e_subgrade`, `h_bituminous`,) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 315.96 638.00 Td (`h_granular`, chainage) Tj ET
+0.800 0.840 0.880 RG 0.40 w 54.00 630.00 m 541.00 630.00 l S
+0.800 0.840 0.880 RG 0.40 w 54.00 664.00 m 54.00 630.00 l S
+0.800 0.840 0.880 RG 0.40 w 155.55 664.00 m 155.55 630.00 l S
+0.800 0.840 0.880 RG 0.40 w 310.96 664.00 m 310.96 630.00 l S
+0.800 0.840 0.880 RG 0.40 w 541.00 664.00 m 541.00 630.00 l S
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 616.00 Td (Calibrate \(rut\)) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 160.55 616.00 Td (`measured_rut_increment_mm`,) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 160.55 604.00 Td (`ye4`, `age`) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 315.96 616.00 Td (deflection, SNP, compaction, cds, speed, surfacing) Tj ET
+0.800 0.840 0.880 RG 0.40 w 54.00 596.00 m 541.00 596.00 l S
+0.800 0.840 0.880 RG 0.40 w 54.00 630.00 m 54.00 596.00 l S
+0.800 0.840 0.880 RG 0.40 w 155.55 630.00 m 155.55 596.00 l S
+0.800 0.840 0.880 RG 0.40 w 310.96 630.00 m 310.96 596.00 l S
+0.800 0.840 0.880 RG 0.40 w 541.00 630.00 m 541.00 596.00 l S
+0.945 0.960 0.975 rg 54.00 574.00 487.00 22.00 re f
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 582.00 Td (Calibrate \(cracking\)) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 160.55 582.00 Td (`crack_prev`, `crack_next`) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 315.96 582.00 Td (—) Tj ET
+0.800 0.840 0.880 RG 0.40 w 54.00 574.00 m 541.00 574.00 l S
+0.800 0.840 0.880 RG 0.40 w 54.00 596.00 m 54.00 574.00 l S
+0.800 0.840 0.880 RG 0.40 w 155.55 596.00 m 155.55 574.00 l S
+0.800 0.840 0.880 RG 0.40 w 310.96 596.00 m 310.96 574.00 l S
+0.800 0.840 0.880 RG 0.40 w 541.00 596.00 m 541.00 574.00 l S
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 560.00 Td (Calibrate \(roughness\)) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 160.55 560.00 Td (`measured_iri_increment`, `iri`,) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 160.55 548.00 Td (`age`) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 315.96 560.00 Td (SNP, d_msa, d_crack_pct, d_rut_mm) Tj ET
+0.800 0.840 0.880 RG 0.40 w 54.00 540.00 m 541.00 540.00 l S
+0.800 0.840 0.880 RG 0.40 w 54.00 574.00 m 54.00 540.00 l S
+0.800 0.840 0.880 RG 0.40 w 155.55 574.00 m 155.55 540.00 l S
+0.800 0.840 0.880 RG 0.40 w 310.96 574.00 m 310.96 540.00 l S
+0.800 0.840 0.880 RG 0.40 w 541.00 574.00 m 541.00 540.00 l S
+0.945 0.960 0.975 rg 54.00 518.00 487.00 22.00 re f
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 526.00 Td (Network & Budget) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 160.55 526.00 Td (a network \(file or uploaded survey\)) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 315.96 526.00 Td (budget, horizon, design MSA) Tj ET
+0.800 0.840 0.880 RG 0.40 w 54.00 518.00 m 541.00 518.00 l S
+0.800 0.840 0.880 RG 0.40 w 54.00 540.00 m 54.00 518.00 l S
+0.800 0.840 0.880 RG 0.40 w 155.55 540.00 m 155.55 518.00 l S
+0.800 0.840 0.880 RG 0.40 w 310.96 540.00 m 310.96 518.00 l S
+0.800 0.840 0.880 RG 0.40 w 541.00 540.00 m 541.00 518.00 l S
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 59.00 504.00 Td (Design) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 160.55 504.00 Td (CBR + design traffic) Tj ET
+BT /F1 9.00 Tf 0.150 0.180 0.210 rg 315.96 504.00 Td (VDF, design life, carriageway) Tj ET
+0.800 0.840 0.880 RG 0.40 w 54.00 496.00 m 541.00 496.00 l S
+0.800 0.840 0.880 RG 0.40 w 54.00 518.00 m 54.00 496.00 l S
+0.800 0.840 0.880 RG 0.40 w 155.55 518.00 m 155.55 496.00 l S
+0.800 0.840 0.880 RG 0.40 w 310.96 518.00 m 310.96 496.00 l S
+0.800 0.840 0.880 RG 0.40 w 541.00 518.00 m 541.00 496.00 l S
+0.42 0.46 0.50 rg BT /F1 8 Tf 277.04 30.00 Td (Page 7 of 7) Tj ET
+0.80 0.84 0.88 RG 0.5 w 54.00 42.00 m 541.00 42.00 l S
+endstream
+endobj
+20 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> /Contents 19 0 R >>
+endobj
+xref
+0 21
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000163 00000 n 
+0000000260 00000 n 
+0000000362 00000 n 
+0000000467 00000 n 
+0000000562 00000 n 
+0000003538 00000 n 
+0000003694 00000 n 
+0000026217 00000 n 
+0000026374 00000 n 
+0000060557 00000 n 
+0000060715 00000 n 
+0000090405 00000 n 
+0000090563 00000 n 
+0000139838 00000 n 
+0000139996 00000 n 
+0000180999 00000 n 
+0000181157 00000 n 
+0000186849 00000 n 
+trailer
+<< /Size 21 /Root 1 0 R >>
+startxref
+187007
+%%EOF

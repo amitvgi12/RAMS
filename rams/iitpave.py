@@ -55,7 +55,7 @@ DUAL_SPACING_MM = 310.0         # centre-to-centre spacing of a dual wheel set
 # the bottom of the bituminous layer systematically under-predicts the rigorous
 # layered-elastic (IITPAVE) value; the subgrade vertical strain is close. These
 # multipliers are fitted to real IITPAVE outputs -- the IRC:37-2018 worked
-# examples (Annex II, Poisson 0.35) and the NH-152D FWD evaluation report
+# examples (Annex II, Poisson 0.35) and a published FWD evaluation report
 # (IRC:115-2014, Poisson 0.5/0.4/0.4) -- and bring eps_t / eps_v to within
 # ~5-8% of IITPAVE over 50-1600 MPa bituminous moduli and 190-310 mm thickness.
 # The tensile factor differs by standard because the granular Poisson ratio

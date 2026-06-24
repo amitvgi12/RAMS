@@ -26,7 +26,7 @@ to swap in an ILP solver later without changing the API.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from typing import Dict, List, Optional
 
 from .batch import SegmentForecast
@@ -181,3 +181,49 @@ def optimize_budget(
         annual_budget=params.annual_budget,
         rationale=rationale,
     )
+
+
+def recommend_budget_to_clear(
+    segments: List[SegmentInput],
+    forecasts: List[SegmentForecast],
+    params: BudgetParams,
+    iters: int = 24,
+) -> Dict[str, object]:
+    """Smallest flat annual budget that funds every at-risk segment in-window.
+
+    "Unfunded" segments are simply those the annual budget could not cover before
+    their preventive window closed -- a budget-vs-need gap, not an error. This
+    answers the natural follow-up: *what budget makes the unfunded list empty?*
+
+    Re-uses the supplied forecasts (the expensive step); only the cheap greedy
+    allocation is re-run, so the binary search is inexpensive even for large
+    networks. Returns the total preventive need, the number of at-risk segments,
+    whether the current budget already clears it, and the recommended budget.
+    """
+    # Total preventive need = everything funded under an unconstrained budget.
+    full = optimize_budget(segments, forecasts, replace(params, annual_budget=1.0e15))
+    total_need = full.total_spend
+    n_at_risk = len(full.scheduled)
+
+    base = optimize_budget(segments, forecasts, params)
+    if not base.unfunded:
+        return {
+            "total_preventive_need": round(total_need, 2),
+            "n_at_risk": n_at_risk,
+            "recommended_annual_budget": round(params.annual_budget, 2),
+            "clears_at_current": True,
+        }
+
+    lo, hi = params.annual_budget, max(total_need, params.annual_budget)
+    for _ in range(iters):
+        mid = (lo + hi) / 2.0
+        if optimize_budget(segments, forecasts, replace(params, annual_budget=mid)).unfunded:
+            lo = mid
+        else:
+            hi = mid
+    return {
+        "total_preventive_need": round(total_need, 2),
+        "n_at_risk": n_at_risk,
+        "recommended_annual_budget": round(hi, 2),
+        "clears_at_current": False,
+    }

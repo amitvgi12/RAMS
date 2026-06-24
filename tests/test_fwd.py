@@ -101,6 +101,20 @@ class TestApiNetworkModel(unittest.TestCase):
         out = api.network_and_budget(self._payload("default"))
         self.assertEqual(out["model"]["rut_model"], "DEFAULT")
 
+    def test_unfunded_recommendation_clears_backlog(self):
+        # A starved budget leaves a backlog; the recommended budget must clear it.
+        p = self._payload("default")
+        p["annual_budget"] = 1  # far too small -> unfunded segments
+        out = api.network_and_budget(p)
+        b = out["budget"]
+        self.assertIn("recommended_annual_budget", b)
+        if b["unfunded"]:
+            self.assertFalse(b["clears_at_current"])
+            self.assertGreaterEqual(b["recommended_annual_budget"], b["annual_budget"])
+            # Re-running at the recommended budget should empty the unfunded list.
+            p["annual_budget"] = b["recommended_annual_budget"]
+            self.assertEqual(api.network_and_budget(p)["budget"]["unfunded"], [])
+
     def test_forecast_derive_snp(self):
         out = api.forecast_single({"model": "hdm4", "deflection": 1.3, "derive_snp": True, "years": 5})
         self.assertTrue(out["model"]["snp_derived_from_fwd"])

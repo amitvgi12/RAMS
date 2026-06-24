@@ -201,9 +201,15 @@ def serve(host: str = "127.0.0.1", port: int = 8000) -> None:
 
 
 def main(argv=None) -> int:
+    # On a PaaS (Render / Cloud Run / Heroku / Fly) the platform injects $PORT and
+    # expects a public bind, so default to 0.0.0.0:$PORT there; locally keep the
+    # secure loopback default. Explicit --host/--port always win.
+    env_port = os.environ.get("PORT")
+    default_port = int(env_port) if env_port and env_port.isdigit() else 8000
+    default_host = os.environ.get("HOST", "0.0.0.0" if env_port else "127.0.0.1")
     p = argparse.ArgumentParser(prog="rams-server", description="RAMS web dashboard")
-    p.add_argument("--host", default="127.0.0.1", help="bind host (loopback only by default)")
-    p.add_argument("--port", type=int, default=8000)
+    p.add_argument("--host", default=default_host, help="bind host (loopback only by default)")
+    p.add_argument("--port", type=int, default=default_port)
     args = p.parse_args(argv)
     serve(args.host, args.port)
     return 0

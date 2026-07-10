@@ -17,6 +17,7 @@ from rams.ingest import (
     ingest_segments,
     ingest_segments_pdf_bytes,
     _decode_pdf_literal,
+    _looks_like_fwd_report,
 )
 from rams.mci import (
     RUT_OVERLAY_THRESHOLD_MM,
@@ -104,6 +105,24 @@ class TestPdfIngestion(unittest.TestCase):
     def test_image_only_pdf_raises(self):
         with self.assertRaises(ValueError):
             ingest_segments_pdf_bytes(b"%PDF-1.4\n%%EOF")
+
+    def test_fwd_report_pdf_points_to_fwd_tool(self):
+        # An FWD moduli report has none of the condition-survey columns; the error
+        # should recognise it and route the user to the FWD overlay tool.
+        pdf = make_pdf([
+            "Falling Weight Deflectometer (FWD) Evaluation Report",
+            "Back-calculated layer moduli and central deflection D0",
+            "Chainage  E1  E2  E3  Deflection",
+        ])
+        with self.assertRaises(ValueError) as ctx:
+            ingest_segments_pdf_bytes(pdf)
+        self.assertIn("FWD remaining-life", str(ctx.exception))
+
+    def test_looks_like_fwd_report(self):
+        self.assertTrue(_looks_like_fwd_report(
+            "FWD deflection back-calculated moduli report"))
+        self.assertFalse(_looks_like_fwd_report(
+            "Annual condition survey: IRI, rutting, cracking by chainage"))
 
     def test_pdf_literal_non_octal_digit_escape(self):
         # \8 and \9 are NOT octal escapes (octal is 0-7); the PDF spec says the

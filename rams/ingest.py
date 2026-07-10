@@ -523,9 +523,19 @@ def ingest_segments_pdf_bytes(
         )
     rows = _csv_rows_from_text(text)
     if rows is None:
+        hint = ""
+        if _looks_like_fwd_report(text):
+            hint = (" This looks like an FWD deflection/moduli report, which is "
+                    "different data -- load it in the 'FWD remaining-life & overlay' "
+                    "tool (Design tab), not the condition-survey importer.")
         raise ValueError(
-            "could not locate a segment table header in the PDF text "
-            f"(expected columns: {', '.join(REQUIRED_COLUMNS)})."
+            "could not read a condition-survey table from the PDF. This importer "
+            "reads a digitally-generated, comma-delimited table with the columns: "
+            f"{', '.join(REQUIRED_COLUMNS)}."
+            + hint +
+            " A formatted/scanned report PDF whose columns are aligned with spaces "
+            "(not commas) will not parse -- paste the table as CSV, or upload a "
+            ".csv / .xlsx instead."
         )
     return _ingest_mappings(rows, bounds, max_rows)
 
@@ -618,6 +628,17 @@ def _decode_pdf_literal(s: bytes) -> str:
         out.append(ch.decode("latin-1"))
         i += 1
     return "".join(out)
+
+
+def _looks_like_fwd_report(text: str) -> bool:
+    """Heuristic: does the recovered PDF text read like an FWD deflection/moduli
+    report (so we can point the user at the FWD overlay tool)?"""
+    low = text.lower()
+    hits = sum(kw in low for kw in (
+        "falling weight", "fwd", "deflection", "back-calcul", "backcalcul",
+        "modulus", "moduli", "benkelman", "d0 ", "central deflection",
+    ))
+    return hits >= 2
 
 
 def _csv_rows_from_text(text: str) -> Optional[List[Dict[str, str]]]:

@@ -909,7 +909,13 @@ def _file_rows(payload: dict, target_col: Optional[str] = None) -> List[dict]:
         elif fmt == "pdf" or raw[:5] == b"%PDF-":
             rows = _dictrows_from_csv_text(_extract_pdf_text(raw), target_col)
             if not rows:
-                raise ValueError("no calibration table found in the PDF text layer.")
+                raise ValueError(
+                    "no table found in the PDF text layer. The parser reads a "
+                    "digitally-generated, comma-delimited table" +
+                    (f" containing a '{target_col}' column" if target_col else "") +
+                    "; a formatted/scanned report whose columns are aligned with "
+                    "spaces will not parse -- paste the table as CSV, or upload a "
+                    ".csv / .xlsx instead.")
         else:
             rows = _dictrows_from_csv_text(raw.decode("utf-8-sig", "replace"))
     else:

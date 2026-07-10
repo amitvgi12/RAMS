@@ -869,21 +869,93 @@ _FWD_DEFAULTS = {"e_granular": 250.0, "e_subgrade": 50.0,
                  "h_bituminous": 150.0, "h_granular": 450.0}
 
 
+def _split_delimited(line: str) -> List[str]:
+    """Split a row on the delimiter it actually uses: tab (reconstructed PDF tables),
+    comma (CSV), or runs of 2+ spaces (space-aligned report tables)."""
+    if "\t" in line:
+        return [c.strip() for c in line.split("\t")]
+    if "," in line:
+        return [c.strip() for c in line.split(",")]
+    parts = re.split(r"\s{2,}", line.strip())
+    return [p.strip() for p in parts]
+
+
+# Fuzzy header -> canonical column: substring rules so real report headers
+# ("Bituminous Layer", "Sub-Section", "Subgrade (Seasonal)"...) map to the schema.
+_FUZZY_COLS = [
+    ("chainage_from", ("chainage_from", "from_chainage", "start_chainage")),
+    ("chainage_to", ("chainage_to", "to_chainage", "end_chainage")),
+    ("e_bituminous", ("bitumin", "e_bc", "e_bit", "e1")),
+    ("e_granular", ("granular", "e_base", "e_gran", "e2")),
+    ("e_subgrade", ("subgrade", "e_sg", "e3")),
+    ("h_bituminous", ("thickness_bitumin", "bt_layer", "h_bc", "h1")),
+    ("h_granular", ("thickness_granular", "granular_layer_mm", "h_base", "h2")),
+    ("section_id", ("sub_section", "sub-section", "subsection", "section", "sec")),
+]
+
+
+def _fuzzy_canon(key: str) -> Optional[str]:
+    """Best canonical column for a normalised header cell, or None."""
+    k = key.replace("-", "_")
+    for canon, needles in _FUZZY_COLS:
+        if k == canon:
+            return canon
+    for canon, needles in _FUZZY_COLS:
+        if any(nd in k for nd in needles):
+            return canon
+    return None
+
+
+def _header_matches(cells: List[str], target_col: str) -> bool:
+    """Does this row look like the table header we want?
+
+    An *exact* canonical name (e.g. a real CSV header) is trusted on its own. A
+    *fuzzy* match (report-style names like "Bituminous Layer") must be corroborated
+    -- the row has to resolve to at least three distinct schema columns -- so a
+    prose sentence that merely contains a word like "bituminous" is not mistaken
+    for a header.
+    """
+    norm = [_norm_calib_key(c) for c in cells]
+    if target_col in norm:
+        return True
+    canons = set()
+    hit_target = False
+    for nk in norm:
+        c = _fuzzy_canon(nk)
+        if c:
+            canons.add(c)
+            hit_target = hit_target or c == target_col
+    return hit_target and len(canons) >= 3
+
+
 def _dictrows_from_csv_text(text: str, target_col: Optional[str] = None) -> List[dict]:
-    """DictReader CSV text. If `target_col` is given, skip preamble lines until a
-    header row that actually contains it (handives PDF text / banner lines)."""
+    """Rows from delimited text (comma / tab / space-aligned). If `target_col` is
+    given, skip preamble lines until a header row that contains it (exact or fuzzy
+    match) -- handles PDF text, banner lines and real report column names."""
     import csv as _csv
     import io
 
     lines = [ln for ln in text.splitlines() if ln.strip()]
+    if not lines:
+        return []
     if target_col:
         for i, ln in enumerate(lines):
-            cells = [_norm_calib_key(c) for c in ln.split(",")]
-            if target_col in cells:
+            if _header_matches(_split_delimited(ln), target_col):
                 lines = lines[i:]
                 break
-    rows = list(_csv.DictReader(io.StringIO("\n".join(lines))))
-    return [{_norm_calib_key(k): v for k, v in r.items()} for r in rows]
+    header_cells = _split_delimited(lines[0])
+    # Comma header with no tab -> keep the robust csv reader (quoting, etc.).
+    if "," in lines[0] and "\t" not in lines[0]:
+        rows = list(_csv.DictReader(io.StringIO("\n".join(lines))))
+        return [{_norm_calib_key(k): v for k, v in r.items()} for r in rows]
+    keys = [_norm_calib_key(c) for c in header_cells]
+    out: List[dict] = []
+    for ln in lines[1:]:
+        cells = _split_delimited(ln)
+        if not any(c for c in cells):
+            continue
+        out.append({keys[j]: cells[j] for j in range(min(len(keys), len(cells)))})
+    return out
 
 
 def _file_rows(payload: dict, target_col: Optional[str] = None) -> List[dict]:
@@ -936,8 +1008,18 @@ def _calib_rows(payload: dict, target_col: Optional[str] = None) -> List[dict]:
 
 
 def _fwd_rows(payload: dict) -> List[dict]:
-    """FWD sub-section rows (multi-format) with the FWD alias map applied."""
-    return [_apply_aliases(r, _FWD_ALIASES) for r in _file_rows(payload, "e_bituminous")]
+    """FWD sub-section rows (multi-format). Real report column names ("Bituminous
+    Layer", "Sub-Section", ...) are resolved by fuzzy substring matching, then the
+    exact FWD alias map fills anything still missing."""
+    out = []
+    for r in _file_rows(payload, "e_bituminous"):
+        merged = dict(r)
+        for k, v in r.items():
+            canon = _fuzzy_canon(k)
+            if canon and merged.get(canon) in (None, ""):
+                merged[canon] = v
+        out.append(_apply_aliases(merged, _FWD_ALIASES))
+    return out
 
 
 # Sentinel: column is required (no default) for a calibration observation.

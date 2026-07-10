@@ -70,6 +70,40 @@ def make_pdf(lines):
     return out
 
 
+def make_table_pdf(rows, x0=50, y0=700, dy=18, colw=95):
+    """PDF whose table cells are individually positioned (each cell its own Tm/Tj),
+    like a real report -- exercises the coordinate-based row reconstruction."""
+    ops = ["BT", "/F1 10 Tf"]
+    for r, cells in enumerate(rows):
+        y = y0 - r * dy
+        for c, cell in enumerate(cells):
+            x = x0 + c * colw
+            esc = str(cell).replace("\\", "\\\\").replace("(", "\\(").replace(")", "\\)")
+            ops.append("1 0 0 1 %d %d Tm (%s) Tj" % (x, y, esc))
+    ops.append("ET")
+    content = "\n".join(ops).encode("latin-1")
+    objs = [
+        b"<< /Type /Catalog /Pages 2 0 R >>",
+        b"<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
+        b"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R "
+        b"/Resources << /Font << /F1 5 0 R >> >> >>",
+        b"<< /Length %d >>\nstream\n%s\nendstream" % (len(content), content),
+        b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>",
+    ]
+    out = b"%PDF-1.4\n"
+    offsets = []
+    for i, o in enumerate(objs, start=1):
+        offsets.append(len(out))
+        out += b"%d 0 obj\n%s\nendobj\n" % (i, o)
+    xref = len(out)
+    out += b"xref\n0 %d\n0000000000 65535 f \n" % (len(objs) + 1)
+    for off in offsets:
+        out += b"%010d 00000 n \n" % off
+    out += b"trailer\n<< /Size %d /Root 1 0 R >>\nstartxref\n%d\n%%%%EOF" % (
+        len(objs) + 1, xref)
+    return out
+
+
 # --- PDF --------------------------------------------------------------------
 
 class TestPdfIngestion(unittest.TestCase):
@@ -132,6 +166,47 @@ class TestPdfIngestion(unittest.TestCase):
         self.assertEqual(_decode_pdf_literal(rb"\9"), "9")
         self.assertEqual(_decode_pdf_literal(rb"\101"), "A")     # valid octal still works
         self.assertEqual(_decode_pdf_literal(rb"\78"), chr(7) + "8")
+
+
+class TestReportTableExtraction(unittest.TestCase):
+    """Coordinate-based row reconstruction + fuzzy FWD parsing for report PDFs."""
+
+    def test_positioned_cells_reconstruct_into_rows(self):
+        from rams.ingest import _extract_pdf_text
+        pdf = make_table_pdf([
+            ["Sub-Section", "Bituminous Layer", "Granular Layer", "Subgrade"],
+            ["LHS-Sec-1", "977", "60", "70"],
+            ["LHS-Sec-2", "978", "75", "77"],
+        ])
+        text = _extract_pdf_text(pdf)
+        rows = [ln for ln in text.splitlines() if "\t" in ln]
+        self.assertEqual(rows[0].split("\t")[0], "Sub-Section")
+        self.assertIn("977", rows[1].split("\t"))
+
+    def test_fwd_overlay_from_positioned_pdf(self):
+        import base64
+        pdf = make_table_pdf([
+            ["Sub-Section", "Bituminous Layer", "Granular Layer", "Subgrade"],
+            ["LHS-Sec-1", "977", "60", "70"],
+            ["RHS-Sec-8", "688", "61", "56"],
+        ])
+        res = api.fwd_overlay({
+            "design_msa": 300, "format": "pdf",
+            "content_b64": base64.b64encode(pdf).decode(),
+        })
+        self.assertEqual(res["n_sections"], 2)
+        ids = {s["section_id"] for s in res["sections"]}
+        self.assertEqual(ids, {"LHS-Sec-1", "RHS-Sec-8"})
+
+    def test_prose_line_is_not_mistaken_for_a_header(self):
+        from rams.api import _header_matches, _split_delimited
+        prose = "The back calculated moduli of the bituminous granular layers"
+        # words become separate cells, but a sentence resolves to < 3 schema
+        # columns, so it must not be picked as the FWD header.
+        self.assertFalse(_header_matches(_split_delimited(prose.replace(" ", "\t")),
+                                         "e_bituminous"))
+        header = "Sub-Section\tBituminous Layer\tGranular Layer\tSubgrade"
+        self.assertTrue(_header_matches(_split_delimited(header), "e_bituminous"))
 
 
 # --- dispatcher -------------------------------------------------------------

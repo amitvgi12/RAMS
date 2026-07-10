@@ -569,27 +569,140 @@ def _extract_pdf_text_stdlib(data: bytes) -> str:
     return "\n".join(t for t in lines if t)
 
 
-# Tokens we care about: PDF literal strings and the operators that show text or
-# advance to a new text line.
-_PDF_TOKEN = re.compile(rb"\((?:\\.|[^\\()])*\)|\bTd\b|\bTD\b|\bT\*\b|\bTm\b|\bTj\b|\bTJ\b|'|\"")
+# Content-stream tokens: literal / hex strings, array delimiters (for TJ), numeric
+# operands, and the text operators we track for positioning.
+_CONTENT_TOKEN = re.compile(
+    rb"\((?:\\.|[^\\()])*\)"          # ( literal string )
+    rb"|<[0-9A-Fa-f\s]*>"             # <hex string>
+    rb"|\[|\]"                        # TJ array delimiters
+    rb"|[-+]?\d*\.\d+|[-+]?\d+"       # number
+    rb"|T[dmDL*]|Tj|TJ|BT|ET|'|\""    # text operators
+)
+
+_Y_TOL = 3.0        # PDF text units: fragments within this dy are the same table row
+_X_MERGE = 2.5      # fragments within this dx are the same cell (kerning), not columns
+
+
+def _decode_hex_string(tok: bytes) -> str:
+    body = re.sub(rb"\s+", b"", tok[1:-1])
+    if len(body) % 2:
+        body += b"0"
+    try:
+        return bytes.fromhex(body.decode("ascii")).decode("latin-1")
+    except ValueError:
+        return ""
 
 
 def _text_from_content_stream(chunk: bytes) -> str:
-    """Decode text-show operators in a content stream into text lines."""
-    out_lines: List[str] = []
-    current: List[str] = []
-    for tok in _PDF_TOKEN.finditer(chunk):
+    """Recover text from a content stream, reconstructing visual table rows.
+
+    Each shown string is recorded with the (x, y) of the text line it sits on
+    (tracked through the Tm / Td / TD / T* / TL operators). Fragments are then
+    grouped by y into rows and ordered by x into cells -- so a table whose cells
+    are individually positioned on the page (a typical report PDF) is recovered as
+    tab-separated rows, not scattered one-cell-per-line. A "print-to-PDF of a CSV"
+    (one full comma row per string) still comes out one row per line. Purely
+    best-effort: it tracks translations only (no font metrics / rotation).
+    """
+    records: List[Tuple[float, float, str]] = []   # (y, x, text)
+    tlm_x = tlm_y = 0.0
+    leading = 0.0
+    operands: List[float] = []
+    last_string = ""
+    array_buf: List[str] = []
+    in_array = False
+
+    for tok in _CONTENT_TOKEN.finditer(chunk):
         t = tok.group(0)
-        if t.startswith(b"("):
-            current.append(_decode_pdf_literal(t[1:-1]))
-        elif t in (b"Td", b"TD", b"T*", b"Tm", b"'", b'"'):
-            # A positioning / next-line operator => flush the current line.
-            if current:
-                out_lines.append("".join(current))
-                current = []
-    if current:
-        out_lines.append("".join(current))
-    return "\n".join(out_lines)
+        c0 = t[:1]
+        if c0 == b"(":
+            s = _decode_pdf_literal(t[1:-1])
+            if in_array:
+                array_buf.append(s)
+            else:
+                last_string = s
+        elif c0 == b"<":
+            s = _decode_hex_string(t)
+            if in_array:
+                array_buf.append(s)
+            else:
+                last_string = s
+        elif t == b"[":
+            in_array = True
+            array_buf = []
+        elif t == b"]":
+            in_array = False
+            last_string = "".join(array_buf)
+        elif t[:1] in b"-+0123456789." and t not in (b"T*",):
+            try:
+                operands.append(float(t))
+            except ValueError:
+                pass
+        elif t == b"Tm":
+            if len(operands) >= 6:
+                tlm_x, tlm_y = operands[-2], operands[-1]
+            operands = []
+        elif t in (b"Td", b"TD"):
+            if len(operands) >= 2:
+                tlm_x += operands[-2]
+                tlm_y += operands[-1]
+                if t == b"TD":
+                    leading = -operands[-1]
+            operands = []
+        elif t == b"TL":
+            if operands:
+                leading = operands[-1]
+            operands = []
+        elif t == b"T*":
+            tlm_y -= leading
+            operands = []
+        elif t in (b"Tj", b"'", b'"'):
+            if t in (b"'", b'"'):
+                tlm_y -= leading          # these show on the next line first
+            if last_string:
+                records.append((tlm_y, tlm_x, last_string))
+            last_string = ""
+            operands = []
+        elif t == b"TJ":
+            if last_string:
+                records.append((tlm_y, tlm_x, last_string))
+            last_string = ""
+            operands = []
+        elif t == b"BT":
+            tlm_x = tlm_y = leading = 0.0
+            operands = []
+        else:
+            operands = []
+    return _reconstruct_rows(records)
+
+
+def _reconstruct_rows(records: List[Tuple[float, float, str]]) -> str:
+    """Group positioned text fragments into rows (by y) and cells (by x)."""
+    if not records:
+        return ""
+    records.sort(key=lambda r: (-r[0], r[1]))     # top-to-bottom, then left-to-right
+    rows: List[List[Tuple[float, str]]] = []
+    ref_y = None
+    for y, x, txt in records:
+        if ref_y is None or abs(y - ref_y) > _Y_TOL:
+            rows.append([])
+            ref_y = y
+        rows[-1].append((x, txt))
+    lines: List[str] = []
+    for cells in rows:
+        cells.sort(key=lambda c: c[0])
+        parts: List[str] = []
+        prev_x = None
+        for x, txt in cells:
+            if prev_x is not None and (x - prev_x) < _X_MERGE:
+                parts[-1] += txt          # kerned continuation of the same cell
+            else:
+                parts.append(txt)
+            prev_x = x
+        line = "\t".join(p.strip() for p in parts).rstrip("\t")
+        if line.strip():
+            lines.append(line)
+    return "\n".join(lines)
 
 
 _PDF_ESCAPES = {

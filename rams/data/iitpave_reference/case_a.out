@@ -1,0 +1,10 @@
+  No. of layers                3
+  E values (MPa)         2000.00  200.00   75.00
+  Mu values                 0.300.300.30
+  thicknesses (mm)        100.00  300.00
+  single wheel load (N) 20000.00
+  tyre pressure (MPa)       0.56
+  Dual  Wheel
+    Z        R      SigmaZ      SigmaT     SigmaR     TaoRZ      DispZ      epZ        epT        epR
+  400.00  155.00-0.4392E-01 0.4681E-01 0.3796E-01-0.1286E-01 0.3924E+00-0.3467E-03 0.2430E-03 0.1854E-03
+  400.00L 155.00-0.4391E-01 0.5791E-02 0.2469E-02-0.1285E-01 0.3925E+00-0.6186E-03 0.2430E-03 0.1854E-03

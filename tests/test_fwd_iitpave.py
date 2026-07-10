@@ -56,13 +56,18 @@ class TestStrainCalibration(unittest.TestCase):
         self.assertLess(_rel(s.vertical_microstrain, 213), 0.10)
         self.assertLess(_rel(s.governing_life_msa, 330.5), 0.15)  # report remaining life
 
-    def test_tensile_correction_differs_by_standard(self):
+    def test_strain_is_physical_life_differs_by_standard(self):
         lyr = LayerModel(1000, 300, 77, 300, 350,
                          nu_bituminous=0.5, nu_granular=0.4, nu_subgrade=0.4)
-        # IRC:115 uses a larger tensile correction (1.38) than IRC:37 (1.30).
+        # The IITPAVE engine computes the strain directly, so it is a physical
+        # quantity independent of the fatigue standard: eps_t is identical for
+        # irc37 and irc115. Only the fatigue LAW (and hence the life) differs.
         s37 = compute_strains(lyr, standard="irc37")
         s115 = compute_strains(lyr, standard="irc115")
-        self.assertGreater(s115.tensile_microstrain, s37.tensile_microstrain)
+        self.assertAlmostEqual(s115.tensile_microstrain, s37.tensile_microstrain,
+                               places=6)
+        self.assertNotAlmostEqual(s115.fatigue_life_msa, s37.fatigue_life_msa,
+                                  places=2)
 
 
 class TestEvaluateSectionStandard(unittest.TestCase):

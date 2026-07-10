@@ -421,7 +421,7 @@ INDEX_HTML = r"""<!DOCTYPE html>
         design traffic &mdash; either directly as design MSA, or as commercial vehicles/day
         (CVPD) and VDF to derive it via IRC:37. <b>Catalogue</b> returns the IRC:37-2018
         catalogue section; <b>IITPAVE (mechanistic)</b> sizes the lowest-cost section whose
-        Odemark&ndash;Boussinesq fatigue and rutting strains both meet the design traffic.</p>
+        layered-elastic (IITPAVE) fatigue and rutting strains both meet the design traffic.</p>
       <div class="grid">
         <div><label>Method</label><select id="d_method"><option value="catalogue">Catalogue (IRC:37-2018)</option><option value="iitpave">IITPAVE (mechanistic)</option></select></div>
         <div><label>Subgrade CBR (%)</label><input id="d_cbr" type="number" step="0.5" value="8"></div>
@@ -468,9 +468,9 @@ INDEX_HTML = r"""<!DOCTYPE html>
       <p class="muted">Paste an FWD report's homogeneous sub-sections (the corrected
         15th-percentile back-calculated moduli + crust thickness), or upload the report
         (<b>.csv / .xlsx / .pdf</b>). RAMS computes the IRC:115-2014 remaining life per section
-        and flags where an overlay is needed for the design traffic. Screening-grade
-        (Odemark&ndash;Boussinesq, ~&plusmn;10% of IITPAVE); sections within 15% of the threshold
-        are marked to confirm with IITPAVE. Columns: section_id, e_bituminous, e_granular,
+        and flags where an overlay is needed for the design traffic. Strains from the
+        IITPAVE layered-elastic engine; sections within 15% of the threshold are marked
+        borderline (verify with field cores / seasonal moduli). Columns: section_id, e_bituminous, e_granular,
         e_subgrade, h_bituminous, h_granular (optional chainage_from, chainage_to).
         Missing optional columns default; only e_bituminous is required.</p>
       <div class="grid">
@@ -1049,7 +1049,7 @@ async function runDesign(){
       kpi(Math.round(d.subgrade_modulus_mpa)+' MPa','subgrade modulus')+
       (s? kpi(Math.round(s.governing_life_msa)+' MSA','mechanistic capacity'):'');
     const strainTbl = s?
-      '<p class="muted" style="margin-top:12px"><b>Mechanistic check (IITPAVE-style)</b></p>'+
+      '<p class="muted" style="margin-top:12px"><b>Mechanistic check (IITPAVE layered-elastic)</b></p>'+
       '<table><tr><th>Criterion</th><th>Strain (&micro;&epsilon;)</th><th>Life (MSA)</th></tr>'+
         '<tr><td>Fatigue (eps_t, bottom of bituminous)</td><td>'+s.tensile_microstrain+'</td><td>'+Math.round(s.fatigue_life_msa)+'</td></tr>'+
         '<tr><td>Rutting (eps_v, top of subgrade)</td><td>'+s.vertical_microstrain+'</td><td>'+Math.round(s.rutting_life_msa)+'</td></tr>'+

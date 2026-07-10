@@ -478,16 +478,19 @@ budget/interval cannot keep performance-compliant). Both are exposed at
 and as the dashboard's **Design & PBMC** tab. Every rate is a planning default —
 replace with the agency's schedule of rates for a tender-grade estimate.
 
-## IITPAVE-style mechanistic design & section evaluation
+## IITPAVE mechanistic design & section evaluation
 
 `rams/iitpave.py` adds the mechanistic layer IRC:37-2018 actually designs with: a
 layered-elastic analysis that computes the two critical strains under the
-standard axle and converts them to fatigue/rutting life. RAMS cannot ship the
-IRC IITPAVE binary, so it uses the **Odemark--Boussinesq method of equivalent
-thickness** -- a documented layered-elastic approximation in the IITPAVE
-tradition (standard 80 kN dual-wheel axle, 0.56 MPa, second wheel superposed).
-It is monotonic and lands in the IRC:37 strain range, but is an approximation:
-**confirm a final design against IITPAVE proper.**
+standard axle and converts them to fatigue/rutting life. RAMS cannot run the IRC
+IITPAVE Windows binary on its Linux hosting (and ships no third-party packages),
+so `rams/iitpave_engine.py` **re-implements the genuine IITPAVE multi-layer
+linear-elastic (Burmister) solver in pure Python** — the Hankel-transform solution
+with Bessel-kernel integration, the standard 80 kN dual-wheel axle (0.56 MPa,
+310 mm c/c, both wheels superposed). It is validated against the official IITPAVE
+outputs (bundled under `rams/data/iitpave_reference/`) to **~0.1%**. The older
+Odemark–Boussinesq approximation stays available as a fast fallback
+(`compute_strains(..., method="odemark")`).
 
 Two uses, both on the **Design & PBMC** tab and at `POST /api/design`
 (`method:"iitpave"`) / `POST /api/iitpave`:
@@ -495,12 +498,12 @@ Two uses, both on the **Design & PBMC** tab and at `POST /api/design`
 ```bash
 # Mechanistic design: lowest-cost section meeting fatigue AND rutting for the MSA
 python -m rams.cli --design --design-method iitpave --cbr 8 --design-msa 50
-#   -> 145 mm bituminous over 360 mm granular; eps_t 185 / eps_v 368 microstrain
+#   -> 150 mm bituminous over 380 mm granular; eps_t 192 / eps_v 361 microstrain
 
 # Section check from FWD back-calculated 15th-percentile moduli (residual life)
 python -m rams.cli --iitpave --e-bt 977 --e-gran 200 --e-sub 70 \
     --h-bt 300 --h-gran 350 --msa 10 --growth 0.05 --cumulative-msa 20 --design-msa 150
-#   -> capacity 258 MSA (subgrade rutting), ~16 yr residual, carries 150 MSA
+#   -> capacity 239 MSA (subgrade rutting), ~15 yr residual, carries 150 MSA
 ```
 
 ```python
@@ -515,17 +518,19 @@ the **IITPAVE section check** card evaluates an in-service pavement from its FWD
 back-calculated layer moduli + thicknesses (the natural input from a deflection
 survey's homogeneous-section report).
 
-### Calibration & accuracy (validated against real IITPAVE output)
+### Accuracy (validated against real IITPAVE output)
 
-The Odemark–Boussinesq strains are calibrated to **real IITPAVE results** — the
-IRC:37-2018 Annex II worked examples and a published FWD evaluation report —
-with multipliers (`TENSILE_CORRECTION_IRC37=1.30`, `TENSILE_CORRECTION_IRC115=1.38`,
-`VERTICAL_CORRECTION=0.97`) that bring εt/εv to within **~5–10%** of IITPAVE over
-the validated range (50–1600 MPa bituminous modulus, 190–310 mm thickness). The
-golden cases are locked in the test suite. Two honest caveats: very thick
-(>250 mm) perpetual-pavement sections under-predict tensile strain, and overlay
-decisions within **±15% of the design life are flagged "confirm with IITPAVE"** —
-the screening defers the close calls to a rigorous run rather than guessing.
+The engine is checked three ways in the test suite (`tests/test_iitpave_engine.py`):
+against the **closed-form Boussinesq** solution for a homogeneous half-space
+(stresses *and* strains); against the **bundled IITPAVE reference outputs** — the
+self-consistent 3-layer cases, reproduced **row-for-row to ~0.1%** (stress tensor,
+deflection and all three strains); and for **physical self-consistency** (splitting
+a layer into identical sub-layers leaves the result unchanged). It also reproduces
+the published IRC:115 FWD example (εt ≈ 125, εv ≈ 213) to within a few percent.
+Because the strains are computed directly, no empirical correction factors are
+needed. The remaining uncertainty is in the *inputs* (back-calculated moduli,
+temperature/seasonal corrections), so overlay decisions within **±15% of the design
+life are flagged borderline** — verify those against field data.
 
 ### FWD remaining-life & overlay (IRC:115-2014)
 
@@ -660,8 +665,9 @@ rams/
   distress.py     Selectable cracking (MLIT) / roughness / skid / pothole models
   traffic.py      IRC:37 CVPD + VDF -> design / annual MSA (Indian overloading)
   design.py       IRC:37 new-pavement design: CBR + MSA -> BC/DBM/WMM/GSB section
-  iitpave.py      Mechanistic layered-elastic analysis (Odemark-Boussinesq):
-                  critical strains -> fatigue/rutting life, section check + design
+  iitpave_engine.py  Pure-Python IITPAVE layered-elastic (Burmister) solver
+  iitpave.py      Mechanistic analysis on that engine: critical strains ->
+                  fatigue/rutting life, section check + design (Odemark fallback)
   pbmc.py         Performance-Based Maintenance Contract cost estimator (5-7 yr)
   morth.py        MoRTH Standard Data Book treatment unit rates (Rs/m^2) + costing
   lca.py          Life-cycle decision matrix (routine/preventive/overlay/recon) + NPV/EUAC
@@ -771,7 +777,7 @@ earlier preventive window — that earlier year is what `--csv` prints per row.
 - **Calibrate & Residual Life** — fit any deterioration model to field data, and
   assess IRC:81/IRC:37 remaining structural life + HAM handback verdict.
 - **Design & PBMC** — IRC:37 pavement design (CBR → layer thicknesses) via the
-  catalogue **or** an IITPAVE-style mechanistic analysis, an **IITPAVE section
+  catalogue **or** an IITPAVE layered-elastic mechanistic analysis, an **IITPAVE section
   check** (FWD moduli → strains, fatigue/rutting life, residual life), a priced
   5–7-year Performance-Based Maintenance Contract, and the **Life-Cycle Analysis**
   decision matrix with MoRTH costs (NPV/EUAC).

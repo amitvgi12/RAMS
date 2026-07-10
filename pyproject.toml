@@ -24,3 +24,7 @@ rams = "rams.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["rams*"]
+
+[tool.setuptools.package-data]
+# Bundled IITPAVE reference I/O used to validate the layered-elastic engine.
+rams = ["data/iitpave_reference/*"]

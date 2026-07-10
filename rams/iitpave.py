@@ -1,5 +1,5 @@
 """
-Mechanistic layered-elastic pavement analysis (IITPAVE-style) for IRC:37-2018.
+Mechanistic layered-elastic pavement analysis (IITPAVE) for IRC:37-2018.
 
 IRC:37-2018 sizes a flexible pavement *mechanistically*: a layered-elastic
 analysis (the IRC tool is IITPAVE) computes the two critical strains under the
@@ -10,25 +10,27 @@ standard axle, and the pavement is adequate when both exceed the design traffic:
   * vertical compressive strain on top of the subgrade (eps_v)
     -> subgrade rutting life (Nr).
 
-RAMS cannot ship the IITPAVE binary (Windows Fortran, IRC-distributed), so this
-module computes the same two strains with the **Odemark--Boussinesq method of
-equivalent thickness (MET)** -- a documented, citable layered-elastic
-approximation in the IITPAVE/IRC:37 tradition:
+The strains come from `iitpave_engine`, a pure-Python re-implementation of the
+genuine IITPAVE multi-layer linear-elastic (Burmister) solver. RAMS cannot run
+the IITPAVE Windows binary on its Linux hosting and ships no third-party
+packages, so the engine reproduces the same computation from first principles
+(Hankel-transform solution + Bessel integration); it is validated against the
+bundled IITPAVE outputs (``rams/data/iitpave_reference/``) to ~0.1%. The standard
+axle is the IRC dual wheel (20 kN/wheel, 0.56 MPa, 310 mm c/c); both wheels are
+superposed and both the wheel-centre and between-wheels positions are evaluated.
+
+The older **Odemark--Boussinesq method of equivalent thickness** remains available
+as a fast, calibrated fallback (`compute_strains(..., method="odemark")`):
 
   1. Upper layers are transformed to an equivalent thickness of the layer below
      by `h_e = f * h * (E_upper/E_lower)^(1/3)` (Odemark).
-  2. The strain is read from the Boussinesq closed-form solution for a uniformly
-     loaded circular area on the resulting elastic half-space, at the equivalent
-     depth.
-  3. The standard axle is modelled as a dual wheel (20 kN/wheel, 0.56 MPa,
-     310 mm spacing); the second wheel is superposed (point-load approximation)
-     for the subgrade strain -- without it eps_v is badly under-predicted.
+  2. The strain is read from the Boussinesq closed-form solution at the equivalent
+     depth, with a second superposed wheel for the subgrade strain.
 
-This is an engineering approximation: it lands within the IRC:37 strain range
-and is monotonic and self-consistent for design search, but a final design must
-be confirmed against IITPAVE proper. Every constant (the MET factor `f`, the
-Poisson ratios, the load) is overridable -- coefficients-as-data, like the rest
-of RAMS. The fatigue/rutting performance laws are reused from `design.py`.
+The odemark path applies empirical `TENSILE_CORRECTION` factors to track IITPAVE;
+the engine needs none -- it computes the strains directly. Every constant (the
+Poisson ratios, the load) is overridable -- coefficients-as-data, like the rest of
+RAMS. The fatigue/rutting performance laws are reused from `design.py`.
 """
 from __future__ import annotations
 
@@ -45,6 +47,7 @@ from .design import (
     rutting_life_msa,
     subgrade_modulus_mpa,
 )
+from . import iitpave_engine as _engine
 
 # --- IRC:37 standard-axle load configuration --------------------------------
 STD_WHEEL_LOAD_N = 20_000.0     # one wheel of the 80 kN standard axle (dual wheel)
@@ -147,15 +150,78 @@ def compute_strains(layer: LayerModel,
                     pressure_mpa: float = TYRE_PRESSURE_MPA,
                     *,
                     standard: str = "irc37",
+                    method: str = "iitpave",
+                    resolution=None,
                     tensile_correction: Optional[float] = None,
                     vertical_correction: float = VERTICAL_CORRECTION) -> "StrainResult":
-    """Critical strains via Odemark--Boussinesq (calibrated to IITPAVE), then the
-    fatigue/rutting life.
+    """Critical IRC:37 strains for a section, then the fatigue/rutting life.
 
-    `standard`: "irc37" (IRC:37-2018 fatigue with the mix C factor, for design) or
-    "irc115" (IRC:115-2014 fatigue, the FWD remaining-life model). The strains are
-    multiplied by the IITPAVE calibration factors so they track real IITPAVE
-    output; reliability follows IRC (90% at/above 20 MSA, else 80%)."""
+    `method`: "iitpave" (default) computes the two critical strains with the genuine
+    multi-layer linear-elastic solver (`iitpave_engine`, IITPAVE-equivalent); "odemark"
+    uses the older Odemark--Boussinesq approximation. `standard`: "irc37" (IRC:37-2018
+    fatigue with the mix C factor, for design) or "irc115" (IRC:115-2014 fatigue, the
+    FWD remaining-life model). Reliability follows IRC (90% at/above 20 MSA, else 80%).
+    The `tensile_correction`/`vertical_correction` arguments apply only to the odemark
+    method (the engine needs no calibration -- it computes the strains directly).
+    """
+    if method == "odemark":
+        return _compute_strains_odemark(
+            layer, load_n, pressure_mpa, standard=standard,
+            tensile_correction=tensile_correction,
+            vertical_correction=vertical_correction)
+    return _compute_strains_engine(
+        layer, load_n, pressure_mpa, standard=standard, resolution=resolution)
+
+
+def _compute_strains_engine(layer: LayerModel,
+                            load_n: float = STD_WHEEL_LOAD_N,
+                            pressure_mpa: float = TYRE_PRESSURE_MPA,
+                            *,
+                            standard: str = "irc37",
+                            resolution=None) -> "StrainResult":
+    """Critical strains via the exact IITPAVE layered-elastic engine.
+
+    The section is modelled as three bonded layers (bituminous / granular / subgrade
+    half-space). Under the IRC standard dual wheel the engine returns the full strain
+    state; the design-critical values are the maximum horizontal tensile strain at the
+    bottom of the bituminous layer (fatigue) and the maximum vertical compressive
+    strain on top of the subgrade (rutting), each taken over the wheel-centre (R=0)
+    and between-wheels (R=155 mm) positions.
+    """
+    layers = [
+        _engine.ElasticLayer(layer.e_bituminous_mpa, layer.nu_bituminous,
+                             layer.h_bituminous_mm),
+        _engine.ElasticLayer(layer.e_granular_mpa, layer.nu_granular,
+                             layer.h_granular_mm),
+        _engine.ElasticLayer(layer.e_subgrade_mpa, layer.nu_subgrade, 0.0),
+    ]
+    load = _engine.WheelLoad(load_n, pressure_mpa, dual=True,
+                             spacing_mm=DUAL_SPACING_MM)
+    z_ac = layer.h_bituminous_mm                         # bottom of bituminous
+    z_sg = layer.h_bituminous_mm + layer.h_granular_mm   # top of subgrade
+    queries = [
+        (z_ac, 0.0, False), (z_ac, DUAL_SPACING_MM / 2.0, False),   # eps_t positions
+        (z_sg, 0.0, True), (z_sg, DUAL_SPACING_MM / 2.0, True),     # eps_v positions
+    ]
+    res = _engine.analyze(layers, load, queries,
+                          resolution=resolution or _engine.RES_FINE)
+    # Fatigue: largest horizontal tensile (positive) strain at the AC underside.
+    eps_t = max(res[0].eps_t, res[0].eps_r, res[1].eps_t, res[1].eps_r, 0.0)
+    # Rutting: largest vertical compressive strain on the subgrade.
+    eps_v = max(abs(res[2].eps_z), abs(res[3].eps_z))
+    return _lives_from_strains(eps_t, eps_v, layer.e_bituminous_mpa, standard=standard)
+
+
+def _compute_strains_odemark(layer: LayerModel,
+                             load_n: float = STD_WHEEL_LOAD_N,
+                             pressure_mpa: float = TYRE_PRESSURE_MPA,
+                             *,
+                             standard: str = "irc37",
+                             tensile_correction: Optional[float] = None,
+                             vertical_correction: float = VERTICAL_CORRECTION) -> "StrainResult":
+    """Critical strains via Odemark--Boussinesq (calibrated to IITPAVE), then the
+    fatigue/rutting life. Retained as a fast, dependency-free fallback for the exact
+    `iitpave_engine`; see `compute_strains`."""
     a = contact_radius_mm(load_n, pressure_mpa)
     p = pressure_mpa
     if tensile_correction is None:
@@ -430,8 +496,9 @@ def evaluate_fwd_sections(
             remaining_rutting_msa=s.rutting_life_msa,
             remaining_life_msa=remaining, design_msa=design_msa,
             overlay_required=remaining < design_msa,
-            # Within +-15% of the threshold the Odemark approximation cannot
-            # decide reliably -> flag for a confirmatory IITPAVE run.
+            # Within +-15% of the threshold the overlay decision is sensitive to
+            # the back-calculated moduli / temperature correction -> flag for a
+            # confirmatory check (field cores, seasonal moduli).
             confirm_with_iitpave=abs(remaining - design_msa) <= 0.15 * design_msa,
         ))
     return FWDOverlayResult(design_msa=design_msa, rows=rows)
@@ -461,7 +528,7 @@ class FWDOverlayResult:
         n_confirm = len(self.borderline_sections)
         confirm_txt = (
             f" {n_confirm} borderline section(s) are within 15% of the threshold -- "
-            f"confirm these with IITPAVE." if n_confirm else ""
+            f"verify these against field data (cores / seasonal moduli)." if n_confirm else ""
         )
         return {
             "design_msa": self.design_msa,
@@ -472,10 +539,10 @@ class FWDOverlayResult:
             "min_remaining_msa": round(self.min_remaining_msa, 1),
             "verdict": (
                 f"All {len(self.rows)} sub-section(s) carry the {self.design_msa:.0f} MSA "
-                f"design life; no overlay required (screening)." + confirm_txt
+                f"design life; no overlay required." + confirm_txt
                 if n_overlay == 0 else
                 f"{n_overlay} of {len(self.rows)} sub-section(s) fall below the "
-                f"{self.design_msa:.0f} MSA design life; overlay required (screening)." + confirm_txt
+                f"{self.design_msa:.0f} MSA design life; overlay required." + confirm_txt
             ),
             "sections": [r.as_dict() for r in self.rows],
         }
@@ -519,33 +586,89 @@ def design_pavement_mechanistic(
         return h_bt * bituminous_cost_ratio + h_gran
 
     e_sub = subgrade_modulus_mpa(cbr)
-    best: Optional[MechanisticDesign] = None
+
+    def feasible_at(h_bt: float, h_gran: float, e_gran: float):
+        """(is_feasible, strains) at a trial section, using the fast engine preset."""
+        lyr = LayerModel(
+            e_bituminous_mpa=e_bituminous_mpa, e_granular_mpa=e_gran,
+            e_subgrade_mpa=e_sub, h_bituminous_mm=h_bt, h_granular_mm=h_gran,
+        )
+        st = compute_strains(lyr, resolution=_engine.RES_FAST)
+        ok = st.fatigue_life_msa >= design_msa and st.rutting_life_msa >= design_msa
+        return ok, st
+
+    n_bt = int(round((bituminous_max_mm - bituminous_min_mm) / step_mm))
+
+    def thinnest_bt(h_gran: float, e_gran: float):
+        """Thinnest feasible bituminous thickness for a granular layer (bisection on
+        the step grid; the mechanistic lives increase monotonically with bituminous
+        thickness)."""
+        def h(i: int) -> float:
+            return bituminous_min_mm + i * step_mm
+        if not feasible_at(h(n_bt), h_gran, e_gran)[0]:
+            return None
+        if feasible_at(h(0), h_gran, e_gran)[0]:
+            return h(0)
+        lo, hi = 0, n_bt          # invariant: h(lo) infeasible, h(hi) feasible
+        while hi - lo > 1:
+            mid = (lo + hi) // 2
+            if feasible_at(h(mid), h_gran, e_gran)[0]:
+                hi = mid
+            else:
+                lo = mid
+        return h(hi)
+
+    # Cost = ratio*bituminous + granular, with bituminous ~ratio x dearer. The
+    # thinnest-bituminous curve is monotone in granular thickness but the cost
+    # optimum is interior, so a plain scan is wasteful. Scan the granular axis
+    # coarsely to bracket the optimum, then refine around it at full step.
+    def best_over(h_gran_values):
+        best_local = None
+        best_c = float("inf")
+        for h_gran in h_gran_values:
+            if h_gran < granular_min_mm or h_gran > granular_max_mm:
+                continue
+            e_gran = granular_modulus_from_subgrade(e_sub, h_gran)
+            h_bt = thinnest_bt(h_gran, e_gran)
+            if h_bt is None:
+                continue
+            c = cost(h_bt, h_gran)
+            if c < best_c:
+                best_c = c
+                best_local = (h_gran, h_bt, e_gran)
+        return best_local, best_c
+
+    coarse_step = max(step_mm, 40.0)
+    n_coarse = int((granular_max_mm - granular_min_mm) / coarse_step) + 1
+    coarse_vals = [granular_min_mm + i * coarse_step for i in range(n_coarse)]
+    coarse_vals.append(granular_max_mm)
+    coarse_best, _ = best_over(coarse_vals)
+
+    best = None
     best_cost = float("inf")
-    h_gran = granular_min_mm
-    while h_gran <= granular_max_mm:
-        e_gran = granular_modulus_from_subgrade(e_sub, h_gran)
-        h_bt = bituminous_min_mm
-        while h_bt <= bituminous_max_mm:
-            layer = LayerModel(
-                e_bituminous_mpa=e_bituminous_mpa, e_granular_mpa=e_gran,
-                e_subgrade_mpa=e_sub, h_bituminous_mm=h_bt, h_granular_mm=h_gran,
-            )
-            s = compute_strains(layer)
-            if s.fatigue_life_msa >= design_msa and s.rutting_life_msa >= design_msa:
-                c = cost(h_bt, h_gran)
-                if c < best_cost:
-                    best_cost = c
-                    best = MechanisticDesign(
-                        cbr=float(cbr), design_msa=float(design_msa),
-                        design_life_years=int(design_life_years),
-                        subgrade_modulus_mpa=e_sub, e_bituminous_mpa=e_bituminous_mpa,
-                        e_granular_mpa=e_gran, bituminous_mm=round(h_bt, 0),
-                        granular_mm=round(h_gran, 0), total_mm=round(h_bt + h_gran, 0),
-                        strains=s, rationale="",
-                    )
-                break  # thinnest bituminous for this granular thickness
-            h_bt += step_mm
-        h_gran += step_mm
+    if coarse_best is not None:
+        # Refine within +-coarse_step of the coarse optimum at the fine step.
+        g0 = coarse_best[0]
+        n_fine = int(2 * coarse_step / step_mm) + 1
+        fine_vals = [g0 - coarse_step + i * step_mm for i in range(n_fine)]
+        fine_best, best_cost = best_over(fine_vals)
+        chosen = fine_best or coarse_best
+        h_gran, h_bt, e_gran = chosen
+        best_cost = cost(h_bt, h_gran)
+        # Re-price the winner at full engine resolution for the report.
+        layer = LayerModel(
+            e_bituminous_mpa=e_bituminous_mpa, e_granular_mpa=e_gran,
+            e_subgrade_mpa=e_sub, h_bituminous_mm=h_bt, h_granular_mm=h_gran,
+        )
+        s = compute_strains(layer)
+        best = MechanisticDesign(
+            cbr=float(cbr), design_msa=float(design_msa),
+            design_life_years=int(design_life_years),
+            subgrade_modulus_mpa=e_sub, e_bituminous_mpa=e_bituminous_mpa,
+            e_granular_mpa=e_gran, bituminous_mm=round(h_bt, 0),
+            granular_mm=round(h_gran, 0), total_mm=round(h_bt + h_gran, 0),
+            strains=s, rationale="",
+        )
 
     if best is None:  # design traffic beyond the search envelope
         layer = LayerModel(
@@ -563,7 +686,7 @@ def design_pavement_mechanistic(
         )
 
     best.rationale = (
-        f"IITPAVE-style (Odemark--Boussinesq) design for CBR {cbr:.1f}% "
+        f"IITPAVE layered-elastic design for CBR {cbr:.1f}% "
         f"(subgrade M_R {e_sub:.0f} MPa) and {design_msa:.0f} MSA: "
         f"{best.bituminous_mm:.0f} mm bituminous over {best.granular_mm:.0f} mm "
         f"granular (total {best.total_mm:.0f} mm) gives eps_t "
@@ -571,6 +694,7 @@ def design_pavement_mechanistic(
         f"{best.strains.vertical_microstrain:.0f} microstrain -> fatigue "
         f"{best.strains.fatigue_life_msa:.0f} MSA, rutting "
         f"{best.strains.rutting_life_msa:.0f} MSA (governed by "
-        f"{best.strains.governing_mode}). Approximate -- confirm with IITPAVE."
+        f"{best.strains.governing_mode}). Strains from the IITPAVE-equivalent "
+        f"layered-elastic engine."
     )
     return best

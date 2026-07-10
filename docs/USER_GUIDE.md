@@ -184,9 +184,9 @@ cross-section diagram**, and (mechanistic method) a fatigue/rutting strain check
 
 **How it's calculated:**
 - *Catalogue* — the IRC:37-2018 design catalogue section for the CBR and traffic.
-- *Mechanistic* — sizes the **least-cost** section whose Odemark–Boussinesq
+- *Mechanistic* — sizes the **least-cost** section whose IITPAVE layered-elastic
   fatigue (ε_t at the bottom of bituminous) and rutting (ε_v at the subgrade top)
-  strains both satisfy the design traffic, calibrated to IITPAVE.
+  strains both satisfy the design traffic.
 
 ### 6.2 IITPAVE section check
 Enter layer moduli and thicknesses → tensile/vertical strains and fatigue/rutting
@@ -202,10 +202,10 @@ and flag overlays.
   `e_subgrade`, `h_bituminous`, `h_granular` (optional — **default if absent**),
   plus optional `chainage_from/to`. Aliases like `E_BC`, `E_base`, `E_sg`,
   `H_BC`, `H_base` are recognised.
-- **How it's calculated:** Odemark–Boussinesq strains → IRC:115-2014 remaining
+- **How it's calculated:** IITPAVE layered-elastic strains → IRC:115-2014 remaining
   fatigue/rutting life; sections below the design traffic need an overlay, and
-  those within 15% of the threshold are marked *confirm with IITPAVE*
-  (screening-grade, ~±10% of full IITPAVE).
+  those within 15% of the threshold are marked *borderline* (verify with field
+  cores / seasonal moduli — the decision is sensitive to the input moduli there).
 
 ### 6.4 PBMC estimate (5–7 yr)
 Prices a Performance-Based Maintenance Contract to hold a service level.
@@ -249,8 +249,11 @@ current SDB / State Schedule of Rates before tendering.
 
 ## 9. Limitations & honest caveats
 
-- **Mechanistic strains are screening-grade** (Odemark–Boussinesq). Confirm
-  borderline sections with full IITPAVE before construction/tender.
+- **Mechanistic strains** use a pure-Python re-implementation of IITPAVE's
+  layered-elastic solver, validated against the official IITPAVE outputs to ~0.1%.
+  It assumes bonded, linear-elastic layers under the IRC standard axle (as IITPAVE
+  does); back-calculated moduli and temperature/seasonal corrections remain the main
+  source of uncertainty, so verify borderline sections against field data.
 - **MoRTH rates are indicative.** Load the current SDB / State SoR for tendering.
 - **Calibration needs repeat surveys** (or age + traffic). A single condition
   snapshot feeds forecasting, not rate-fitting.

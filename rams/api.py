@@ -596,7 +596,7 @@ def pavement_design(payload: dict) -> dict:
     Payload: `cbr`, and either `design_msa` directly or CVPD inputs
     (`cvpd`, `vdf`|`terrain`, `growth`, `design_life_years`, `carriageway`) to
     derive it via IRC:37; optional `reliability` (80|90) and
-    `method`: "catalogue" (default) | "iitpave" (mechanistic Odemark-Boussinesq).
+    `method`: "catalogue" (default) | "iitpave" (mechanistic layered-elastic).
     """
     cbr = _f(payload, "cbr", 8.0)
     design_life = _i(payload, "design_life_years", 15)

@@ -243,7 +243,7 @@ def _build_parser() -> argparse.ArgumentParser:
     p.add_argument("--design", action="store_true", help="Run an IRC:37 pavement design (needs --cbr; design MSA from --design-msa or --cvpd)")
     p.add_argument("--cbr", type=float, default=8.0, help="Subgrade CBR (%%) for the IRC:37 design")
     p.add_argument("--reliability", type=int, default=None, choices=[80, 90], help="IRC:37 reliability (default: 80 if <20 MSA else 90)")
-    p.add_argument("--design-method", default="catalogue", choices=["catalogue", "iitpave"], help="Design method: IRC:37-2018 catalogue, or IITPAVE mechanistic (Odemark-Boussinesq)")
+    p.add_argument("--design-method", default="catalogue", choices=["catalogue", "iitpave"], help="Design method: IRC:37-2018 catalogue, or IITPAVE mechanistic (layered-elastic)")
 
     # IITPAVE-style mechanistic check of an existing section (FWD moduli -> life)
     p.add_argument("--iitpave", action="store_true", help="Mechanistic check of a section from layer moduli + thicknesses")
@@ -392,7 +392,7 @@ def _run_design(args: argparse.Namespace) -> int:
             cbr=args.cbr, design_msa=d_msa, design_life_years=args.design_life,
         )
         s = m.strains
-        print(f"\nIITPAVE-style mechanistic design | CBR={m.cbr:.1f}% | "
+        print(f"\nIITPAVE mechanistic design | CBR={m.cbr:.1f}% | "
               f"design {m.design_msa:.0f} MSA / {m.design_life_years}y")
         print(f"subgrade M_R {m.subgrade_modulus_mpa:.0f} MPa | bituminous E {m.e_bituminous_mpa:.0f} "
               f"| granular E {m.e_granular_mpa:.0f} MPa")
@@ -446,7 +446,7 @@ def _run_iitpave(args: argparse.Namespace) -> int:
         standard=args.standard,
     )
     s = a.strains
-    print(f"\nIITPAVE-style section check (Odemark-Boussinesq, {args.standard.upper()})")
+    print(f"\nIITPAVE layered-elastic section check ({args.standard.upper()})")
     print(f"section: BT {args.h_bt:.0f}mm @ {args.e_bt:.0f} MPa | granular {args.h_gran:.0f}mm @ "
           f"{args.e_gran:.0f} MPa | subgrade {args.e_sub:.0f} MPa")
     print("-" * 52)

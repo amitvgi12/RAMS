@@ -145,6 +145,13 @@ from .iitpave import (
     evaluate_fwd_sections,
     evaluate_section,
 )
+from .iitpave_engine import (
+    ElasticLayer,
+    WheelLoad,
+    PointResponse,
+    analyze as iitpave_analyze,
+    compute_point as iitpave_compute_point,
+)
 from .design import fatigue_life_msa_irc115
 from .survey import (
     SurveyDefaults,
@@ -286,6 +293,11 @@ __all__ = [
     "fatigue_life_msa_irc115",
     "design_pavement_mechanistic",
     "contact_radius_mm",
+    "ElasticLayer",
+    "WheelLoad",
+    "PointResponse",
+    "iitpave_analyze",
+    "iitpave_compute_point",
     "SurveyDefaults",
     "segments_from_survey",
     "merge_surveys",

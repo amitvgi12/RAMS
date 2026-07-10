@@ -600,15 +600,18 @@ def _decode_pdf_literal(s: bytes) -> str:
                 out.append(_PDF_ESCAPES[nxt])
                 i += 2
                 continue
-            if nxt.isdigit():  # up to 3 octal digits
+            if b"0" <= nxt <= b"7":  # up to 3 OCTAL digits (0-7 only)
                 j = i + 1
                 octal = b""
-                while j < n and len(octal) < 3 and s[j : j + 1].isdigit():
+                while j < n and len(octal) < 3 and b"0" <= s[j : j + 1] <= b"7":
                     octal += s[j : j + 1]
                     j += 1
                 out.append(chr(int(octal, 8) & 0xFF))
                 i = j
                 continue
+            # Any other char after a backslash: per the PDF spec the backslash is
+            # ignored and the character is taken literally (this covers \8 and \9,
+            # which are NOT octal escapes).
             out.append(nxt.decode("latin-1"))
             i += 2
             continue

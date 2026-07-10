@@ -16,6 +16,7 @@ from rams import api
 from rams.ingest import (
     ingest_segments,
     ingest_segments_pdf_bytes,
+    _decode_pdf_literal,
 )
 from rams.mci import (
     RUT_OVERLAY_THRESHOLD_MM,
@@ -103,6 +104,15 @@ class TestPdfIngestion(unittest.TestCase):
     def test_image_only_pdf_raises(self):
         with self.assertRaises(ValueError):
             ingest_segments_pdf_bytes(b"%PDF-1.4\n%%EOF")
+
+    def test_pdf_literal_non_octal_digit_escape(self):
+        # \8 and \9 are NOT octal escapes (octal is 0-7); the PDF spec says the
+        # backslash is ignored and the digit is literal. Previously this crashed
+        # with "invalid literal for int() with base 8: b'8'".
+        self.assertEqual(_decode_pdf_literal(rb"IRI \8.5 m/km"), "IRI 8.5 m/km")
+        self.assertEqual(_decode_pdf_literal(rb"\9"), "9")
+        self.assertEqual(_decode_pdf_literal(rb"\101"), "A")     # valid octal still works
+        self.assertEqual(_decode_pdf_literal(rb"\78"), chr(7) + "8")
 
 
 # --- dispatcher -------------------------------------------------------------

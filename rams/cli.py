@@ -504,6 +504,7 @@ def _print_pbmc(est) -> None:
     compliant = "yes" if est.compliant else f"NO (min PCI {est.min_pci:.2f})"
     print(f"performance-compliant: {compliant}")
     print("-" * 64)
+    print("  (all cost figures in Rs lakh)")
     print(f"  {'Yr':>2} {'Routine':>9} {'Periodic':>9} {'Initial':>9} {'Total':>10}  Treatments")
     for y in est.years:
         treat = ", ".join(y.treatments) if y.treatments else ""
@@ -512,8 +513,8 @@ def _print_pbmc(est) -> None:
     print("-" * 64)
     print(f"  routine {est.total_routine:.1f} | periodic {est.total_periodic:.1f} | "
           f"initial {est.initial_rectification:.1f}")
-    print(f"  CONTRACT VALUE {est.contract_value:.1f}  (NPV {est.npv:.1f}, "
-          f"{est.cost_per_km:.1f}/km)")
+    print(f"  CONTRACT VALUE Rs {est.contract_value:.1f} lakh  (NPV Rs {est.npv:.1f} lakh, "
+          f"Rs {est.cost_per_km:.1f} lakh/km)")
     print(f"\n>> {est.rationale}\n")
 
 
@@ -703,14 +704,15 @@ def _run_network(args: argparse.Namespace, policy: MaintenancePolicy) -> int:
         print(f"\n{net.term_years}y PBMC over {net.n_segments} segment(s) / "
               f"{net.total_length_km:.1f} km (service level PCI >= {net.performance_pci:.2f})")
         print("-" * 64)
+        print("  (Contract / NPV / per-km figures in Rs lakh)")
         print(f"  {'Segment':<16} {'km':>6} {'Contract':>10} {'NPV':>10} {'/km':>8}  Compl.")
         for e in net.segments:
             print(f"  {e.segment_id[:16]:<16} {e.length_km:>6.1f} {e.contract_value:>10.1f} "
                   f"{e.npv:>10.1f} {e.cost_per_km:>8.1f}  {'y' if e.compliant else 'N'}")
         print("-" * 64)
         print(f"  routine {net.total_routine:.1f} | periodic {net.total_periodic:.1f} | "
-              f"initial {net.total_initial:.1f}")
-        print(f"  NETWORK CONTRACT VALUE {net.contract_value:.1f}  (NPV {net.npv:.1f})")
+              f"initial {net.total_initial:.1f}  (Rs lakh)")
+        print(f"  NETWORK CONTRACT VALUE Rs {net.contract_value:.1f} lakh  (NPV Rs {net.npv:.1f} lakh)")
         if net.non_compliant:
             print(f"  performance-deficient (raise budget/shorten interval): "
                   f"{', '.join(net.non_compliant)}")

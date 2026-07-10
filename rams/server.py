@@ -491,7 +491,7 @@ Sec-4,865,335,77,300,350</textarea>
       <p class="muted">The financial-forecast stage. Prices a fixed-term contract to keep the
         road above a service-level PCI: handover rectification + routine + periodic renewals
         (from the deterioration forecast) + escalation, contingency and overhead. Reports the
-        contract value, NPV and per-year cash flow.</p>
+        contract value, NPV and per-year cash flow (all figures in &#8377; lakh).</p>
       <div class="grid">
         <div><label>Initial IRI (mm/m)</label><input id="p_iri" type="number" step="0.1" value="2.6"></div>
         <div><label>Initial Rut (mm)</label><input id="p_rut" type="number" step="0.1" value="5.0"></div>
@@ -897,7 +897,7 @@ async function runNetwork(){
     // KPI cards
     let kp=`<div class="card"><div class="kpis">`+
       `<div class="kpi"><b>&#8377;${bud.total_spend}</b><span>Total spend (L)</span></div>`+
-      `<div class="kpi"><b style="color:#1a9850">&#8377;${bud.net_savings}</b><span>Avoided structural cost (funded)</span></div>`+
+      `<div class="kpi"><b style="color:#1a9850">&#8377;${bud.net_savings}L</b><span>Avoided structural cost (funded)</span></div>`+
       `<div class="kpi"><b>${bud.scheduled.length}</b><span>Segments funded</span></div>`+
       `<div class="kpi"><b style="color:${bud.unfunded.length?'#d73027':'#1a9850'}">${bud.unfunded.length}</b><span>Unfunded (&rarr; structural)</span></div>`+
       (d.handback?`<div class="kpi"><b style="color:${d.handback.counts.FAIL?'#d73027':'#1a9850'}">${d.handback.counts.FAIL}</b><span>Fail handback (&ge;${d.handback.required_residual_msa} MSA)</span></div>`:'')+
@@ -1179,14 +1179,14 @@ async function runPBMC(){
     rows.push('<tr><th>Total</th><th>'+e.total_routine.toFixed(1)+'</th><th>'+
         e.total_periodic.toFixed(1)+'</th><th>'+e.initial_rectification.toFixed(1)+
         '</th><th>'+e.contract_value.toFixed(1)+'</th><th></th></tr>');
-    const header='<tr><th>Yr</th><th>Routine</th><th>Periodic</th><th>Initial</th>'+
-        '<th>Total</th><th style="text-align:left">Treatments</th></tr>';
+    const header='<tr><th>Yr</th><th>Routine (&#8377;L)</th><th>Periodic (&#8377;L)</th><th>Initial (&#8377;L)</th>'+
+        '<th>Total (&#8377;L)</th><th style="text-align:left">Treatments</th></tr>';
     $('pbmcOut').innerHTML=
       '<div class="kpis" style="margin:14px 0">'+
-        kpi(e.contract_value.toFixed(1),'contract value')+
-        kpi(e.npv.toFixed(1),'NPV')+
-        kpi(e.cost_per_km.toFixed(1),'per km')+
-        kpi(e.initial_rectification.toFixed(1),'handover rectification')+'</div>'+
+        kpi('&#8377;'+e.contract_value.toFixed(1)+'L','contract value')+
+        kpi('&#8377;'+e.npv.toFixed(1)+'L','NPV')+
+        kpi('&#8377;'+e.cost_per_km.toFixed(1)+'L','per km')+
+        kpi('&#8377;'+e.initial_rectification.toFixed(1)+'L','handover rectification')+'</div>'+
       '<p class="muted">'+e.term_years+'-yr term &middot; performance: '+comp+'</p>'+
       '<div id="pbmcTbl"></div>'+
       '<p class="muted" style="margin-top:10px">'+e.rationale+'</p>';

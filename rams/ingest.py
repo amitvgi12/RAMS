@@ -576,11 +576,17 @@ _CONTENT_TOKEN = re.compile(
     rb"|<[0-9A-Fa-f\s]*>"             # <hex string>
     rb"|\[|\]"                        # TJ array delimiters
     rb"|[-+]?\d*\.\d+|[-+]?\d+"       # number
-    rb"|T[dmDL*]|Tj|TJ|BT|ET|'|\""    # text operators
+    rb"|T[dmDLf*]|Tj|TJ|BT|ET|'|\""   # text operators (incl. Tf)
 )
 
-_Y_TOL = 3.0        # PDF text units: fragments within this dy are the same table row
-_X_MERGE = 2.5      # fragments within this dx are the same cell (kerning), not columns
+# Row/column reconstruction thresholds, in multiples of the font size (so they
+# scale with headings vs body text). Fragment widths are estimated from the glyph
+# count, so the gap logic distinguishes an ordinary word space inside a cell from
+# a real column gap -- a multi-word header like "Bituminous Layer" stays ONE cell.
+_Y_TOL = 3.0        # PDF text units: fragments within this dy are the same row
+_CHAR_W = 0.5       # approx glyph width as a fraction of the font size (em)
+_SPACE_GAP = 0.10   # gap > this (x font size) after a fragment -> a word space
+_COL_GAP = 0.85     # gap > this (x font size) -> a new column (tab), not a space
 
 
 def _decode_hex_string(tok: bytes) -> str:
@@ -594,19 +600,22 @@ def _decode_hex_string(tok: bytes) -> str:
 
 
 def _text_from_content_stream(chunk: bytes) -> str:
-    """Recover text from a content stream, reconstructing visual table rows.
+    """Recover text from a content stream, reconstructing visual rows.
 
     Each shown string is recorded with the (x, y) of the text line it sits on
-    (tracked through the Tm / Td / TD / T* / TL operators). Fragments are then
-    grouped by y into rows and ordered by x into cells -- so a table whose cells
-    are individually positioned on the page (a typical report PDF) is recovered as
-    tab-separated rows, not scattered one-cell-per-line. A "print-to-PDF of a CSV"
-    (one full comma row per string) still comes out one row per line. Purely
-    best-effort: it tracks translations only (no font metrics / rotation).
+    (tracked through Tm / Td / TD / T* / TL) and the current font size (Tf).
+    Fragments are grouped by y into rows and, within a row, joined by the gap to
+    the previous fragment: a small gap is a word space (same cell), a large gap is
+    a column boundary (tab). So a report table whose cells are individually placed
+    on the page is recovered as tab-separated rows, while ordinary prose stays a
+    readable line and a multi-word header cell is not split into columns. A
+    "print-to-PDF of a CSV" still comes out one row per line. Best-effort:
+    translations + font size only (no per-glyph widths, kerning matrices, rotation).
     """
-    records: List[Tuple[float, float, str]] = []   # (y, x, text)
+    records: List[Tuple[float, float, str, float]] = []   # (y, x, text, size)
     tlm_x = tlm_y = 0.0
     leading = 0.0
+    font_size = 10.0
     operands: List[float] = []
     last_string = ""
     array_buf: List[str] = []
@@ -633,11 +642,15 @@ def _text_from_content_stream(chunk: bytes) -> str:
         elif t == b"]":
             in_array = False
             last_string = "".join(array_buf)
-        elif t[:1] in b"-+0123456789." and t not in (b"T*",):
+        elif c0 in b"-+0123456789.":
             try:
                 operands.append(float(t))
             except ValueError:
                 pass
+        elif t == b"Tf":
+            if operands:
+                font_size = abs(operands[-1]) or 10.0
+            operands = []
         elif t == b"Tm":
             if len(operands) >= 6:
                 tlm_x, tlm_y = operands[-2], operands[-1]
@@ -660,12 +673,12 @@ def _text_from_content_stream(chunk: bytes) -> str:
             if t in (b"'", b'"'):
                 tlm_y -= leading          # these show on the next line first
             if last_string:
-                records.append((tlm_y, tlm_x, last_string))
+                records.append((tlm_y, tlm_x, last_string, font_size))
             last_string = ""
             operands = []
         elif t == b"TJ":
             if last_string:
-                records.append((tlm_y, tlm_x, last_string))
+                records.append((tlm_y, tlm_x, last_string, font_size))
             last_string = ""
             operands = []
         elif t == b"BT":
@@ -676,30 +689,36 @@ def _text_from_content_stream(chunk: bytes) -> str:
     return _reconstruct_rows(records)
 
 
-def _reconstruct_rows(records: List[Tuple[float, float, str]]) -> str:
-    """Group positioned text fragments into rows (by y) and cells (by x)."""
+def _reconstruct_rows(records: List[Tuple[float, float, str, float]]) -> str:
+    """Group positioned fragments into rows (by y) and cells (by x-gap)."""
     if not records:
         return ""
     records.sort(key=lambda r: (-r[0], r[1]))     # top-to-bottom, then left-to-right
-    rows: List[List[Tuple[float, str]]] = []
+    rows: List[List[Tuple[float, str, float]]] = []
     ref_y = None
-    for y, x, txt in records:
+    for y, x, txt, size in records:
         if ref_y is None or abs(y - ref_y) > _Y_TOL:
             rows.append([])
             ref_y = y
-        rows[-1].append((x, txt))
+        rows[-1].append((x, txt, size))
     lines: List[str] = []
     for cells in rows:
         cells.sort(key=lambda c: c[0])
         parts: List[str] = []
-        prev_x = None
-        for x, txt in cells:
-            if prev_x is not None and (x - prev_x) < _X_MERGE:
-                parts[-1] += txt          # kerned continuation of the same cell
-            else:
+        prev_end = None
+        for x, txt, size in cells:
+            if prev_end is None:
                 parts.append(txt)
-            prev_x = x
-        line = "\t".join(p.strip() for p in parts).rstrip("\t")
+            else:
+                gap = x - prev_end
+                if gap > size * _COL_GAP:
+                    parts.append(txt)                 # -> joined with a tab: new column
+                elif gap > size * _SPACE_GAP:
+                    parts[-1] += " " + txt            # word space within the same cell
+                else:
+                    parts[-1] += txt                  # abutting / kerned continuation
+            prev_end = x + len(txt) * size * _CHAR_W
+        line = "\t".join(p.strip() for p in parts).strip("\t")
         if line.strip():
             lines.append(line)
     return "\n".join(lines)

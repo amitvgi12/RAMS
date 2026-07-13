@@ -110,6 +110,30 @@ class ElasticLayer:
     thickness_mm: float          # ignored for the bottom half-space
 
 
+def envelope_note(layers: Sequence[ElasticLayer]) -> Optional[str]:
+    """Return a caveat if a layer stack falls outside the engine's *validated*
+    envelope, else None.
+
+    The engine is validated (to ~0.1%) against the bundled IITPAVE outputs and the
+    closed-form Boussinesq solution for **monotonically softening** stacks -- the
+    real-pavement case, where each layer is weaker than the one above (bituminous >
+    granular > subgrade). Every stack RAMS builds is of that form, so this returns
+    None in production. It has NOT been reconciled against IITPAVE for non-monotone
+    profiles with a stiff layer buried under a softer one (the only bundled
+    reference for that, ``case_c.out``, is internally inconsistent -- it violates
+    interface continuity -- so it could not be used). For such a stack, confirm the
+    result against IITPAVE proper.
+    """
+    finite = [l for l in layers]
+    moduli = [l.E_mpa for l in finite]
+    for upper, lower in zip(moduli, moduli[1:]):
+        if lower > upper * 1.05:                      # a stiffer layer below a softer one
+            return ("layer stack is not monotonically softening (a stiffer layer sits "
+                    "below a softer one); outside the engine's validated envelope -- "
+                    "confirm against IITPAVE.")
+    return None
+
+
 @dataclass(frozen=True)
 class WheelLoad:
     """A circular contact load. ``dual`` superposes a second identical wheel."""

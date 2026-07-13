@@ -129,5 +129,27 @@ class TestPhysicalInvariance(unittest.TestCase):
             self.assertAlmostEqual(b.eps_z, s.eps_z, places=10)
 
 
+class TestValidatedEnvelope(unittest.TestCase):
+    """The engine is validated for monotonically-softening stacks (the real-pavement
+    case). `envelope_note` flags anything outside it -- honestly fencing the one
+    regime (non-monotone, stiff layer buried under a softer one) that could not be
+    reconciled against IITPAVE because the only bundled reference is corrupt."""
+
+    def test_monotone_stack_is_in_envelope(self):
+        from rams.iitpave_engine import envelope_note
+        self.assertIsNone(envelope_note([
+            ElasticLayer(3000, 0.35, 150), ElasticLayer(250, 0.35, 400),
+            ElasticLayer(50, 0.35, 0)]))
+
+    def test_non_monotone_stack_is_flagged(self):
+        from rams.iitpave_engine import envelope_note
+        # a stiff (5000) layer buried under a soft (100) one -- CASE_C's shape
+        note = envelope_note([
+            ElasticLayer(3000, 0.35, 100), ElasticLayer(100, 0.35, 100),
+            ElasticLayer(5000, 0.35, 200), ElasticLayer(80, 0.35, 0)])
+        self.assertIsNotNone(note)
+        self.assertIn("IITPAVE", note)
+
+
 if __name__ == "__main__":
     unittest.main()

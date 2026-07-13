@@ -286,7 +286,8 @@ INDEX_HTML = r"""<!DOCTYPE html>
         (IRC:115 cumulative-difference) with a per-section table you can download as XLSX / PDF.
         <b>Select several files at once</b> (rutting + roughness + cracking + potholes, or a
         multi-sheet workbook) and they are <b>merged by chainage</b> into the full condition.
-        If only deflection is present, SNP is derived.</p>
+        If only deflection is present, SNP is derived. <b>PDF import is best-effort</b>
+        (simple single-row-header tables only); for a formatted report, use CSV / XLSX.</p>
       <div class="grid">
         <div style="grid-column:1/-2"><label>Survey file(s)</label><input id="segFile" type="file" accept=".csv,.xlsx,.pdf" multiple></div>
         <div style="align-self:end"><button class="go" style="margin:0" onclick="importSegment()">Load &amp; forecast</button></div>
@@ -472,7 +473,11 @@ INDEX_HTML = r"""<!DOCTYPE html>
         IITPAVE layered-elastic engine; sections within 15% of the threshold are marked
         borderline (verify with field cores / seasonal moduli). Columns: section_id, e_bituminous, e_granular,
         e_subgrade, h_bituminous, h_granular (optional chainage_from, chainage_to).
-        Missing optional columns default; only e_bituminous is required.</p>
+        Missing optional columns default; only e_bituminous is required.
+        <b>PDF import is best-effort</b> and works for simple, single-row-header tables;
+        a formatted report with merged / stacked multi-row headers (or the moduli and
+        thickness in separate tables) cannot be read reliably &mdash; it will say so
+        rather than guess, so <b>paste the table as CSV</b> for those.</p>
       <div class="grid">
         <div><label>Design MSA</label><input id="f_design" type="number" step="10" value="300"></div>
         <div style="grid-column:2/-1;align-self:end"><label>FWD report file (.csv / .xlsx / .pdf)</label><input id="f_file" type="file" accept=".csv,.xlsx,.pdf"></div>

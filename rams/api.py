@@ -949,12 +949,24 @@ def _dictrows_from_csv_text(text: str, target_col: Optional[str] = None) -> List
         rows = list(_csv.DictReader(io.StringIO("\n".join(lines))))
         return [{_norm_calib_key(k): v for k, v in r.items()} for r in rows]
     keys = [_norm_calib_key(c) for c in header_cells]
+    ncol = len(keys)
     out: List[dict] = []
     for ln in lines[1:]:
         cells = _split_delimited(ln)
         if not any(c for c in cells):
             continue
-        out.append({keys[j]: cells[j] for j in range(min(len(keys), len(cells)))})
+        # Fail loud on ragged rows: a data row whose column count does not match the
+        # header means the table did not line up (merged / stacked multi-row headers,
+        # or a layout the reader could not reconstruct). Zipping mismatched rows
+        # silently shifts values into the wrong columns -> confidently wrong numbers.
+        # Refuse instead, and tell the user how to proceed.
+        if ncol > 1 and len(cells) != ncol:
+            raise ValueError(
+                f"the table columns did not line up (header has {ncol} columns, a "
+                f"data row has {len(cells)}: {cells[:8]}). This usually means the PDF "
+                "has merged or stacked/multi-row headers that cannot be read reliably. "
+                "Paste the table as CSV, or upload a .csv / .xlsx.")
+        out.append({keys[j]: cells[j] for j in range(ncol)})
     return out
 
 

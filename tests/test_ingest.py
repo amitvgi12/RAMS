@@ -70,16 +70,22 @@ def make_pdf(lines):
     return out
 
 
-def make_table_pdf(rows, x0=50, y0=700, dy=18, colw=95):
-    """PDF whose table cells are individually positioned (each cell its own Tm/Tj),
-    like a real report -- exercises the coordinate-based row reconstruction."""
-    ops = ["BT", "/F1 10 Tf"]
+def make_table_pdf(rows, x0=50, y0=700, dy=18, colw=130, size=10):
+    """PDF whose table cells are individually positioned, with every *word* placed
+    as its own Tm/Tj fragment (like a real report -- multi-word header cells such as
+    "Bituminous Layer" are two fragments). Exercises the coordinate-based row/cell
+    reconstruction honestly, not with pre-joined single-string cells."""
+    ops = ["BT", "/F1 %d Tf" % size]
     for r, cells in enumerate(rows):
         y = y0 - r * dy
         for c, cell in enumerate(cells):
             x = x0 + c * colw
-            esc = str(cell).replace("\\", "\\\\").replace("(", "\\(").replace(")", "\\)")
-            ops.append("1 0 0 1 %d %d Tm (%s) Tj" % (x, y, esc))
+            for w in str(cell).split(" "):
+                if not w:
+                    continue
+                esc = w.replace("\\", "\\\\").replace("(", "\\(").replace(")", "\\)")
+                ops.append("1 0 0 1 %d %d Tm (%s) Tj" % (x, y, esc))
+                x += len(w) * size * 0.55 + 3          # advance past the word + a space
     ops.append("ET")
     content = "\n".join(ops).encode("latin-1")
     objs = [
@@ -168,35 +174,80 @@ class TestPdfIngestion(unittest.TestCase):
         self.assertEqual(_decode_pdf_literal(rb"\78"), chr(7) + "8")
 
 
-class TestReportTableExtraction(unittest.TestCase):
-    """Coordinate-based row reconstruction + fuzzy FWD parsing for report PDFs."""
+def make_prose_pdf(sentence, x0=60, y=700, size=10):
+    """A single line of justified prose with each word individually positioned."""
+    ops = ["BT", "/F1 %d Tf" % size]
+    x = x0
+    for w in sentence.split(" "):
+        esc = w.replace("(", "\\(").replace(")", "\\)")
+        ops.append("1 0 0 1 %g %d Tm (%s) Tj" % (x, y, esc))
+        x += len(w) * size * 0.55 + 3
+    ops.append("ET")
+    content = "\n".join(ops).encode("latin-1")
+    objs = [
+        b"<< /Type /Catalog /Pages 2 0 R >>",
+        b"<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
+        b"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R "
+        b"/Resources << /Font << /F1 5 0 R >> >> >>",
+        b"<< /Length %d >>\nstream\n%s\nendstream" % (len(content), content),
+        b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>",
+    ]
+    out = b"%PDF-1.4\n"
+    offsets = []
+    for i, o in enumerate(objs, start=1):
+        offsets.append(len(out))
+        out += b"%d 0 obj\n%s\nendobj\n" % (i, o)
+    xref = len(out)
+    out += b"xref\n0 %d\n0000000000 65535 f \n" % (len(objs) + 1)
+    for off in offsets:
+        out += b"%010d 00000 n \n" % off
+    out += b"trailer\n<< /Size %d /Root 1 0 R >>\nstartxref\n%d\n%%%%EOF" % (
+        len(objs) + 1, xref)
+    return out
 
-    def test_positioned_cells_reconstruct_into_rows(self):
+
+class TestReportTableExtraction(unittest.TestCase):
+    """Coordinate-based row reconstruction + fuzzy FWD parsing for report PDFs.
+
+    De-rigged: table cells are built from individually-placed *words* (not
+    pre-joined strings), so these exercise the real failure modes.
+    """
+
+    def test_prose_paragraph_stays_readable(self):
+        # Regression: positioned prose must NOT explode into tab-separated fragments.
         from rams.ingest import _extract_pdf_text
+        text = _extract_pdf_text(make_prose_pdf(
+            "The subgrade modulus estimated from the above methods"))
+        self.assertNotIn("\t", text)
+        self.assertIn("subgrade modulus estimated", text)
+
+    def test_multiword_header_maps_correct_moduli(self):
+        # "Bituminous Layer" is two fragments but must stay ONE cell, so the moduli
+        # map to the right columns (this is the silent-wrong bug from the autopsy).
+        import base64
+        from rams.api import _fwd_rows
         pdf = make_table_pdf([
             ["Sub-Section", "Bituminous Layer", "Granular Layer", "Subgrade"],
             ["LHS-Sec-1", "977", "60", "70"],
-            ["LHS-Sec-2", "978", "75", "77"],
         ])
-        text = _extract_pdf_text(pdf)
-        rows = [ln for ln in text.splitlines() if "\t" in ln]
-        self.assertEqual(rows[0].split("\t")[0], "Sub-Section")
-        self.assertIn("977", rows[1].split("\t"))
+        row = _fwd_rows({"format": "pdf", "content_b64": base64.b64encode(pdf).decode()})[0]
+        self.assertEqual(row.get("e_bituminous"), "977")
+        self.assertEqual(row.get("e_granular"), "60")
+        self.assertEqual(row.get("e_subgrade"), "70")   # not dropped / defaulted
 
-    def test_fwd_overlay_from_positioned_pdf(self):
+    def test_stacked_multirow_header_fails_loud(self):
+        # A merged/stacked 2-row header cannot align to the data columns; the parser
+        # must REFUSE (clear error), never silently shift values into wrong columns.
         import base64
         pdf = make_table_pdf([
-            ["Sub-Section", "Bituminous Layer", "Granular Layer", "Subgrade"],
+            ["", "Bituminous", "Granular", "Subgrade"],   # header line 1
+            ["Sub-Section", "Layer", "Layer", ""],        # header line 2 (stacked)
             ["LHS-Sec-1", "977", "60", "70"],
-            ["RHS-Sec-8", "688", "61", "56"],
         ])
-        res = api.fwd_overlay({
-            "design_msa": 300, "format": "pdf",
-            "content_b64": base64.b64encode(pdf).decode(),
-        })
-        self.assertEqual(res["n_sections"], 2)
-        ids = {s["section_id"] for s in res["sections"]}
-        self.assertEqual(ids, {"LHS-Sec-1", "RHS-Sec-8"})
+        with self.assertRaises(ValueError) as ctx:
+            api.fwd_overlay({"design_msa": 300, "format": "pdf",
+                             "content_b64": base64.b64encode(pdf).decode()})
+        self.assertIn("did not line up", str(ctx.exception))
 
     def test_prose_line_is_not_mistaken_for_a_header(self):
         from rams.api import _header_matches, _split_delimited

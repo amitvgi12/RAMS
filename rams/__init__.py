@@ -151,6 +151,7 @@ from .iitpave_engine import (
     PointResponse,
     analyze as iitpave_analyze,
     compute_point as iitpave_compute_point,
+    envelope_note as iitpave_envelope_note,
 )
 from .design import fatigue_life_msa_irc115
 from .survey import (
